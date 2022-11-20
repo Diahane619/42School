@@ -1,0 +1,159 @@
+2022-11-18 12:53:15,896 [main][INFO]: current_dir: Printfgithub
+2022-11-18 12:53:15,897 [c selector][INFO]: Testing path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/ex00
+2022-11-18 12:53:15,898 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/Makefile
+2022-11-18 12:53:15,900 [gnl][INFO]: Testing: get_next_line.c
+2022-11-18 12:53:15,901 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/Makefile
+2022-11-18 12:53:15,904 [main][INFO]: Test params: TestRunInfo(source_dir=PosixPath('/mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub'), base_dir=PosixPath('/home/Gino/francinette'), ex_to_execute=None, args=Namespace(bonus=False, clean=False, exercise=[], git_repo=None, ignore_norm=False, mandatory=False, strict=False, testers=None, timeout='10', update=False, verbose=False), has_bonus=False)
+2022-11-18 12:53:15,908 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub to /home/Gino/francinette/temp/printf
+2022-11-18 12:53:16,112 [base][ERROR]: 
+Traceback (most recent call last):
+  File "/home/Gino/francinette/testers/BaseTester.py", line 120, in prepare_ex_files
+    repo = git.Repo(self.temp_dir)
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 266, in __init__
+    self.working_dir: Optional[PathLike] = self._working_tree_dir or self.common_dir
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 347, in common_dir
+    raise InvalidGitRepositoryError()
+git.exc.InvalidGitRepositoryError
+2022-11-18 12:53:16,150 [base][INFO]: On directory /home/Gino/francinette/temp/printf
+2022-11-18 12:53:16,251 [base][INFO]: CompletedProcess(args=['norminette'], returncode=0, stdout='ft_putuphex.c: OK!\nft_putpointer.c: OK!\nft_printf.c: OK!\nft_putnbr.c: OK!\nft_strlen.c: OK!\nft_putchar.c: OK!\nft_putstr.c: OK!\nft_putunbr.c: OK!\nft_puthex.c: OK!\nft_printf.h: OK!\n', stderr='')
+2022-11-18 12:53:16,315 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub to /home/Gino/francinette/temp/printf/__my_srcs
+2022-11-18 12:53:16,510 [base][INFO]: bonus investigation: []
+2022-11-18 12:53:16,510 [base][INFO]: To execute: []
+2022-11-18 12:53:16,510 [base][INFO]: Missing: []
+2022-11-18 12:53:16,510 [base][INFO]: Calling 'make fclean all' on directory /home/Gino/francinette/temp/printf
+2022-11-18 12:53:16,737 [base][INFO]: CompletedProcess(args=['make', 'fclean', 'all'], returncode=0, stdout='gcc -Wall -Wextra -Werror   -c -o ft_puthex.o ft_puthex.c\ngcc -Wall -Wextra -Werror   -c -o ft_putnbr.o ft_putnbr.c\ngcc -Wall -Wextra -Werror   -c -o ft_putstr.o ft_putstr.c\ngcc -Wall -Wextra -Werror   -c -o ft_printf.o ft_printf.c\ngcc -Wall -Wextra -Werror   -c -o ft_putchar.o ft_putchar.c\ngcc -Wall -Wextra -Werror   -c -o ft_putuphex.o ft_putuphex.c\ngcc -Wall -Wextra -Werror   -c -o ft_putpointer.o ft_putpointer.c\ngcc -Wall -Wextra -Werror   -c -o ft_putunbr.o ft_putunbr.c\ngcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c\n', stderr='')
+2022-11-18 12:53:16,753 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/printfTester to /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:53:16,758 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:53:16,759 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:53:36,443 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/unit-test to /home/Gino/francinette/temp/printf/unit-test
+2022-11-18 12:53:36,444 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/unit-test
+2022-11-18 12:53:36,444 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/ft_printf_test to /home/Gino/francinette/temp/printf/ft_printf_test
+2022-11-18 12:53:36,446 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/ft_printf_test
+2022-11-18 12:53:36,446 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/fsoares to /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:53:36,447 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:53:36,451 [pf-fsoares][INFO]: reading mandatory.c
+2022-11-18 12:53:36,451 [pf-fsoares][INFO]: writing to mandatory.c
+2022-11-18 12:53:36,451 [base_exec][INFO]: added sanitization to makefile ../__my_srcs/Makefile
+2022-11-18 12:53:36,451 [base_exec][INFO]: executing: make TIMEOUT=10  build_m
+2022-11-18 12:53:36,451 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:53:37,279 [base_exec][INFO]: 
+2022-11-18 12:53:37,335 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:53:37,443 [pf-fsoares][INFO]: errors: []
+2022-11-18 12:53:37,444 [base][WARNING]: norminette errors: []
+2022-11-18 12:53:37,444 [base][WARNING]: missing functions: []
+2022-11-18 12:53:37,445 [base][WARNING]: errors in functions: [('printfTester', ['printfTester']), ('printf-unit-test', []), ('ft_printf_test', []), ('fsoares', [])]
+2022-11-18 12:54:12,026 [main][INFO]: current_dir: Printfgithub
+2022-11-18 12:54:12,027 [c selector][INFO]: Testing path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/ex00
+2022-11-18 12:54:12,028 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/Makefile
+2022-11-18 12:54:12,031 [gnl][INFO]: Testing: get_next_line.c
+2022-11-18 12:54:12,032 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub/Makefile
+2022-11-18 12:54:12,035 [main][INFO]: Test params: TestRunInfo(source_dir=PosixPath('/mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub'), base_dir=PosixPath('/home/Gino/francinette'), ex_to_execute=None, args=Namespace(bonus=False, clean=False, exercise=[], git_repo=None, ignore_norm=False, mandatory=False, strict=False, testers=None, timeout='10', update=False, verbose=False), has_bonus=False)
+2022-11-18 12:54:12,041 [base][INFO]: Removing already present directory /home/Gino/francinette/temp/printf
+2022-11-18 12:54:12,044 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub to /home/Gino/francinette/temp/printf
+2022-11-18 12:54:12,207 [base][ERROR]: 
+Traceback (most recent call last):
+  File "/home/Gino/francinette/testers/BaseTester.py", line 120, in prepare_ex_files
+    repo = git.Repo(self.temp_dir)
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 266, in __init__
+    self.working_dir: Optional[PathLike] = self._working_tree_dir or self.common_dir
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 347, in common_dir
+    raise InvalidGitRepositoryError()
+git.exc.InvalidGitRepositoryError
+2022-11-18 12:54:12,283 [base][INFO]: On directory /home/Gino/francinette/temp/printf
+2022-11-18 12:54:12,386 [base][INFO]: CompletedProcess(args=['norminette'], returncode=0, stdout='ft_putuphex.c: OK!\nft_putpointer.c: OK!\nft_printf.c: OK!\nft_putnbr.c: OK!\nft_strlen.c: OK!\nft_putchar.c: OK!\nft_putstr.c: OK!\nft_putunbr.c: OK!\nft_puthex.c: OK!\nft_printf.h: OK!\n', stderr='')
+2022-11-18 12:54:12,444 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/42School/PRINTF/Printfgithub to /home/Gino/francinette/temp/printf/__my_srcs
+2022-11-18 12:54:12,605 [base][INFO]: bonus investigation: []
+2022-11-18 12:54:12,605 [base][INFO]: To execute: []
+2022-11-18 12:54:12,605 [base][INFO]: Missing: []
+2022-11-18 12:54:12,605 [base][INFO]: Calling 'make fclean all' on directory /home/Gino/francinette/temp/printf
+2022-11-18 12:54:12,780 [base][INFO]: CompletedProcess(args=['make', 'fclean', 'all'], returncode=0, stdout='gcc -Wall -Wextra -Werror   -c -o ft_puthex.o ft_puthex.c\ngcc -Wall -Wextra -Werror   -c -o ft_putnbr.o ft_putnbr.c\ngcc -Wall -Wextra -Werror   -c -o ft_putstr.o ft_putstr.c\ngcc -Wall -Wextra -Werror   -c -o ft_printf.o ft_printf.c\ngcc -Wall -Wextra -Werror   -c -o ft_putchar.o ft_putchar.c\ngcc -Wall -Wextra -Werror   -c -o ft_putuphex.o ft_putuphex.c\ngcc -Wall -Wextra -Werror   -c -o ft_putpointer.o ft_putpointer.c\ngcc -Wall -Wextra -Werror   -c -o ft_putunbr.o ft_putunbr.c\ngcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c\n', stderr='')
+2022-11-18 12:54:12,848 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/printfTester to /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:54:12,851 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:54:12,851 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/printfTester
+2022-11-18 12:54:31,940 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/unit-test to /home/Gino/francinette/temp/printf/unit-test
+2022-11-18 12:54:31,942 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/unit-test
+2022-11-18 12:54:31,942 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/ft_printf_test to /home/Gino/francinette/temp/printf/ft_printf_test
+2022-11-18 12:54:31,944 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/ft_printf_test
+2022-11-18 12:54:31,944 [base][INFO]: Copying from /home/Gino/francinette/tests/printf/fsoares to /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:54:31,945 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:54:31,949 [pf-fsoares][INFO]: reading mandatory.c
+2022-11-18 12:54:31,949 [pf-fsoares][INFO]: writing to mandatory.c
+2022-11-18 12:54:31,950 [base_exec][INFO]: added sanitization to makefile ../__my_srcs/Makefile
+2022-11-18 12:54:31,950 [base_exec][INFO]: executing: make TIMEOUT=10  build_m
+2022-11-18 12:54:31,950 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:54:32,775 [base_exec][INFO]: 
+2022-11-18 12:54:32,833 [base_exec][INFO]: on dir /home/Gino/francinette/temp/printf/fsoares
+2022-11-18 12:54:32,943 [pf-fsoares][INFO]: errors: []
+2022-11-18 12:54:32,943 [base][WARNING]: norminette errors: []
+2022-11-18 12:54:32,943 [base][WARNING]: missing functions: []
+2022-11-18 12:54:32,943 [base][WARNING]: errors in functions: [('printfTester', ['printfTester']), ('printf-unit-test', []), ('ft_printf_test', []), ('fsoares', [])]
+2022-11-20 16:15:38,476 [main][INFO]: current_dir: Gino
+2022-11-20 16:15:38,476 [c selector][INFO]: Testing path: /home/Gino/ex00
+2022-11-20 16:15:38,477 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:15:38,477 [gnl][INFO]: Testing: get_next_line.c
+2022-11-20 16:15:38,477 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:15:38,477 [minitalk][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:15:38,477 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:15:38,477 [main][ERROR]: Francinette needs to be executed inside a project folder
+[0mIf you are in a project folder, please make sure that you have a valid Makefile and that you are creating the expected turn in files (for example 'libft.a')
+Traceback (most recent call last):
+  File "/home/Gino/francinette/main.py", line 194, in main
+    project = guess_project(Path('.'))
+  File "/home/Gino/francinette/main.py", line 64, in guess_project
+    raise Exception(f"Francinette needs to be executed inside a project folder\n" +
+Exception: Francinette needs to be executed inside a project folder
+[0mIf you are in a project folder, please make sure that you have a valid Makefile and that you are creating the expected turn in files (for example 'libft.a')
+2022-11-20 16:16:13,795 [main][INFO]: current_dir: Gino
+2022-11-20 16:16:13,795 [c selector][INFO]: Testing path: /home/Gino/ex00
+2022-11-20 16:16:13,795 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:16:13,795 [gnl][INFO]: Testing: get_next_line.c
+2022-11-20 16:16:13,796 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:16:13,796 [minitalk][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:16:13,796 [utils][INFO]: Makefile path: /home/Gino/Makefile
+2022-11-20 16:16:13,796 [main][ERROR]: Francinette needs to be executed inside a project folder
+[0mIf you are in a project folder, please make sure that you have a valid Makefile and that you are creating the expected turn in files (for example 'libft.a')
+Traceback (most recent call last):
+  File "/home/Gino/francinette/main.py", line 194, in main
+    project = guess_project(Path('.'))
+  File "/home/Gino/francinette/main.py", line 64, in guess_project
+    raise Exception(f"Francinette needs to be executed inside a project folder\n" +
+Exception: Francinette needs to be executed inside a project folder
+[0mIf you are in a project folder, please make sure that you have a valid Makefile and that you are creating the expected turn in files (for example 'libft.a')
+2022-11-20 16:17:59,162 [main][INFO]: current_dir: Printf Git
+2022-11-20 16:17:59,163 [c selector][INFO]: Testing path: /mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git/ex00
+2022-11-20 16:17:59,164 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git/Makefile
+2022-11-20 16:17:59,172 [gnl][INFO]: Testing: get_next_line.c
+2022-11-20 16:17:59,173 [utils][INFO]: Makefile path: /mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git/Makefile
+2022-11-20 16:17:59,176 [main][INFO]: Test params: TestRunInfo(source_dir=PosixPath('/mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git'), base_dir=PosixPath('/home/Gino/francinette'), ex_to_execute=None, args=Namespace(bonus=False, clean=False, exercise=[], git_repo=None, ignore_norm=False, mandatory=False, strict=False, testers=None, timeout='10', update=False, verbose=False), has_bonus=False)
+2022-11-20 16:17:59,181 [base][INFO]: Removing already present directory /home/Gino/francinette/temp/printf
+2022-11-20 16:17:59,187 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git to /home/Gino/francinette/temp/printf
+2022-11-20 16:17:59,418 [base][ERROR]: 
+Traceback (most recent call last):
+  File "/home/Gino/francinette/testers/BaseTester.py", line 120, in prepare_ex_files
+    repo = git.Repo(self.temp_dir)
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 266, in __init__
+    self.working_dir: Optional[PathLike] = self._working_tree_dir or self.common_dir
+  File "/home/Gino/francinette/venv/lib/python3.8/site-packages/git/repo/base.py", line 347, in common_dir
+    raise InvalidGitRepositoryError()
+git.exc.InvalidGitRepositoryError
+2022-11-20 16:17:59,422 [base][INFO]: On directory /home/Gino/francinette/temp/printf
+2022-11-20 16:17:59,523 [base][INFO]: CompletedProcess(args=['norminette'], returncode=1, stdout='ft_putuphex.c: OK!\nft_putpointer.c: OK!\nft_printf.c: Error!\nError: CONSECUTIVE_NEWLINES (line:  13, col:   1):\tConsecutive newlines\nft_putnbr.c: OK!\nft_strlen.c: OK!\nft_putchar.c: OK!\nft_putstr.c: OK!\nft_putunbr.c: OK!\nft_puthex.c: OK!\nft_printf.h: OK!\n', stderr='')
+2022-11-20 16:17:59,584 [base][INFO]: copying /mnt/c/Users/fvita/Desktop/Coding/42School/PRINTF/Printf Git to /home/Gino/francinette/temp/printf/__my_srcs
+2022-11-20 16:17:59,797 [base][INFO]: bonus investigation: []
+2022-11-20 16:17:59,797 [base][INFO]: To execute: []
+2022-11-20 16:17:59,797 [base][INFO]: Missing: []
+2022-11-20 16:17:59,797 [base][INFO]: Calling 'make fclean all' on directory /home/Gino/francinette/temp/printf
+2022-11-20 16:17:59,946 [base][INFO]: CompletedProcess(args=['make', 'fclean', 'all'], returncode=2, stdout='gcc -Wall -Wextra -Werror   -c -o ft_puthex.o ft_puthex.c\ngcc -Wall -Wextra -Werror   -c -o ft_putnbr.o ft_putnbr.c\ngcc -Wall -Wextra -Werror   -c -o ft_putstr.o ft_putstr.c\ngcc -Wall -Wextra -Werror   -c -o ft_printf.o ft_printf.c\n', stderr='ft_printf.c:14:15: error: unknown type name ‘va_list’\n   14 | void ft_print(va_list args, const char *format, int *count, int *i)\n      |               ^~~~~~~\nft_printf.c:1:1: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?\n  +++ |+#include <stdarg.h>\n    1 | /* ************************************************************************** */\nft_printf.c: In function ‘ft_printf’:\nft_printf.c:37:2: error: unknown type name ‘va_list’\n   37 |  va_list args;\n      |  ^~~~~~~\nft_printf.c:37:2: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?\nft_printf.c:42:2: error: implicit declaration of function ‘va_start’ [-Werror=implicit-function-declaration]\n   42 |  va_start(args, format);\n      |  ^~~~~~~~\nft_printf.c:45:6: error: implicit declaration of function ‘ft_strlen’ [-Werror=implicit-function-declaration]\n   45 |  n = ft_strlen(format);\n      |      ^~~~~~~~~\nft_printf.c:49:4: error: implicit declaration of function ‘ft_putchar’ [-Werror=implicit-function-declaration]\n   49 |    ft_putchar(format[i++], &count);\n      |    ^~~~~~~~~~\nft_printf.c:53:4: error: implicit declaration of function ‘ft_print’; did you mean ‘ft_printf’? [-Werror=implicit-function-declaration]\n   53 |    ft_print(args, format, &count, &i);\n      |    ^~~~~~~~\n      |    ft_printf\nft_printf.c:56:2: error: implicit declaration of function ‘va_end’ [-Werror=implicit-function-declaration]\n   56 |  va_end (args);\n      |  ^~~~~~\ncc1: all warnings being treated as errors\nmake: *** [<builtin>: ft_printf.o] Error 1\n')
+2022-11-20 16:17:59,960 [main][ERROR]: Problem creating the library
+Traceback (most recent call last):
+  File "/home/Gino/francinette/main.py", line 199, in main
+    project(info)
+  File "/home/Gino/francinette/testers/printf/Printf.py", line 23, in __init__
+    self.execute_testers()
+  File "/home/Gino/francinette/testers/BaseTester.py", line 77, in execute_testers
+    self.compile_source()
+  File "/home/Gino/francinette/testers/BaseTester.py", line 175, in compile_source
+    run_command(command, spinner)
+  File "/home/Gino/francinette/testers/BaseTester.py", line 28, in run_command
+    raise Exception("Problem creating the library")
+Exception: Problem creating the library
