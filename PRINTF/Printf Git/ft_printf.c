@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
 void	ft_print(va_list args, const char *format, int *count, int *i)
 {
