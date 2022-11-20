@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:49:32 by rel-fila          #+#    #+#             */
-/*   Updated: 2022/11/20 17:00:53 by francevi         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:15:38 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 			ft_putchar(format[i++], &count);
-		else if (i < n && count != 0)
+		else if (i < n)
 		{
 			i++;
 			ft_print(args, format, &count, &i);
