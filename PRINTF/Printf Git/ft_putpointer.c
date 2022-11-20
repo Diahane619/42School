@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putpointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rel-fila <rel-fila@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:56:59 by rel-fila          #+#    #+#             */
-/*   Updated: 2022/11/08 16:57:09 by rel-fila         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:21:56 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	ft_putpointer(void *p, int *count)
 {
-	ft_putstr("0x", count);
-	ft_puthex((unsigned long long)p, count);
+	if(p == 0)
+		ft_putstr("(nil)", count);
+	else
+	{
+		ft_putstr("0x", count);
+		ft_puthex((unsigned long long)p, count);
+	}
 }
