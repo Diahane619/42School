@@ -14,7 +14,7 @@
 
 void	ft_putpointer(void *p, int *count)
 {
-	if(p == 0)
+	if (p == 0)
 		ft_putstr("(nil)", count);
 	else
 	{
