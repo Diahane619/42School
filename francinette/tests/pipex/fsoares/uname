@@ -1,3 +1,0 @@
-#!/bin/bash
-
-printf "This is not the real uname! Check the path!"
