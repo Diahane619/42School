@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/19 11:15:27 by jdecorte          #+#    #+#             */
+/*   Updated: 2021/10/19 12:01:01 by jdecorte         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
-
-# include <stdio.h>
-# include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
-# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
 
-size_t  ft_strlen(char *s);
-char    *ft_strchr(char *s, int c);
-char    *ft_strjoin(char *left_str, char *buff);
-char    *ft_line(char *str);
-char    *ft_next_str(char *str);
-char    *ft_read(int fd, char *str);
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *string, int searchedChar);
+
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t elementCount, size_t elementSize);
+
+size_t	ft_strlen(const char *theString);
 
 #endif
