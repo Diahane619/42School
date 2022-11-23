@@ -32,8 +32,7 @@
 * Poi lo unisce alla variabile statica cumulativa per la persistenza delle informazioni.
 * PARAMETRI
 * #1. Un descrittore di file.
-* #2. Puntatore alla variabile statica cumulativa delle esecuzioni precedenti di
-* get_next_line.
+* #2. Puntatore alla variabile statica cumulativa delle esecuzioni precedenti di get_next_line.
 * VALORI DI RITORNO
 * Il nuovo valore della variabile statica con buffer unito per la persistenza delle informazioni,
 * o NULL in caso di errore.
