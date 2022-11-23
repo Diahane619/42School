@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:06:50 by francevi          #+#    #+#             */
-/*   Updated: 2022/11/23 12:59:47 by francevi         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:31:30 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # endif
 
 # ifndef OPEN_MAX
-#  define OPEN_MAX 1024
+#  define OPEN_MAX 4096
 
 # endif
 
