@@ -83,32 +83,30 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	char	*line;
-	int		i;
 	int		fd1;
 	int		fd2;
 	int		fd3;
-	fd1 = open("tests/test.txt", O_RDONLY);
-	fd2 = open("tests/test2.txt", O_RDONLY);
-	fd3 = open("tests/empty.txt", O_RDONLY);
-	i = 1;
-	while (i < 7)
+	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/test.txt", O_RDONLY);
+	fd2 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/test2.txt", O_RDONLY);
+	fd3 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/empty.txt", O_RDONLY);
+	
+	while (line)
 	{
 		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
+		printf("line(fd1): %s", line);
 		free(line);
 		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
+		printf("line(fd2): %s", line);
 		free(line);
 		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
+		printf("line(fd3): %s", line);
 		free(line);
-		i++;
 	}
 	close(fd1);
 	close(fd2);
 	close(fd3);
 	return (0);
-}*/
+}
