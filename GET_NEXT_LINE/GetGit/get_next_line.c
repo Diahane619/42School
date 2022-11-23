@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2021/11/08 23:14:55 by jdecorte         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:56:12 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// delete line find
+// Elimina la linea trovata
 char	*ft_next(char *buffer)
 {
 	int		i;
@@ -30,16 +30,16 @@ char	*ft_next(char *buffer)
 	char	*line;
 
 	i = 0;
-	// find len of first line
+// Trova la lunghezza della prima linea
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// if eol == \0 return NULL
+// Se arriva alla fine ritorna NULL
 	if (!buffer[i])
 	{
 		free(buffer);
 		return (NULL);
 	}
-	// len of file - len of firstline + 1
+	// La lunghezza del file - La lunghezza della prima linea + 1
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
@@ -50,20 +50,20 @@ char	*ft_next(char *buffer)
 	return (line);
 }
 
-// take line for return
+// Prende la linea per fare il return
 char	*ft_line(char *buffer)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	// if no line return NULL
+	// Se non ci sono linee ritorna NULL
 	if (!buffer[i])
 		return (NULL);
-	// go to the eol
+	// Vai alla fine della linea
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// malloc to eol
+	// malloc fino alla fine
 	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
 	// line = buffer
@@ -72,7 +72,7 @@ char	*ft_line(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
-	// if eol is \0 or \n, replace eol by \n
+	// Se la fine della linea è \0 o \n, sostituiscila con \n
 	if (buffer[i] && buffer[i] == '\n')
 		line[i++] = '\n';
 	return (line);
