@@ -10,80 +10,105 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+* GET_NEXT_LINE
+* -------------
+* DESCRIZIONE
+* Questa funzione prende un file descriptor(fd) aperto e restituisce la riga successiva.
+* Questa funzione ha un comportamento indefinito durante la lettura da un file binario.
+* PARAMETRI
+* #1. Un descrittore di file
+* VALORI DI RITORNO
+* In caso di successo, get_next_line restituisce una stringa con la riga completa che termina con
+* un'interruzione di riga (`\n`) quando ce n'è una.
+* Se si verifica un errore o non c'è altro da leggere, restituisce NULL.
+* ------------------------------------------------- ---------------------------
+* FUNZIONI AUSILIARIE
+* -------------------
+* READ_TO_LEFT_STR
+* -----------------
+* DESCRIZIONE
+* Prende il file descriptor aperto e salva su una variabile "buff" quanto letto
+* Poi lo unisce alla variabile statica cumulativa per la persistenza delle informazioni.
+* PARAMETRI
+* #1. Un descrittore di file.
+* #2. Puntatore alla variabile statica cumulativa delle esecuzioni precedenti di
+* get_next_line.
+* VALORI DI RITORNO
+* Il nuovo valore della variabile statica con buffer unito per la persistenza delle informazioni,
+* o NULL in caso di errore.
+*/
+
 #include "get_next_line.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
 
-// partiamo dalla funzione get_next_line e poi vediamo le altre funzioni una volta che vengono chiamate
-
-static char	*ft_next(char **temp)				// la funzione next prende come argomento un puntatore alla stringa temp, ci serve per passare alla linea successiva
+char	*ft_read_to_left_str(int fd, char *left_str)
 {
-	char	*line;						// puntatore alla prossima linea da leggere
-	char	*ptr;						// puntatore 
+	char	*buff;
+	int		rd_bytes;
 
-	ptr = *temp;						// 
-	while (*ptr && *ptr != '\n')				// fintanto non troviamo la nuova linea avanziamo il puntatore, poi lo assegniamo alla posizione successiva a "\n"
-		++ptr;
-	ptr += (*ptr == '\n');
-	line = ft_substr(*temp, 0, (size_t)(ptr - *temp));	// assegniamo a line, la sottostringa di temp a partire dalla nuova linea.
-	if (!line)						// caso limite
-	{
-		free (*temp);
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
 		return (NULL);
-	}
-	ptr = ft_substr(ptr, 0, ft_strlen (ptr));		// accorciamo ptr togliendo la parte precedente la nuova linea che abbiamo trovato in precedenza
-	free (*temp);						// liberiamo temp e assegniamo la nuova posizione di ptr
-	*temp = ptr;
-	return (line);						// torniamo il puntatore alla nuova linea
-}
-
-static char	*ft_read(char *temp, int fd, char *buf)	// la funzione prende il nostro temp, il fd e il buf e ritorna il nuovo valore di temp.
-{								// Nello specifico, abbiamo un while che dura finche' non trova una nuova linea nel nostro temp.
-	ssize_t		r;				// Dentro il while, leggiamo con read il fd nella misura massima del buffer size. Dopo aggiungiamo su temp
-								// il contenuto di buf (cio' che abbiamo letto finora), e continua fino a che non si trova una nuova linea.
-	r = 1;							// Appena la trova si libera il buff e si ritorna il temp, cioe' la stringa che abbiamo letto fino alla nuova linea.
-	while (r && !ft_strchr (temp, '\n'))
+	rd_bytes = 1;
+	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
 	{
-		r = read(fd, buf, BUFFER_SIZE);
-		if (r == -1)					// caso limite in caso di errori nel read
+		rd_bytes = read(fd, buff, BUFFER_SIZE);
+		if (rd_bytes == -1)
 		{
-			free (buf);
-			free (temp);
+			free(buff);
 			return (NULL);
 		}
-		buf[r] = 0;
-		temp = ft_strjoin(temp, buf);
-		if (!temp)					// caso limite dove non troviamo la nuova linea e il temp e' terminato
-		{
-			free (buf);
-			return (NULL);
-		}
+		buff[rd_bytes] = '\0';
+		left_str = ft_strjoin(left_str, buff);
 	}
-	free (buf);
-	return (temp);
+	free(buff);
+	return (left_str);
 }
 
-char	*get_next_line(int fd)					// prototipo fornito dal soggetto, ritorna una stringa, ha come parametro un file descriptor (fd)
+char	*get_next_line(int fd)
 {
-	static char	*temp[OPEN_MAX];			// stringa statica per immagazzinare i dati che leggiamo dal buffer
-	char		*buf;					// stringa che usiamo come buffer
+	char		*line;
+	static char	*left_str;
 
-	if (fd == -1 || BUFFER_SIZE < 1)			// casi limite
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	left_str = ft_read_to_left_str(fd, left_str);
+	if (!left_str)
 		return (NULL);
-	if (!temp[fd])						// casi limite
-		return (NULL);
-	buf = malloc (sizeof (*buf) * (BUFFER_SIZE + 1));	// mallocchiamo il buf per avere spazio a sufficienza (BUFFER SIZE) per leggere il fd
-	if (!buf)						// se non va a buon fine ritorna null e liberiamo temp
-	{
-		free (temp[fd]);
-		return (NULL);
-	}
-	temp[fd] = ft_read(temp[fd], fd, buf);		// assegniamo a temp i valori che leggiamo tramite la funzione ft_read (VEDI FUNZIONE). Questo ci serve per avanzare nella lettura del fd
-	if (!temp[fd])						// con i valori assegnati al buffer. Negli IF vengono considerati i casi limite.
-		return (NULL);
-	if (!*temp[fd])
-	{
-		free (temp[fd]);
-		temp[fd] = NULL;
-		return (NULL);
-	}
-	return (ft_next(&temp[fd]));				// il nostro valore di ritorno e' il risultato della funzione ft_next
+	line = ft_get_line(left_str);
+	left_str = ft_new_left_str(left_str);
+	return (line);
 }
+
+/*int	main(void)
+{
+	char	*line;
+	int		i;
+	int		fd1;
+	int		fd2;
+	int		fd3;
+	fd1 = open("tests/test.txt", O_RDONLY);
+	fd2 = open("tests/test2.txt", O_RDONLY);
+	fd3 = open("tests/empty.txt", O_RDONLY);
+	i = 1;
+	while (i < 7)
+	{
+		line = get_next_line(fd1);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+		line = get_next_line(fd2);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+		line = get_next_line(fd3);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+		i++;
+	}
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	return (0);
+}*/
