@@ -6,5 +6,5 @@ int	 main()
 
 	scanf("Valore di a: %d", &a);
 	scanf("Valore di b: %d", &b);
-	print("Valore di c:%d");
+	print("Valore di c:%d", &c);
 }
