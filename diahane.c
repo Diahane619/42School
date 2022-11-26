@@ -1,10 +1,13 @@
+#include <stdio.h>
+
 int	 main()
 {
 	int	a;
 	int	b;
-	int c = a + b;
+	int c;
 
-	scanf("Valore di a: %d", &a);
-	scanf("Valore di b: %d", &b);
-	print("Valore di c:%d", &c);
+	scanf("Valore di a: %d\n", &a);
+	scanf("Valore di b: %d\n", &b);
+	c = a + b;
+	printf("Valore di c: %d\n", c);
 }
