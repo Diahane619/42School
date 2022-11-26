@@ -6,8 +6,10 @@ int	 main()
 	int	b;
 	int c;
 
-	scanf("Valore di a: %d\n", &a);
-	scanf("Valore di b: %d\n", &b);
+	printf("Valore di a: ");
+	scanf("%d", &a);
+	printf("Valore di b: ");
+	scanf("%d", &b);
 	c = a + b;
-	printf("Valore di c: %d\n", c);
+	printf("Somma: %d\n", c);
 }
