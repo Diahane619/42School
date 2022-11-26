@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+diahane
 
 void	ft_print(va_list args, const char *format, int *count, int *i)
 {
