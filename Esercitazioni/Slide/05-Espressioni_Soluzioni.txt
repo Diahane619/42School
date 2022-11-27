@@ -1,0 +1,155 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   05-Espressioni_Soluzioni.txt                                  */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int a, b, c, d;
+   float media;
+   printf("Primo valore: ");
+   scanf("%d", &a);
+   printf("Secondo valore: ");
+   scanf("%d", &b);
+   printf("Terzo valore: ");
+   scanf("%d", &c);
+   printf("Quarto valore: ");
+   scanf("%d", &d);
+   media = (a+b+c+d)/4.0F;
+   printf("La media e': %.2f\n", media);
+   
+   return 0;
+}
+
+/* Considerazioni:
+   media = (a+b+c+d)/4.0; 
+      il 4.0 e' un double, promuove il risultato della parentesi a
+      double, l'assegnazione darebbe un warning perche' media e' di
+      tipo float
+   media = (float)(a+b+c+d)/4;
+      il 4 e' un int, viene promosso a float, corretto
+   media = (float)(a+b+c+d)/4.0;
+      il risultato della parentesi viene convertito in float, ma il
+      4.0 e' un double e questo promuove il risultato della parentesi
+      a double, l'assegnazione darebbe un warning perche' media e' 
+      di tipo float
+   media = (float)(a+b+c+d)/4.0F;
+      corretto
+   media = ((float)a+b+c+d)/4;
+      corretto
+
+*/
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double f, c, k;
+   
+   printf("Temperatura in gradi Fahrenheit: ");
+   scanf("%lf", &f);
+   
+   c = 5.0/9.0 * (f-32);
+   k = c + 273.15;
+   printf("Celsius: %f\nKelvin: %f\n", c, k);
+   
+   return 0;
+}
+
+/* Considerazioni:
+   c = 5/9 * (f-32);
+      da' sempre 0 perche' 5 e 9 sono interi e la divisione tra 
+      interi da' risultato intero con troncamento (appunto 0)
+   c = (f-32) * 5/9;
+      corretto, f e' double, promuove il 32, il 5 e il 9 in questo
+      ordine in quanto * e / hanno la stessa priorita' e la loro 
+      associativita' e' da sinistra a destra
+*/
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+   double lung, massa;
+   double gamma;
+   double v;
+   const double c = 2.99793E8; /* metri al secondo */
+
+   printf("Lunghezza da fermo (metri): ");
+   scanf("%lf", &lung);
+   printf("Massa da fermo (kg): ");
+   scanf("%lf", &massa);
+   printf("Velocita' (km/secondo): ");
+   scanf("%lf", &v);
+   v *= 1000.; /* in metri al secondo */
+   gamma = sqrt(1.0-pow(v/c,2.0));
+
+   printf("Alla velocita' di: %f km/s l'oggetto e' piu' corto di" 
+          " %f metri e pesa %f kg in piu'\n", 
+          v/1000., lung-lung*gamma, massa/gamma-massa);
+
+   return 0;
+}
+
+/* Nota:
+   nell'ultima printf le due stringhe di formato vengono agganciate
+   a formarne una sola da parte del compilatore
+*/
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+   double lat1, lon1, lat2, lon2;
+   double p1, p2, p3;
+   double x, d;
+   const double r = 6372.795;
+   const double Pi = 4.0 * atan(1.0); /* pi greco */
+
+   printf("Latitudine del punto 1 (gradi): ");
+   scanf("%lf", &lat1);
+   printf("Longitudine del punto 1 (gradi): ");
+   scanf("%lf", &lon1);
+   printf("Latitudine del punto 2 (gradi): ");
+   scanf("%lf", &lat2);
+   printf("Longitudine del punto 2 (gradi): ");
+   scanf("%lf", &lon2);
+
+   lat1 = lat1 * Pi / 180.0; /* converte in radianti */
+   lon1 = lon1 * Pi / 180.0;
+   lat2 = lat2 * Pi / 180.0;
+   lon2 = lon2 * Pi / 180.0;
+
+   p1 = cos(lat1) * cos(lon1) * cos(lat2) * cos(lon2);
+   p2 = cos(lat1) * sin(lon1) * cos(lat2) * sin(lon2);
+   p3 = sin(lat1) * sin(lat2);
+   x = p1 + p2 + p3;
+   d = ( atan2(-x, sqrt(1 - x * x)) + Pi / 2.0 ) * r;
+   printf("Distanza: %f\n", d);
+
+   return 0;
+}

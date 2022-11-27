@@ -1,0 +1,357 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   19-DynAlloc_Soluzioni.txt                                     */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<stdlib.h>
+
+void ordina(int vett[], int lung);
+
+int main()
+{
+   int i, nvalori;
+   FILE *fpIN, *fpOUT;
+   char filename[FILENAME_MAX];
+   int *v;
+
+   printf("Nome del file in input: ");
+   gets(filename);
+   if ((fpIN=fopen(filename,"r"))==NULL)
+   {
+      fprintf(stderr, "Il file non esiste\n");
+      return EXIT_FAILURE;
+   }
+   
+   printf("Nome del file in output: ");
+   gets(filename);
+   if ((fpOUT=fopen(filename,"w"))==NULL)
+   {
+      fprintf(stderr, "Non posso aprire il file\n");
+      return EXIT_FAILURE;
+   }
+
+   /* conta quanti valori contiene il file */
+   nvalori = 0;
+   while (fscanf(fpIN, "%*d") != EOF) /* li legge e li scarta */
+      nvalori++;               /* fscanf da' 0 se legge e scarta */
+
+   /* alloca spazio per un vettore di int  di dimensione nvalori */
+   v = (int *)malloc(nvalori*sizeof(int));
+   if (v == NULL)
+   {
+      fprintf(stderr, "Non posso allocare\n");
+      return EXIT_FAILURE;
+   }
+
+   rewind(fpIN);
+   
+   /* ora legge i valori dal file e li memorizza */
+   for (i=0; i<nvalori; i++)  /* si sa quanti sono, basta un for */
+      fscanf(fpIN, "%d", &v[i]);
+
+   ordina(v, nvalori);
+
+   for (i=0; i<nvalori; i++)
+      fprintf(fpOUT, "%d\n", v[i]);
+   
+   free(v);
+
+   return EXIT_SUCCESS;
+}
+
+void ordina(int v[], int len)
+{
+   int i, j, jmin, len;
+   char t;
+   
+   for (i=0; i<len-1; i++)
+   {
+      jmin = i;
+      for (j=i+1; j<len; j++)
+         if (s[j] < s[jmin])
+            jmin = j;
+         
+         t=s[jmin];
+         s[jmin]=s[i];
+         s[i]=t;
+   }
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+/* NOTA: non sono stati fatti i controlli sulle allocazioni solo
+   per rendere piu' chiaro il codice, in un programma non
+   dimostrativo e' indispensabile che ci siano */
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define NUMRIGHE 5
+#define NUMCOL 15
+
+void f2(int *arrayp, int rows, int cols);
+
+int main()
+{
+   int i;
+   int numRighe=20;
+   int numCol=10;
+
+   int array[NUMRIGHE][NUMCOL];
+   int **array1;          /* vettore di puntatori, ragged */
+   int **array2;          /* vettore di puntatori, contiguo */
+   int *array3;           /* vettore NO matrice (flat) */
+   int (*array4)[NUMCOL]; /* puntatore a vettore */
+
+   array1=(int **)malloc(numRighe*sizeof(int *));
+   for (i=0; i<numRighe; i++)
+      array1[i]=malloc(numCol*sizeof(int));
+
+   array2=(int **)malloc(numRighe*sizeof(int *));
+   array2[0]=(int*)malloc(numRighe*numCol*sizeof(int));
+   for (i=1; i<numRighe; i++)
+      array2[i]=array2[0]+i*numCol;
+
+   array3=(int *)malloc(numRighe*numCol*sizeof(int));
+
+   array4=(int (*)[NUMCOL])malloc(numRighe*sizeof(*array4));
+
+   printf("array\n");
+   f2(array[0], NUMRIGHE, NUMCOL);
+   printf("array2\n");
+   f2(array2[0], numRighe, numCol);
+   printf("array3\n");
+   f2(array3, numRighe, numCol);
+   printf("array4\n");
+   f2(*array4, numRighe, numCol);
+
+   return EXIT_SUCCESS;
+}
+
+void f2(int *arrayp, int rows, int cols)
+{
+   int r, c;
+
+   for (r=0; r<rows; r++)
+   {
+      for (c=0; c<cols; c++)
+      {
+         arrayp[r*cols+c]=r*cols+c;
+         printf("%3d ", arrayp[r*cols+c]);
+      }
+      printf("\n");
+   }
+}
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+/* NOTA: non sono stati fatti i controlli sulle allocazioni solo
+   per rendere piu' chiaro il codice, in un programma non
+   dimostrativo e' indispensabile che ci siano */
+
+/* SOLUZIONE 1, Passaggio di matrice statica a somma2 con creazione
+   del vettore di puntatori alle righe NEL CHIAMANTE */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define NUMRIGHE 10
+#define NUMCOL 20
+
+int somma1(int *v, int nrows, int ncols);
+int somma2(int **v, int nrows, int ncols);
+
+int main()
+{
+   int s1, s2;
+   int ms[NUMRIGHE][NUMCOL]={1,2,3,4,5,6,7,8,9}; /* matr. statica */
+   int numRighe, numCol, i;
+   int **md;       /* matrice dinamica */
+
+   numRighe = 20;
+   numCol = 30;
+   /* crea una matrice dinamica tipo array2 */
+   md = (int **)malloc(numRighe*sizeof(int *));   
+   md[0] = (int *)calloc(numRighe*numCol, sizeof(int));
+   for (i=1; i<numRighe; i++)
+      md[i]=md[0]+i*numCol;
+   md[0][0] = 5; /* perche' non sia tutta 0 */
+
+   /* somma1 su matrice statica */
+   s1 = somma1(&ms[0][0], NUMRIGHE, NUMCOL);
+   printf("somma1 statica: %d\n", s1);
+
+   /* somma1 su matrice dinamica */   
+   s1 = somma1(&md[0][0], numRighe, numCol); /* anche md[0] o *md */
+   printf("somma1 dinamica: %d\n", s1);
+
+   /* somma2 su matrice statica */
+   /* Realizza il primo metodo: il chiamante prima della chiamata
+      alla funzione crea un vettore dinamico di puntatori alle righe
+      della matrice statica (come array2) e passa il puntatore di
+      questo (msd, che quindi e' un puntatore a puntatore) alla 
+      funzione */
+   { 
+      /* somma2 richiede un int **, non le si puo' passare un ms[][]
+         allora si crea un int ** temporaneo che punti a ms, come in
+         array2 */
+      int **msd;   /* vettore di punt alle righe, come per array2 */
+      int i;
+      msd = (int **)malloc(NUMRIGHE*sizeof(int *));
+      msd[0] = &ms[0][0];
+      for (i=1; i<NUMRIGHE; i++)
+         msd[i]=msd[0]+i*NUMCOL;
+   
+      s2 = somma2(msd, NUMRIGHE, NUMCOL); /* passa msd e non ms */
+      free(msd);
+      printf("somma2 statica: %d\n", s2);
+   }
+
+   /* somma2 su matrice dinamica */
+   s2 = somma2(md, numRighe, numCol);
+   printf("somma2 dinamica: %d\n", s2);
+
+   getchar();
+   return EXIT_SUCCESS;
+}
+
+
+int somma1(int *v, int nrows, int ncols)
+{
+   int r, c, sum = 0;
+   for (r=0; r<nrows; r++)
+      for (c=0; c<ncols; c++)
+         sum += v[r*ncols+c];
+   return sum;
+   /* somma1 vede la matrice statica come un vettore e questo
+      non è strettamente conforme allo standard perché l’accesso
+      ad elementi oltre la fine della prima riga è considerato 
+      indefinito, cioè l’accesso a (&array[0][0])[x] non è 
+      definito per x >= NC */
+}
+
+
+int somma2(int **v, int nrows, int ncols)
+{
+   int r, c, sum = 0;
+   for (r=0; r<nrows; r++)
+      for (c=0; c<ncols; c++)
+         sum += v[r][c];
+   return sum;
+}
+
+
+/* --------------------------------------- */
+/* SOLUZIONE 2, Passaggio di matrice statica a somma2 con creazione
+   del vettore di puntatori alle righe NELLA FUNZIONE */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define NUMRIGHE 10
+#define NUMCOL 20
+
+int somma1(int *v, int nrows, int ncols);
+int somma2(int **v, int nrows, int ncols);
+
+int main()
+{
+   int s1, s2;
+   int ms[NUMRIGHE][NUMCOL]={1,2,3,4,5,6,7,8,9}; /* matr. statica */
+   int numRighe, numCol, i;
+   int **md;       /* matrice dinamica */
+
+   numRighe = 20;
+   numCol = 30;
+   /* crea una matrice dinamica tipo array2 */
+   md = (int **)malloc(numRighe*sizeof(int *));   
+   md[0] = (int *)calloc(numRighe*numCol, sizeof(int));
+   for (i=1; i<numRighe; i++)
+      md[i]=md[0]+i*numCol;
+   md[0][0] = 5; /* perche' non sia tutta 0 */
+
+   /* somma1 su matrice statica */
+   s1 = somma1(&ms[0][0], NUMRIGHE, NUMCOL);
+   printf("somma1 statica: %d\n", s1);
+
+   /* somma1 su matrice dinamica */   
+   s1 = somma1(&md[0][0], numRighe, numCol); /* anche md[0] o *md */
+   printf("somma1 dinamica: %d\n", s1);
+
+   /* somma2 su matrice statica */
+   /* Realizza il secondo metodo: il chiamante crea un puntatore a
+      puntatore alla matrice statica (msd) e lo passa alla funzione,
+      la funzione crea un vettore dinamico di puntatori alle righe
+      della matrice statica (come array2) e lo inizializza tramite
+      il puntatore passato */
+   { 
+      /* somma2 richiede un int **, non le si puo' passare un ms[][]
+         allora si crea un int ** temporaneo che punti a ms, come in
+         array2 */
+      int **msd;   /* vettore di punt alle righe, come per array2 */
+      int *punt = &ms[0][0]; /* punta alla matrice statica */
+      
+      msd = &punt;
+      s2 = somma2(msd, NUMRIGHE, NUMCOL); /* passa msd e non ms */
+      printf("somma2 statica: %d\n", s2);
+   }
+
+   /* somma2 su matrice dinamica */
+   s2 = somma2(md, numRighe, numCol);
+   printf("somma2 dinamica: %d\n", s2);
+
+   getchar();
+   return EXIT_SUCCESS;
+}
+
+
+int somma1(int *v, int nrows, int ncols)
+{
+   int r, c, sum = 0;
+   for (r=0; r<nrows; r++)
+      for (c=0; c<ncols; c++)
+         sum += v[r*ncols+c];
+   return sum;
+   /* somma1 vede la matrice statica come un vettore e questo
+      non è strettamente conforme allo standard perché l’accesso
+      ad elementi oltre la fine della prima riga è considerato 
+      indefinito, cioè l’accesso a (&array[0][0])[x] non è 
+      definito per x >= NC */
+}
+
+
+int somma2(int **v, int nrows, int ncols)
+{
+   int r, c, sum = 0;
+   int **pp; /* puntatore a puntatore a int */
+
+  /* crea il vettore di puntatori alle righe, sia per la matrice
+     statica sia per la matrice dinamica, per la sola dinamica non
+     servirebbe */
+  pp = (int **)malloc(nrows * sizeof(int *));
+  /* mette nel primo puntatore il puntatore al blocco passato
+     tramite v */
+  pp[0] = *v; 
+
+  /* assegna i valori dei puntatori alle righe successive alla 1a */
+  for (r=1; r<nrows; r++) 
+    pp[r] = pp[0] + r * ncols;
+
+  /* ora si possono usare gli indici */
+  for (r=0; r<nrows; r++)
+    for (c=0; c<ncols; c++)
+      sum += pp[r][c];
+   
+  /* rilascio del vettore di puntatori */
+  free(pp);
+  return sum;
+}

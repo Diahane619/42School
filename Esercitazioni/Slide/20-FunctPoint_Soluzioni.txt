@@ -1,0 +1,94 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   20-FunctPoint_Soluzioni.txt                                   */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+int pstrcmp(const void *p1, const void *p2)
+{
+   return strcmp(*(char * const *)p1, *(char * const *)p2);
+}
+
+
+int main()
+{
+   int i;
+   char *vs[10];
+   char stringhe[10][20] = {0};
+
+   for (i=0; i<10; i++)
+      vs[i] = stringhe[i];
+
+   strcpy(vs[0], "prima");
+   strcpy(vs[1], "seconda");
+   strcpy(vs[2], "terza");
+   strcpy(vs[3], "quarta");
+   strcpy(vs[4], "quinta");
+   strcpy(vs[5], "sesta");
+   strcpy(vs[6], "settima");
+   strcpy(vs[7], "ottava");
+   strcpy(vs[8], "nona");
+   strcpy(vs[9], "decima");
+
+   for (i=0; i<10; i++)
+      printf("%s\n", vs[i]);
+
+   printf("--------------------------\n");
+
+   qsort(vs, 10, sizeof(char *), pstrcmp);
+   
+   for (i=0; i<10; i++)
+      printf("%s\n", vs[i]);
+
+   getchar();
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+da fare - suggerimenti vari
+
+void* bsearch(const void* key, 
+              const void* base, size_t nmemb, size_t size,
+              int (*compar)(const void*, const void*) );
+
+deve restituire un puntatore al valore trovato o NULL
+
+key: puntatore al valore da cercare
+base: puntatore al vettore in cui cercare
+nmemb: è il numero degli elementi del vettore
+size: dimensione degli elementi del vettore
+compar è la funzione di confronto, è un puntatore a funzione che 
+restituisce un int e riceve due puntatori void relativi agli argomenti 
+da confrontare
+
+Per l'algoritmo di bisezione vedere le slide sugli algoritmi.
+
+Declare variables for the element wanted and a pointer for 
+bsearch's return value:
+
+
+int elemCercato;
+int *elemTrovato;
+
+
+elemTrovato = bsearch(&elemCercato, vett, dimvett, sizeof(vett[0]), 
+                                                         myCompare);
+
+mycompare conterrà alla fine (se vettore di int):
+if ( elemTrovato != NULL )
+     printf("%d trovato\n", elemcercato);
+else printf("%d non trovato\n",elemCercato);

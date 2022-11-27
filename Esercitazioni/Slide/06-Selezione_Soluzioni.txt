@@ -1,0 +1,340 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   06-Selezione_Soluzioni.txt                                    */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double a, b;
+   
+   printf("Introduci il primo valore: ");
+   scanf("%lf", &a);
+   printf("Introduci il secondo valore: ");
+   scanf("%lf", &b);
+   if (a >= b)  /* oppure solo > */
+      printf("%f\n", a);
+   else
+      printf("%f\n", b);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int a;
+   
+   printf("Introduci il valore: ");
+   scanf("%d", &a);
+   if (a % 2 == 0)
+      printf("Pari\n");
+   else
+      printf("Dispari\n");
+
+   return 0;
+}
+
+
+/* Soluzione alternativa */
+   if (a / 2 * 2 == a)
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double a, b, c;
+   
+   printf("Introduci il primo valore: ");
+   scanf("%lf", &a);
+   printf("Introduci il secondo valore: ");
+   scanf("%lf", &b);
+   printf("Introduci il terzo valore: ");
+   scanf("%lf", &c);
+   if (a > b && a > c) /* verifica se a e' > di entrambi */
+      printf("%f\n", a);
+   else if (b > c)     /* a non e' il piu' grande, o e' b o e' c */
+      printf("%f\n", b);
+   else                /* non puo' che essere c */ 
+      printf("%f\n", c);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double a, b, c;
+   
+   printf("Introduci il primo valore: ");
+   scanf("%lf", &a);
+   printf("Introduci il secondo valore: ");
+   scanf("%lf", &b);
+   printf("Introduci il terzo valore: ");
+   scanf("%lf", &c);
+   if (a > b && a > c) /* verifica se a e' > di entrambi */
+      if (b > c)
+         printf("%f %f %f\n", a, b, c);
+      else
+         printf("%f %f %f\n", a, c, b);
+   else if (b > c)     /* a non e' il piu' grande, o e' b o e' c */
+      if (a > c)
+         printf("%f %f %f\n", b, a, c);
+      else
+         printf("%f %f %f\n", b, c, a);
+   else                /* non puo' che essere c */ 
+      if (a > b)
+         printf("%f %f %f\n", c, a, b);
+      else
+         printf("%f %f %f\n", c, b, a);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   5                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int matricola;
+   
+   printf("Introduci il numero di matricola: ");
+   scanf("%d", &matricola);
+   if (matricola % 3 == 1)
+      printf("ROSSA\n");
+   else if (matricola % 3 == 2)
+      printf("VERDE\n");
+   else
+      printf("BLU\n");
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   6                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int matricola;
+   
+   printf("Introduci il numero di matricola: ");
+   scanf("%d", &matricola);
+   switch (matricola % 3)
+   {
+   case 1:
+      printf("ROSSA\n");
+      break;
+   case 2:
+      printf("VERDE\n");
+      break;
+   default:
+      printf("BLU\n");
+      break;
+   }
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   7                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int voto;
+   
+   printf("Introduci il voto: ");
+   scanf("%d", &voto);
+   if (voto <= 0)
+      printf("Impossibile\n");
+   else if (voto < 18)
+      printf("Insufficiente\n");
+   else if (voto == 18)
+      printf("Appena sufficiente\n");
+   else if (voto <= 20)       /* inutile scrivere anche voto > 18 */
+      printf("Basso\n");
+   else if (voto <= 23)
+      printf("Medio\n");
+   else if (voto <= 26)
+      printf("Buono\n");
+   else if (voto <= 29)
+      printf("Alto\n");
+   else if (voto == 30)
+      printf("Massimo\n");
+   else
+      printf("Impossibile\n");
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   8                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int voto;
+   
+   printf("Introduci il voto: ");
+   scanf("%d", &voto);
+   switch (voto)
+   {
+   case 18:
+      printf("Appena sufficiente\n");
+      break;
+   case 19:
+   case 20:
+      printf("Basso\n");
+      break;
+   case 21:
+   case 22:
+   case 23:
+      printf("Medio\n");
+      break;
+   case 24:
+   case 25:
+   case 26:
+      printf("Buono\n");
+      break;
+   case 27:
+   case 28:
+   case 29:
+      printf("Alto\n");
+      break;
+   case 30:
+      printf("Massimo\n");
+      break;
+   default:
+      if (voto > 0 && voto < 18)
+         printf("Insufficiente\n");
+      else
+         printf("Impossibile\n");
+      break;
+   }
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   9                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+   double a, b, c, delta;
+   
+   printf("Introduci il valore di a: ");
+   scanf("%lf", &a);
+   printf("Introduci il valore di b: ");
+   scanf("%lf", &b);
+   printf("Introduci il valore di c: ");
+   scanf("%lf", &c);
+
+   delta = b*b-4*a*c;
+
+   if (delta < 0)
+     printf("Soluzioni non reali\n");
+   else
+   {
+      printf("x1 = %f\n", (-b-sqrt(delta))/(2*a)); /* parentesi   */
+      printf("x2 = %f\n", (-b+sqrt(delta))/(2*a)); /*  al denomin */
+   }
+
+   return 0;
+}
+
+/* Nota: la verifica del segno di delta evita di calcolare la
+   radice quadrata di un valore negativo */
+
+/* =============================================================== */
+/*  10                                                             */
+/* =============================================================== */
+
+
+#include <stdio.h>
+
+int main()
+{
+   int anno;
+   
+   printf("Introduci l'anno: ");
+   scanf("%d", &anno);
+   if (anno % 400 == 0 || (anno % 100 != 0 && anno % 4 == 0)) /* 1 */
+      printf("Bisestile\n");
+   else
+      printf("Non bisestile\n");
+
+   return 0;
+}
+
+/* Note:
+   (1) le parentesi sono opzionali
+   E' inutile scrivere (anno % 100 == 0 && anno % 400 == 0) al posto
+   di (anno % 400 == 0), se e' divisibile per 400 lo e' anche 
+   per 100 */
+
+/* Soluzione alternativa */
+
+#include <stdio.h>
+
+int main()
+{
+   int anno;
+   int d4, d100, d400; /* divisibilita' per 4, 100, 400 */
+   
+   printf("Introduci l'anno: ");
+   scanf("%d", &anno);
+   d4 =   (anno % 4 == 0);    /* parentesi opzionali */
+   d100 = (anno % 100 == 0);
+   d400 = (anno % 400 == 0);
+   if (d400 || !d100 && d4)
+      printf("Bisestile\n");
+   else
+      printf("Non bisestile\n");
+
+   return 0;
+}
+
+/* Nota: inutile scrivere (d100 && d400) , come sopra */

@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Corso di programmazione in C (Standard C89)</title>
+<style type="text/css">
+
+/* remove standards */
+*, body, h1, h2, h3, p , ul, dl, ol {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body
+{
+  width: 425px;
+  margin: 25px auto 25px auto;
+  background: rgb(242,251,255);
+  font-family: arial, sans-serif;
+  font-size: small;
+}
+
+
+
+h1, h2, h3 {
+  font-style: italic;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+h1 {
+	font-size: x-large;
+	margin-bottom: 0.5em;
+	border: 1px solid black;
+	background: url(th_bg.png) repeat center center;
+	padding: 30px 50px; }
+
+h2 {
+	font-size: large;
+	margin-top: 1.75em;
+	margin-bottom: 0.25em;
+}
+
+h3 {
+	font-size: medium;
+	margin-top: 0.75em;
+	margin-bottom: 0.25em;
+}
+
+tt {
+	font-size: medium;
+}
+
+p {
+  margin-bottom: .5em;
+}
+
+p.upDATE {
+  font-style: italic;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+a:link
+{
+  font-weight: normal;
+  color: blue;
+}
+
+a:visited
+{
+  font-weight: normal;
+  color: blue;
+}
+
+a:hover
+{
+  font-weight: normal;
+  text-decoration: underline;
+  color: #f60;
+}
+
+a:active
+{
+  font-weight: normal;
+  text-decoration: underline;
+  color: #f90;
+}
+
+p.lista {
+	margin-bottom: 0;
+}
+
+ul {
+  padding-left: 1.5em;
+  margin-top: 0;
+}
+* html ul {  /* IE */
+	padding-left: 0;
+	margin-left: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+ol {
+	list-style-type: none;
+}
+
+/* TABELLA */
+
+table {
+	background-color: #FFF;
+	border-left: none;
+	border-right: 3px solid #777;
+	border-bottom: 3px solid #777;
+	border-top: 1px solid #777;
+	border-left: 1px solid #777;
+	margin-left: 0;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	border-collapse: collapse;
+	width: 425px;
+}
+
+th {
+	border: 1px solid #000;
+	background: url(th_bg.png);
+	font-family: sans-serif;
+}
+
+th, td {
+	padding: 0 10px;
+	border-bottom: 1px #4444AA solid;
+}
+
+td {
+	height: 40px;
+}
+
+
+#slide, #soluzioni {
+	width: 55px;
+	vertical-align: middle;
+	text-align: center;
+	margin: 0;
+}
+
+
+table a {
+/* 	display: block; */
+	height: 18px;
+}
+
+table a:hover {
+	text-decoration: none;
+}
+
+td a {
+	text-align: center;
+	padding: 1px;
+}
+
+</style>
+</head>
+
+<body>
+
+	<h1>Corso di programmazione in C (Standard C89/C90)</h1>
+
+<h2>Slide e soluzione degli esercizi
+    <br />(Ver. 3 - 2021)</h2>
+<div class="sfontab">
+<table>
+<colgroup>
+	<col id="titolo" />
+	<col id="slide" />
+	<col id="soluzioni" />
+</colgroup>
+<tr><th scope="col">Titolo</th>
+    <th scope="col">Slide</th>
+    <th scope="col">Soluzioni</th></tr>
+<tr><td>La programmazione</td>
+    <td><a href="./00-Programmazione.pdf"       ><img alt="" src="pdf.gif" /></a></td>
+    <td>&nbsp;</td></tr>
+<tr><td>Il primo esperimento</td>
+    <td><a href="./01-PrimoEsper.pdf"           ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./01-PrimoEsper_Soluzioni.txt" ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Il Linguaggio C</td>
+    <td><a href="./02-LinguaggioC.pdf"          ><img alt="" src="pdf.gif" /></a></td>
+    <td>&nbsp;</td></tr>
+<tr><td>Tipi numerici di base</td>
+    <td><a href="./03-Tipi.pdf"                 ><img alt="" src="pdf.gif" /></a></td>
+    <td>&nbsp;</td></tr>
+<tr><td>Input e output di valori numerici</td>
+    <td><a href="./04-IOnumeri.pdf"             ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./04-IOnumeri_Soluzioni.txt"   ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Espressioni e funzioni matematiche</td>
+    <td><a href="./05-Espressioni.pdf"          ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./05-Espressioni_Soluzioni.txt"><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Esecuzione condizionale</td>
+    <td><a href="./06-Selezione.pdf"            ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./06-Selezione_Soluzioni.txt"  ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Strutture iterative</td>
+    <td><a href="./07-Cicli.pdf"                ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./07-Cicli_Soluzioni.txt"      ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Vettori e matrici</td>
+    <td><a href="./08-VettMat.pdf"              ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./08-VettMat_Soluzioni.txt"    ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>I caratteri e le stringhe</td>
+    <td><a href="./09-Stringhe.pdf"             ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./09-Stringhe_Soluzioni.txt"   ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Complementi - 1</td>
+    <td><a href="./10-Complementi-1.pdf"        ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./10-Complementi-1_Soluzioni.txt"><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>File sequenziali</td>
+    <td><a href="./11-File.pdf"                 ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./11-File_Soluzioni.txt"       ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Algoritmi e programmazione a stati</td>
+    <td><a href="./12-Algoritmi.pdf"            ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./12-Algoritmi_Soluzioni.txt"  ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>I puntatori</td>
+    <td><a href="./13-Puntatori.pdf"            ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./13-Puntatori_Soluzioni.txt"  ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Le funzioni</td>
+    <td><a href="./14-Funzioni.pdf"             ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./14-Funzioni_Soluzioni.txt"   ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Il preprocessore C</td>
+    <td><a href="./15-Preprocessore.pdf"                ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./15-Preprocessore_Soluzioni.txt"      ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Le strutture</td>
+    <td><a href="./16-Struct.pdf"               ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./16-Struct_Soluzioni.txt"     ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Programmi composti da pi&ugrave; file</td>
+    <td><a href="./17-Multi-file.pdf"               ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./17-Struct_Soluzioni.txt"     ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>File binari</td>
+    <td><a href="./18-FileBinari.pdf"           ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./18-FileBinari_Soluzioni.txt" ><img alt="vuoto" src="txt-vuoto.gif" /></a></td></tr>
+<tr><td>Allocazione dinamica della memoria</td>
+    <td><a href="./19-DynAlloc.pdf"             ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./19-DynAlloc_Soluzioni.txt"   ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Puntatori a funzioni</td>
+    <td><a href="./20-FunctPoint.pdf"           ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./20-FunctPoint_Soluzioni.txt" ><img alt="incompleto" src="txt-incompleto.gif" /></a></td></tr>
+<tr><td>Complementi - 2</td>
+    <td><a href="./21-Complementi-2.pdf"        ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./21-Complementi-2_Soluzioni.txt"><img alt="incompleto" src="txt-incompleto.gif" /></a></td></tr>
+<tr><td>Liste concatenate (introduzione)</td>
+    <td><a href="./22-Liste.pdf"                ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./22-Liste_Soluzioni.txt"      ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>La ricorsione (introduzione)</td>
+    <td><a href="./23-Ricorsione.pdf"           ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./23-Ricorsione_Soluzioni.txt" ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Alberi binari (introduzione)</td>
+    <td><a href="./24-AlberiBin.pdf"            ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./24-AlberiBin_Soluzioni.txt"  ><img alt="" src="txt.gif" /></a></td></tr>
+<tr><td>Abstract Data Type (introduzione)</td>
+    <td><a href="./25-ADT.pdf"                  ><img alt="" src="pdf.gif" /></a></td>
+    <td><a href="./25-ADT_Soluzioni.txt"        ><img alt="vuoto" src="txt-vuoto.gif" /></a></td></tr>
+</table>
+</div>    
+
+<p>Per alcuni aspetti complessi e dubbi vari pu&ograve; essere interessante la 
+consultazione della FAQ sul C del newsgroup <tt>comp.lang.c</tt>:
+<a href="./C-faq.txt">Steve Summit, comp.lang.c Answers to Frequently Asked Questions (FAQ List)</a></p>
+
+<p>Tutti i file delle slide e delle soluzioni e la FAQ sono raccolti nel file:
+<a href="./PPT89_ver3-2021-1x.zip">PPT89_ver3-2021-1x.zip</a>
+</p>
+
+
+</body>
+</html>

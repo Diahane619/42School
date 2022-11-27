@@ -1,0 +1,224 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   17-Multi-file_Soluzioni.txt                                   */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "stackv.h"
+
+int main()
+{
+   char scelta[4];
+   int v;
+
+   do
+   {
+      printf("Operazioni possibili:\n");
+      printf("1. Push\n");
+      printf("2. Pop\n");
+      printf("x. Exit\n\n");
+      printf("Scelta: ");
+      scanf("%s", scelta);
+      switch (scelta[0])
+      {
+      case '1':
+         printf("Valore da introdurre: ");
+         scanf("%d", &v);
+         if (push(v) == STACK_ERROR)
+            printf("Stack pieno!\n");
+         break;
+      case '2':
+         if (pop(&v) == STACK_ERROR)
+            printf("Stack vuoto!\n");   
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      }
+   }while (scelta[0] != 'x');
+      
+   return EXIT_SUCCESS;
+}
+
+------------- FILE stackv.c -----------------------
+#include "stackv.h"
+#define MAXNUM 10
+
+static int vett[MAXNUM], *p=vett; /* p punta al 1o elemento vuoto */
+
+int push (int v)
+{
+   if (p<vett+MAXNUM) /* vett+MAXNUM e' 1a pos dopo fine di vett */
+   {
+      *p++ = v;
+      return STACK_OK;
+   }
+   else
+      return STACK_ERROR;
+   
+}
+
+int pop (int *v)
+{
+   if (p>vett)
+   {
+      *v = *--p;
+      return STACK_OK;
+   }
+   else
+      return STACK_ERROR;
+}
+
+------------- FILE stackv.h -----------------------
+#define STACK_ERROR 1
+#define STACK_OK 0
+int push(int v);
+int pop(int *v);
+
+/* Nota
+   La pop() deve comunicare al chiamante DUE informazioni, l'esito 
+   dell'operazione e il valore eventualmente prelevato, quindi non 
+   basta il solo valore di ritorno della funzione.
+   Il file .h contiene anche la definizione dei codici da restituire
+*/
+
+
+/* =============================================================== */
+/*  2                                                              */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "queuev.h"
+
+int main()
+{
+   char scelta[4];
+   int v;
+
+   do
+   {
+      printf("Operazioni possibili:\n");
+      printf("1. Enqueue\n");
+      printf("2. Dequeue\n");
+      printf("x. Exit\n\n");
+      printf("Scelta: ");
+      scanf("%s", scelta);
+      switch (scelta[0])
+      {
+      case '1':
+         printf("Valore da introdurre: ");
+         scanf("%d", &v);
+         if (enqueue(v) == QUEUE_ERROR)
+            printf("Coda piena!\n");
+         break;
+      case '2':
+         if (dequeue(&v) == QUEUE_ERROR)
+            printf("Coda vuota!\n");
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      }
+   }while (scelta[0] != 'x');
+   
+   
+   return EXIT_SUCCESS;
+}
+
+------------- FILE queuev.c -----------------------
+#include "queuev.h"
+#define MAXNUM 10
+
+static int vett[MAXNUM], *p=vett;
+
+int enqueue (int v)
+{
+   if (p<vett+MAXNUM)
+   {
+      *p++ = v;
+      return QUEUE_OK;
+   }
+   else
+      return QUEUE_ERROR;
+   
+}
+
+int dequeue (int *v)
+{
+   int *q;
+   if (p>vett)
+   {
+      *v = *vett; /* vett[0] */
+      for (q=vett; q+1<p; q++)   
+      {
+         *q=*(q+1);
+      }
+      p--;
+      return QUEUE_OK;
+   }
+   else
+      return QUEUE_ERROR;
+}
+
+
+------------- FILE queuev.h -----------------------
+#define QUEUE_OK 0
+#define QUEUE_ERROR 1
+int enqueue (int v);
+int dequeue (int *v);
+
+/* Nota
+   La dequeue() deve comunicare al chiamante DUE informazioni:
+   l'esito dell'operazione e il valore eventualmente prelevato;
+   quindi non basta il solo valore di ritorno della funzione.
+   Il file .h contiene anche la definizione dei codici da restituire
+*/
+
+
+/* =============================================================== */
+/*  3                                                              */
+/* =============================================================== */
+
+/* Il programma chiamante e' identico a quello precedente */
+
+------------- FILE queuev.c -----------------------
+#include "queuev.h"
+#define MAXNUM 10
+
+static int buffer[MAXNUM];
+static int n=0, testa=0, coda=0;
+
+int enqueue (int v) /* aggiunge in coda */
+{
+   if (n<MAXNUM)
+   {
+      buffer[coda] = v;
+      coda = (coda +1) % MAXNUM;
+      n++;
+      return QUEUE_OK;
+   }
+   else
+      return QUEUE_ERROR;   
+}
+
+int dequeue (int *v) /* preleva dalla testa */
+{
+   if (n>0)
+   {
+      *v = buffer[testa];
+      testa = (testa +1) % MAXNUM;
+      n--;
+      return QUEUE_OK;
+   }
+   else
+      return QUEUE_ERROR;
+}
+
+------------- FILE queuev.h -----------------------
+/* Il file queuev.h e' identico a quello del precedente */

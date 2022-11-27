@@ -1,0 +1,52 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   01-PrimoEsper_Soluzioni.txt                                   */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+int main()
+{ 
+   int A, B, C, X, Y, Z;
+
+   printf("Primo valore? ");
+   scanf("%d", &A);
+   printf("Secondo valore? ");
+   scanf("%d", &B);
+   printf("Terzo valore? ");
+   scanf("%d", &C);
+   X = A-B;
+   printf("Risultato 1 = %d\n", X);
+   Y = A-B+C;
+   printf("Risultato 2 = %d\n", Y);
+   Z = A-B-C;
+   printf("Risultato 3 = %d\n", Z);
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+int main()
+{ 
+   int A, B, Temp;
+
+   printf("Primo valore? ");
+   scanf("%d", &A);
+   printf("Secondo valore? ");
+   scanf("%d", &B);
+   Temp = A;
+   A = B;
+   B = Temp;
+   printf("A = ", A);
+   printf("B = ", B);
+   return 0;
+}

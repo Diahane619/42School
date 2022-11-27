@@ -1,0 +1,490 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   09-Stringhe_Soluzioni.txt                                     */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<string.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR], b[MAXSTR];
+   
+   printf("Stringa 1? ");
+   gets(a);
+   printf("Stringa 2? ");
+   gets(b);
+   if (strlen(a) >= strlen(b))
+      puts(a);
+   else
+      puts(b);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<string.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR], b[MAXSTR];
+   
+   printf("Stringa 1? ");
+   gets(a);
+   printf("Stringa 2? ");
+   gets(b);
+   if (strcmp(a,b) >=0 )
+      puts(a);
+   else
+      puts(b);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int cont;
+   
+   printf("Stringa? ");
+   gets(a);
+   cont=0;
+   while (a[cont] != '\0')
+     cont++;
+   printf("%d\n", cont);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, l;
+   
+   printf("Stringa? ");
+   gets(a);
+   l=(int)strlen(a);
+   for (i=0; i<l; i++)
+     a[i] = (char)toupper(a[i]);
+   printf("%s\n", a);
+
+   return 0;
+}
+
+/* Nota
+   La funzione strlen produce un valore intero di tipo size_t,
+   poiche' la variabile l e' un int il compilatore potrebbe segnalare
+   un Warning per l'assegnazione di un size_t a un int; il cast sul
+   valore prodotto dalla strlen serve a eliminare questo warning.
+   La funzione toupper produce un valore di tipo int, dovendolo 
+   assegnare ad una variabile di tipo char (a[i]) si avrebbe un
+   warning come nel caso precedente; anche qui un cast elimina il 
+   warning.
+*/
+
+
+/* =============================================================== */
+/*   5                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, trovato=0;
+   
+   printf("Stringa? ");
+   gets(a);
+
+   for (i=0; i<10 && i<strlen(a); i++) /* (1) */
+      if (a[i] == 'A')
+         trovato = 1;
+
+   if (trovato == 1)
+      printf("Trovato\n");
+   else
+      printf("Non trovato\n");
+
+   return 0;
+}
+
+/* Note
+   (1) oppure i<10 && a[i] != '\0'  piu' veloce perche' non usa la
+   funzione per calcolare la lunghezza (usata inoltre a ogni 
+   iterazione.
+
+   Altra possibile modifica:
+   for (i=0; i<10 && a[i] != '\0' && a[i] != 'A'; i++)
+      ;
+
+   if (i < 10 && a[i] == 'A') 
+      printf("Trovato\n");
+   else
+      printf("Non trovato\n");
+
+   ==> Errore frequente:
+   for (i=0; i<10 && a[i] != '\0'; i++)
+      if (a[i] == 'A')
+         printf("Trovato\n");
+      else
+         printf("Non trovato\n");
+   
+   Per ciascuno dei caratteri di a[] produce o la scritta "Trovato" 
+   o "Non trovato", mentre deve produrre una sola scritta al termine.
+*/
+
+
+/* Altra soluzione */
+
+#include<stdio.h>
+#include<string.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR], b[11]={'\0'};
+   int i;
+   
+   printf("Stringa? ");
+   gets(a);
+   strncpy(b, a, 10)
+   if (strchr(b, 'A') != NULL)
+      printf("Trovato\n");
+   else
+      printf("Non trovato\n");
+
+   return 0;
+}
+
+/* Nota
+   b[] deve essere inizializzato a tutti \0 perche' la strncpy
+   copia solo i caratteri di a[], ma non aggiunge il \0 finale
+*/
+
+
+
+/* =============================================================== */
+/*   6                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, L, cifre=0;
+
+   printf("Introduci la stringa:");
+   gets(a);
+
+   L=(int)strlen(a);
+   for (i=0; i<L; i++)
+      if (isdigit(a[i]))
+         cifre++;
+
+   printf("Cifre: %d\n", cifre);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   7                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, L, maius=0, minus=0, cifre=0;
+
+   printf("Introduci la stringa:");
+   gets(a);
+
+   L=(int)strlen(a);
+   for (i=0; i<L; i++)
+      if (isupper(a[i]))
+         maius++;
+      else if (islower(a[i]))
+         minus++;
+      else if (isdigit(a[i]))
+         cifre++;
+
+   printf("Maiuscole: %d\n", maius);
+   printf("Minuscole: %d\n", minus);
+   printf("Cifre:     %d\n", cifre);
+   printf("Altri:     %d\n", L-maius-minus-cifre);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   8                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<string.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR], b[MAXSTR], c[MAXSTR];
+   int i, j, cont=0;
+   int la, lb;
+
+   printf("Introduci la prima stringa:");
+   gets(a);
+   printf("Introduci la seconda stringa:");
+   gets(b);
+   la = (int)strlen(a);
+   lb = (int)strlen(b);
+   if (la<lb)
+   {
+      strcpy(c, a);
+      strcpy(a, b);
+      strcpy(b, c);
+      i = la; la = lb; lb = i;
+   }
+
+   for (i=0; i < la-lb+1; i++)
+   {
+      cont++;
+      for (j=0; j<lb; j++)
+         if (a[i+j] != b[j])
+         {
+            cont--;
+            break;
+         }
+   }
+
+   if (cont==1)
+      printf("Solo una volta\n");
+   else
+      printf("Non solo una volta\n");
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   9                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR], b[MAXSTR];
+   int i, L;
+
+   printf("Introduci la stringa:");
+   gets(a);
+
+   L=(int)strlen(a);
+   for (i=0; i<L; i++)
+      a[i]=(char)tolower(a[i]);
+
+   for (i=0; i<L; i++)
+      b[i]=a[L-1-i];  /* carattere i-esimo contato da destra */
+   b[L]='\0';
+
+   if (strcmp(a, b)==0)
+      printf("Palindroma\n");
+   else
+      printf("Non palindroma\n");
+
+
+   return 0;
+}
+
+
+/* Altra soluzione */
+
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, L, palin;
+
+   printf("Introduci la stringa:");
+   gets(a);
+
+   L=(int)strlen(a);
+   for (i=0; i<L; i++)
+      a[i]=tolower(a[i]);
+
+   palin=1;
+   for (i=0; i<L/2 && palin!=0; i++)
+      if (a[i] != a[L-1-i])
+         palin=0;
+
+   if (palin)
+      printf("Palindroma\n");
+   else
+      printf("Non palindroma\n");
+
+   return 0;
+}
+
+/* Note
+   a[i] e' a[0+i], cioe' l'i-esimo carattere a partire da quello di
+   posizione 0 verso la fine, a[L-1-i] e' a[(L-1)-i], cioe' l'i-esimo
+   carattere a partire dalla posizione L-1 (l'ultima) verso l'inizio.
+
+   Il controllo di palin nella condizione del for permette di fermare
+   l'esecuzione del ciclo non appena si identificano due caratteri che
+   non sono uguali come dovrebbero essere, altrimenti il controllo
+   sarebbe andato avanti (inutilmente) fino a N/2. Per rendere ancora 
+   piu' veloce il programma si può eliminare il controllo di palin 
+   nella condizione del for, ma per uscire dal ciclo non appena due
+   caratteri sono diversi bisogna aggiungere un break dopo palin=0.
+
+   L'uscita dal ciclo for avviene o per terminazione naturale (i 
+   arriva al valore finale L/2) o per effetto del flag palin (o del
+   break se e' stato fatto quanto sopra). Per stabilire per quale dei
+   due motivi il ciclo sia terminato qui e' stato usato il valore
+   della variabile palin perche' e' più chiaro, ma si sarebbe potuto
+   anche verificare il valore di i: se i < L/2 allora e' sicuramente 
+   uscito per effetto del break. 
+*/
+
+
+/* =============================================================== */
+/*   10                                                            */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <string.h>
+#define MAXSTR 80
+
+int main()
+{
+   char a[MAXSTR];
+   int i, L, uguali, dispari;
+
+   printf("Introduci la stringa:");
+   gets(a);
+
+   L=(int)strlen(a);
+   uguali=1;
+   dispari = L % 2;
+   for (i=0; i<L/2; i++)
+      if (a[i] != a[L/2+i+dispari])
+      {
+         uguali=0;
+         break;
+      }
+
+   if (uguali)
+      printf("Composta di due parti uguali\n");
+   else
+      printf("Non composta di due parti uguali\n");
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   11                                                            */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#define N 128
+
+int main()
+{
+    char frase[N+1]; /* per contenere anche lo \0 */
+    int i;
+    int numparole;
+    int numcaratteri=0;
+
+    printf("Inserisci la frase: ");
+    gets(frase);
+
+    numparole=0;
+    numcaratteri=0;
+    for (i=0; frase[i]!='\0'; i++)  /* vedi nota */
+        if (isalpha(frase[i]))
+        {
+            numcaratteri++;
+            if (!isalpha(frase[i+1]))
+                numparole++;
+        }
+
+    printf("Numero parole: %d lunghezza media=%.2f\n", 
+            numparole, (double)numcaratteri/numparole);
+
+    return 0;
+}
+
+/* Note
+   Una parola ha la caratteristica di essere composta da caratteri
+   solo alfabetici ed essere preceduta e seguita da almeno un 
+   carattere non alfabetico, tranne la prima parola che non e'
+   preceduta da nulla e dall'ultima che non e' seguita da nulla.
+   In realta' in C dopo l'ultima parola c'e' sempre un carattere
+   non alfabetico, il \0; quindi dei due modi il secondo e'
+   certamente piu' adatto a essere realizzato (dato che davanti
+   al primo carattere della prima parola non c'e' nulla).
+   Quindi frase[i+1] e' corretto anche quando i è arrivato all'ultimo
+   carattere in quanto il \0 fa comunque parte della stringa.
+
+   Il ciclo:
+      for (i=0; i<(int)strlen(frase); i++)
+   avrebbe funzionato senza problemi. Qui si e' voluto evitare di
+   caricare la libreria di gestione delle stringhe per la sola
+   funzione strlen. Inoltre il programma e' piu' veloce non essendoci
+   una chiamata a funzione a ogni iterazione.
+*/
+
+

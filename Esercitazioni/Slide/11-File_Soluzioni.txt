@@ -1,0 +1,1180 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                               */
+/*   11-File_Soluzioni.txt                                         */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   char file[FILENAME_MAX];
+   FILE *fp;
+   int v, max, min, count, somma;
+
+   printf("Nome del file: ");
+   gets(file);
+
+   if ( (fp=fopen(file,"r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+   
+   if (fscanf(fp, "%d", &v) == EOF) /* primo valore */
+   {
+      fprintf(stderr, "File vuoto\n");
+      return EXIT_FAILURE;
+   }
+
+   max = min = somma = v;
+   count = 1;
+
+   while (fscanf(fp, "%d", &v) != EOF)
+   {
+      count++;
+      somma += v;
+      if (v > max)
+         max = v;
+      else if (v < min)
+         min = v;
+   }
+
+   printf("Max: %d\nMin: %d\nSomma: %d\nMedia: %.2f\nNumero: %d\n",
+           max, min, somma, (double)somma/count, count);
+   
+   fclose(fp);
+   
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define MAXSTR 80
+
+int main()
+{
+   char file[FILENAME_MAX], riga[MAXSTR];
+   FILE *fp;
+   int numrighe=0;
+   long numcaratteri=0;
+
+   printf("Nome del file: ");
+   gets(file);
+   if ( (fp=fopen(file,"r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   while (fgets(riga,MAXSTR-1,fp) != NULL) /* (1) */
+   {
+      numrighe++;
+      numcaratteri += strlen(riga)-1;      /* (2) */
+   }                                    
+   
+   if (riga[strlen(riga)-1] != '\n')       /* (3) */
+      numcaratteri++;
+
+   fclose(fp);
+
+   printf("Righe: %d\nCaratteri: %ld\n", numrighe, numcaratteri);
+   
+   return EXIT_SUCCESS;
+}
+
+/* Note
+   (1) -1 perché effettivamente legga al massimo MAXSTR-2 caratteri,
+       la riga memorizzata deve includere infatti \n\0
+   (2) -1 perche' la fgets mette in riga anche il \n
+   (3) l'ultima riga potrebbe non avere il \n, aggiunge 1 per il
+       carattere erroneamente eliminato da (2)
+*/
+
+/* altra soluzione */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   char file[FILENAME_MAX];
+   int c;                /* notare che e' un int e non un char */
+   FILE *fp;
+   int numrighe=0;
+   long numcaratteri=0;
+
+   printf("Nome del file: ");
+   gets(file);
+   if ( (fp=fopen(file,"r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   while ((c=fgetc(fp))!=EOF)
+      if (c=='\n')
+         numrighe++;
+      else
+         numcaratteri++;
+   fclose(fp);
+
+   printf("Righe: %d\nCaratteri: %ld\n", numrighe, numcaratteri);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   char FileIN[FILENAME_MAX];
+   char FileOUT[FILENAME_MAX];
+   FILE *fpIN, *fpOUT;
+   int x, y;
+
+   printf("Input file: ");
+   gets(FileIN);
+   if ( (fpIN = fopen(FileIN, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileIN);
+      return EXIT_FAILURE;
+   }
+
+   printf("Output file: ");
+   gets(FileOUT);
+   if ( (fpOUT = fopen(FileOUT, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileOUT);
+      return EXIT_FAILURE;
+   }
+
+   while (fscanf(fpIN,"%d%d", &x, &y) == 2)
+      fprintf(fpOUT, "%d\n", x-y);
+
+   fclose(fpIN);
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   Non serve un vettore o una matrice perché i dati vengono usati
+   una volta sola e nell'ordine in cui vengono letti e scritti
+*/
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#define LETTEREALFABETO 26 /* numero di lettere dell'alfabeto */
+
+int main()
+{
+   char file[FILENAME_MAX];
+   FILE *fp;
+   int lettere[LETTEREALFABETO] = {0}; /* contatori delle lettere */
+   int c, cc;   /* notare che sono int e non char */
+   int i;
+ 
+
+   printf("Input file: ");
+   gets(file);
+   if ( (fp = fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+   
+   cc = ' ';         /* per il primo carattere del file */	
+   while ((c=fgetc(fp)) != EOF)
+   {
+      if (isalpha(c) && !isalpha(cc))
+         lettere[toupper(c) - 'A']++;
+      cc = c;
+   }
+
+   for (i=0; i < LETTEREALFABETO; i++)
+      printf("Parole che iniziano con %c: %d\n", i+'A', lettere[i]);
+
+   fclose(fp);
+
+   return EXIT_SUCCESS;
+}
+/* Nota
+   Se il carattere appena letto c e' una lettera e quello precedente
+   cc non lo e', allora c e' l'inizio di una parola. Per il primo 
+   carattere del file basta impostare cc (carattere precedente) allo
+   spazio
+   Descrizione
+   Servono 26 contatori, uno per ciascuna delle lettere dell'
+   alfabeto; per definire 26 contatori tutti insieme si usa un
+   vettore: int lettere[26] (inizializzato a tutti 0).
+   In questo vettore, il contatore delle A e' lettere[0], il
+   contatore delle B e' lettere[1], ecc. e quindi si ha una
+   corrispondenza A->0, B->1, C->2, ecc.
+   Quando viene letta una lettera e questa e' l'inizio di una
+   parola (ossia la if e' vera), si deve incrementare di 1 il
+   corrispondente contatore: se e' una A bisogna incrementare
+   lettere[0], se una B lettere[1], ecc.
+   Per risalire dalla lettera all'indice del corrispondente
+   contatore (A->0, B->1, C->2, ecc.) e' sufficiente sottrarre
+   dal codice ASCII della lettera (c) quello della lettera A
+   mediante il calcolo c-'A' (infatti le lettere sono consecutive
+   nel codice ASCII); ad esempio se c e' la lettera A, c vale 65
+   (questo e' valore del suo codice ASCII) da cui si sottrae 'A'
+   (sempre 65) ottenendo 0. B vale 66, 66-65=1, ecc.
+   Per gestire maiuscole e minuscole si puo' trasformare 
+   preventivamente c in maiuscola con toupper, cosi' la formula
+   diventa toupper(c)-'A'. Essendo questo l'indice del vettore di 
+   contatori, lo si usa direttamente tra le parentesi quadre:
+   lettere[toupper(c)-'A'], poiche' lo si deve incrementare di uno
+   si ottiene: lettere[toupper(c)-'A']++;
+   Quando si devono visualizzare le coppie lettera-contatore, si
+   usa un ciclo for con i da 0 a 25, per avere il codice ASCII della
+   lettera corrispondente sommo 65 a i (ossia sommo 'A'), mentre i
+   e' gia' l'indice del contatore: lettere[i]
+*/
+
+
+/* =============================================================== */
+/*   5                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXRIGA 128
+
+int main()
+{
+   char file[FILENAME_MAX];
+   char riga[MAXRIGA];
+   FILE *fp;
+   double a, b, c;
+   double area, areaMax;
+   int rigaMax, numriga, numAreeCalcolate;
+
+   printf("Input file: ");
+   gets(file);
+   if ( (fp = fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+   
+   areaMax = 0.;
+   rigaMax = 0;
+   area = 0.;   
+   numriga = 0;
+   numAreeCalcolate = 0;
+   while (fgets(riga, MAXRIGA-1, fp) != NULL)
+   {
+      numriga++;
+      numAreeCalcolate++;
+      switch (sscanf(riga, "%lf%lf%lf", &a, &b, &c))
+      {
+      case 2:
+         area = a*b/2.;
+         break;
+      case 3:
+         area = (a+b)*c/2.;
+         break;
+      default:
+         fprintf(stderr, "Errore alla riga: %d\n", numriga);
+         numAreeCalcolate--;
+         break;
+      }
+      if (area > areaMax)
+      {
+         areaMax = area;
+         rigaMax = numriga;
+      }    
+   }
+
+   fclose(fp);
+
+   if (numriga == 0)
+      printf("File vuoto\n");
+   else if (numAreeCalcolate != 0)
+      printf("Area Max = %f alla riga %d\n", areaMax, rigaMax);
+   else
+      printf("Tutte le righe hanno errori\n");
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   Lo schema fgets + sscanf permette di leggere una riga intera e 
+   verificare in seguito quanti elementi contiene, al valore
+   restituito dalla sscanf
+*/
+
+
+/* =============================================================== */
+/*   6                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXRIGA 128
+
+int main()
+{
+   char file[FILENAME_MAX],a[MAXRIGA];
+   FILE *fp, *fp2;
+   int n;
+
+   printf("Nome del file da leggere:");
+   gets(file);
+   if ( (fp=fopen(file,"r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Nome del file da scrivere:");
+   gets(file);
+   if ( (fp2=fopen(file,"w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Quanti? ");
+   scanf("%d", &n);
+
+   while (fgets(a,n+1,fp) != NULL)   /* legge n car, anche il \n */
+   {
+      fputs(a,fp2);
+      if (a[strlen(a)-1] != '\n')    /* (1) */
+         fputs("\n",fp2);
+   }
+
+   fclose(fp);
+   fclose(fp2);
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   (1) se a non e' l'ultima parte di una riga, aggiunge il \n 
+       (l'ultima parte di ogni riga lo ha gia')
+*/
+
+
+/* =============================================================== */
+/*   7                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXNUM 100
+
+int main()
+{
+   char file[FILENAME_MAX], a[MAXNUM], b[MAXNUM];
+   int i, l, spazio, nn;
+   FILE *fp, *fp2;
+
+   printf("Nome del file da leggere: ");
+   gets(file);
+   if ( (fp=fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Nome del file da scrivere: ");
+   gets(file);
+   if ( (fp2=fopen(file, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Massima lunghezza: ");
+   scanf("%d", &nn);
+   
+   while (fgets(a, MAXNUM-1, fp) != NULL)
+   {
+      if (a[strlen(a)-1] == '\n')  /* toglie \n dal fondo se c'e' */
+         a[strlen(a)-1] = '\0';
+      while ((int)strlen(a) > nn)
+      {
+         strncpy(b,a,nn+1);  /* ne prende uno in piu' perche'
+                                potrebbe esserci 1 spazio li' */
+         b[nn+1] = '\0';     /* se ha copiato esattamente nn+1 
+                                caratteri e non meno, allora manca 
+                                il \0 e bisogna aggiungerlo,
+                                se ha copiato meno caratteri non da' prob. */
+         spazio=0;
+         for (i=nn; i >= 0; i--) /* inizia dal car di pos. nn (non nn-1)*/
+            if (b[i] == ' ')     /* non e' in mezzo a una parola */
+            {
+               b[i] = '\0';   /* termina la stringa qui */
+               spazio = i;    /* bisognerebbe togliere eventuali 
+                                 altri spazi precedenti... */
+               break;
+            }
+         if (spazio == 0)
+         {
+            b[nn] = '\0';
+            spazio = nn;
+         }
+         fputs(b,fp2);
+         fputs("\n",fp2);
+         
+         /* toglie gli spazi iniziali */
+         l = strlen(a);
+         while (a[spazio] == ' ')
+            spazio++;
+         /* elimina dall'inizio di a i caratteri appena mandati in
+            output spostando i restanti caratteri all'inizio 
+            (anche il \0) */
+         for (i=0; i< l-spazio+1; i++) 
+            a[i] = a[i+spazio];
+      }
+      /* quando arriva qui, a non puo' essere piu' lunga di nn 
+         caratteri, quindi e' l'ultimo pezzo e lo visualizza */
+      fputs(a,fp2);
+      fputs("\n",fp2);   /* bisogna rimettere il \n finale */
+   }
+   
+   fclose(fp);
+   fclose(fp2);
+    
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   8                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   char file[FILENAME_MAX];
+   FILE *fpIN1, *fpIN2, *fpOUT;
+   int a, b;
+   int eof1, eof2; /* 1 se il file e' finito, 0 altrimenti */
+
+   printf("Primo input file: ");
+   gets(file);
+   if ( (fpIN1 = fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+   
+   printf("Secondo input file: ");
+   gets(file);
+   if ( (fpIN2 = fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+   
+   printf("Output file: ");
+   gets(file);
+   if ( (fpOUT = fopen(file, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   
+   eof1 = fscanf(fpIN1, "%d", &a) == EOF;
+   eof2 = fscanf(fpIN2, "%d", &b) == EOF;
+
+   while (!eof1 && !eof2) /* finche' non arriva alla fine di uno */
+   {                      /*  dei due file */
+      if (a<=b)
+      {
+         fprintf(fpOUT, "%d\n", a);
+         eof1 = fscanf(fpIN1, "%d", &a) == EOF; /* esce dal while */
+      }
+      else
+      {
+         fprintf(fpOUT, "%d\n", b);
+         eof2 = fscanf(fpIN2, "%d", &b) == EOF; /* esce dal while */
+      }
+   }
+    
+   /* arrivato qui, uno solo dei due file e' finito, bisogna 
+      svuotare l'altro */
+   if (!eof1)                 /* consuma il file numero 1 */
+      do  /* output del valore lasciato in a all'ultimo confronto */
+      {
+         fprintf(fpOUT, "%d\n", a);
+      }while (fscanf(fpIN1, "%d", &a) != EOF);         
+   else if (!eof2)            /* consuma il file numero 2 */
+      /* non basta else: se fpIN2 e' inizialmente vuoto allora
+         sia eof1 sia eof2 valgono sono veri (valgono 1)) */
+      do                                        
+      {
+         fprintf(fpOUT, "%d\n", b);
+      }while (fscanf(fpIN2, "%d", &b) != EOF); 
+   
+   fclose(fpIN1);
+   fclose(fpIN2);
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   9                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAXSTRING 80
+#define LETTEREALFABETO 26
+
+int main()
+{
+   int codice, i, l;
+   int c;
+   char riga[MAXSTRING];    /* riga da cifrare */
+   char FileIN[FILENAME_MAX];
+   char FileOUT[FILENAME_MAX];
+   FILE *fpIN, *fpOUT;
+
+   printf("Input file: ");
+   gets(FileIN);
+   if ( (fpIN = fopen(FileIN, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileIN);
+      return EXIT_FAILURE;
+   }
+   printf("Output file: ");
+   gets(FileOUT);
+   if ( (fpOUT = fopen(FileOUT, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileOUT);
+      return EXIT_FAILURE;
+   }
+
+   printf("Codice: ");
+   scanf("%d", &codice);
+   /* I valori utili per codice sono da 0 a 25, ad es. 26 equivale 
+      a 0, 27 a 1, etc. quindi conviene riportare il codice fornito
+      dall'utente come ad un valore tra 0 e 25 calcolando il resto
+      di (codice % 26). Lo standard pero' non garantisce che
+      l'operatore % mantenga il segno nel risultato, quindi lo si
+      calcola sempre come valore positivo e poi si cambia di segno
+      al risultato se codice era negativo */
+   codice = (codice>=0 ? +1 : -1) * (abs(codice) % LETTEREALFABETO);
+
+   while (fgets(riga, MAXSTRING-1, fpIN) != NULL)
+   {
+      l = strlen(riga);
+      for (i=0; i<l; i++)
+      {
+         c = riga[i];
+         if (isupper(c)) /* maiuscola */
+         {
+            c += codice;
+            if (c > 'Z')  /* sfora a destra */
+               c -= LETTEREALFABETO;
+            else if (c < 'A')  /* sfora a sin */
+               c += LETTEREALFABETO;
+            riga[i] = (char)c;
+         }
+         else if (islower(c)) /* minuscola */
+         {
+            c += codice;
+            if (c > 'z')
+               c -= LETTEREALFABETO;
+            else if (c < 'a')
+               c += LETTEREALFABETO;
+            riga[i] = (char)c;
+         }
+      }
+      fputs(riga, fpOUT);
+   }
+   fclose(fpIN);
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   Si sarebbe potuto utilizzare un ciclo come segue per leggere
+   ed elaborare carattere per carattere:
+
+   while ((c=fgetc(fpIN)) != EOF)
+   {
+      if (isupper(c)) /* maiuscola */
+      {
+         c += codice;
+         if (c > 'Z')  /* sfora a destra */
+            c -= LETTEREALFABETO;
+         else if (c < 'A')  /* sfora a sin */
+            c += LETTEREALFABETO;
+      }
+      else if (islower(c)) /* minuscola */
+      {
+         c += codice;
+         if (c > 'z')
+            c -= LETTEREALFABETO;
+         else if (c < 'a')
+            c += LETTEREALFABETO;
+      }
+      fputc(c, fpOUT);
+   }
+*/
+
+/* altra soluzione */
+
+#include<stdio.h>
+#include<ctype.h>
+#include<stdlib.h>
+#define MAXSTRING 80
+
+int main()
+{
+   int codice, i;
+   int c;
+   char riga[MAXSTRING]; /* riga da cifrare */
+   char FileIN[FILENAME_MAX];
+   char FileOUT[FILENAME_MAX];
+   FILE *fpIN, *fpOUT;
+
+   printf("Input file: ");
+   gets(FileIN);
+   if ( (fpIN = fopen(FileIN, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileIN);
+      return EXIT_FAILURE;
+   }
+   printf("Output file: ");
+   gets(FileOUT);
+   if ( (fpOUT = fopen(FileOUT, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileOUT);
+      return EXIT_FAILURE;
+   }
+
+   printf("Codice: ");
+   scanf("%d", &codice);
+   /* I valori utili per codice sono da 0 a 25, ad es. 26 equivale 
+      a 0, 27 a 1, etc. quindi conviene riportare il codice fornito
+      dall'utente come ad un valore tra 0 e 25 calcolando il resto
+      di (codice % 26). Lo standard pero' non garantisce che
+      l'operatore % mantenga il segno nel risultato, quindi lo si
+      calcola sempre come valore positivo e poi si cambia di segno
+      al risultato se codice era negativo */
+   codice = (codice>=0 ? +1 : -1) * (abs(codice) % LETTEREALFABETO);
+
+   /* Ogni codice negativo equivale ad un codice postivo, ad esempio
+      il codice -1 che sposta l'alfabeto a destra di una posizione
+      (la Z sotto la A) equivale al codice 25 che sposta l'alfabeto
+      a sinistra di 25 posizioni, per avere il codice positivo
+      coincidente a quello negativo dato (compreso tra 0 e 25 grazie
+      all'operazione precedente) si puo' fare in questo modo: */   
+   codice = (codice + LETTEREALFABETO) % LETTEREALFABETO; 
+
+   while (fgets(riga, MAXSTRING-1, fpIN) != NULL)
+   {
+      for (i=0; riga[i]!='\0'; i++)
+      {
+         c = riga[i];
+         if (isupper(c)) /* maiuscola */
+            /* la formula sotto funziona solo con codice>=0 */            
+            riga[i] = (char)((c-'A'+codice) % LETTEREALFABETO + 'A');
+         else if (islower(c)) /* minuscola */
+            riga[i] = (char)((c-'a'+codice) % LETTEREALFABETO + 'a');
+      }
+      fputs(riga, fpOUT);
+   }
+   fclose(fpIN);
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*  10                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAXSTRING 80
+#define NUMLETTERE 26
+
+int main()
+{
+   char codice[MAXSTRING];
+   char x[2*NUMLETTERE+1]; /* lettere maiuscole seguite da minusc. */
+   char y[2*NUMLETTERE+1];
+   char op[MAXSTRING];  /* tipo operazione, anche var temporanea */
+   int i, l, j, k;
+   char riga[MAXSTRING]; /* riga da cifrare */
+   char FileIN[FILENAME_MAX];
+   char FileOUT[FILENAME_MAX];
+   FILE *fpIN, *fpOUT;
+
+   printf("Input file: ");
+   gets(FileIN);
+   if ( (fpIN = fopen(FileIN, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileIN);
+      return EXIT_FAILURE;
+   }
+   printf("Output file: ");
+   gets(FileOUT);
+   if ( (fpOUT = fopen(FileOUT, "w")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", FileOUT);
+      return EXIT_FAILURE;
+   }
+
+   printf("Codice: ");
+   gets(codice);
+
+   for (i=0; i<NUMLETTERE; i++) /* mette le lettere maiuscole in x */
+      x[i] = (char)('A' + i);
+   x[i] = '\0';
+
+   l = strlen(codice);
+   /* converte il codice in maiuscolo */
+   for (i=0; i <l; i++)
+      codice[i] = (char)toupper(codice[i]);
+
+   /* toglie le lettere ripetute dal codice */
+   k=0;      /* indica fino a che punto nel vettore codice[] si hanno
+                caratteri non ripetuti */
+   for (i=1; i<l; i++)  /* esamina ciascuna lettera di codice   */
+   {                    /*  a partire dalla 2a e verifica se e' */
+                        /*  uguale a uno di quelli unici (<k)   */
+      if (isalpha(codice[i])     /* salta le non-lettere */
+      { 
+         for (j=k; j>=0 && codice[j] != codice[i]; j--)
+            ;
+         if (j<0)            /* se non la trova, j arriva a -1 */
+            /* se la lettera non e' uguale a una delle precedenti */
+            codice[++k] = codice[i];   /* la aggiunge a codice */
+       }
+   }
+   codice[++k] = '\0';
+
+   strcpy(y, codice);
+
+   /* aggiunge le altre lettere maiuscole a codice */
+   j = strlen(y); /* si posiziona alla fine si y */
+   for (i=NUMLETTERE-1; i>=0; i--)       /* dalla Z alla A:       */
+      if (strchr(codice, 'A'+i) == NULL) /* se lettera non in cod */
+         y[j++] = (char)('A'+i);         /*   aggiungila a y      */
+   y[j] = '\0';
+
+   /* duplica x e y aggiungendovi le minuscole */
+   for (i=0; i<NUMLETTERE; i++)
+   {
+      x[i+NUMLETTERE] = (char)tolower(x[i]);
+      y[i+NUMLETTERE] = (char)tolower(y[i]);
+   }
+   x[2*NUMLETTERE] = y[2*NUMLETTERE] = '\0';
+
+
+   printf("Cifratura [c] o decifratura [d]: ");
+   gets(op); /* ne considero poi solo il primo carattere */
+   op[0] = (char)tolower(op[0]);
+
+   /* se cifra: cerca i caratteri in x e sostituisce quelli 
+     corrispondenti in y, se decifra farebbe il contrario,
+     allora e' piu' semplice scambiare x con y e cercare
+     sempre in x */
+   if (op[0] == 'd')
+   {
+      strcpy(op, x);
+      strcpy(x, y);
+      strcpy(y, op);
+   }
+
+   while (fgets(riga, MAXSTRING-1, fpIN) != NULL)
+   {
+      for (i=0; riga[i]!='\0'; i++)
+      {
+         /* cerca il carattere riga[i] in x */
+         for (j=0; j<2*NUMLETTERE; j++)
+            if (riga[i] == x[j])  /* se lo trova */
+            {                     /*  e' in posizione j di x */
+               riga[i] = y[j];    /*  e lo sost. con il caratt.  */
+               break;             /*  di pos j di y */
+            }
+      }
+      fputs(riga, fpOUT);
+   }
+   fclose(fpIN);
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* Nota
+   Per velocizzare il programma, si puo' notare che NELLA SOLA 
+   CIFRATURA il valore di j si puo' determinare e usare cosi':
+
+   if (isupper(riga[i]))
+   {
+      j = riga[i] - 'A';
+      riga[i] = y[j];
+   }
+   else if (islower(riga[i]])
+   {
+      j = riga[i] - 'a';
+      riga[i] = y[j];
+   }
+
+   Quindi non si possono piu' scambiare x e y e bisogna sdoppiare il
+   ciclo:
+
+   if (op[0] == 'c')
+      while (fgets(riga, MAXSTRING-1, fpIN) != NULL)
+         metodo di questa nota
+   else
+      while (fgets(riga, MAXSTRING-1, fpIN) != NULL)
+         metodo precedente (cerca in y e usa i caratteri di x)   
+
+   Per aumentare la velocita' della decifratura, si possono 
+   riordinare alfab. i due vettori: si riordina alfabeticamente y 
+   mentre i caratteri corrispondenti di x vengono scambiati allo
+   stesso modo per mantenere la corrispondenza
+*/
+
+
+/* =============================================================== */
+/*  11                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <math.h>
+#define N 25
+
+int main()
+{
+   int r, c, i, j;
+   int lato;    /* numero valori del lato del quadrato del sudoku */
+   int n;       /* dimensione del lato dei singoli riquadri */
+   int y, yy;   /* carattere attuale e precentemente letto */
+   int mx[N][N], x;
+   char file[FILENAME_MAX];
+   FILE *fp;
+   enum {FALSE, TRUE} trovato;
+
+   printf("Input file: ");
+   gets(file);
+   if ( (fp=fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   /* conta i valori sulla prima riga per determinare il lato */
+   lato=0;
+   yy=' '; /* inizializzato con una non-cifra */
+   while ((y=fgetc(fp)) != EOF && y != '\n')
+   {
+      if (isdigit(y) && !isdigit(yy)) /* cifra preceduta da !cifra */
+         lato++;
+      yy=y;
+   }
+   n = (int)(sqrt(lato)+0.1);  /* se la radice quadrata desse 2.99 */
+
+   printf("Sudoku di lato %d\n", lato);
+
+   rewind(fp);
+   for (r=0; r<lato; r++)
+      for (c=0; c<lato; c++)
+         if (fscanf(fp, "%d", &mx[r][c]) == EOF)
+         {
+            fprintf(stderr, "Errore: numero valori non corretto\n");
+            return EXIT_FAILURE;
+         }
+   fclose(fp);
+
+   /* controlla le righe */
+   for (r=0; r<lato; r++)
+      for (x=1; x<=lato; x++)
+      {
+         /* cerca il valore x nella riga r */
+         trovato = FALSE;
+         for (c=0; c<lato; c++)
+            if (mx[r][c]==x)
+            {
+               trovato = TRUE;
+               break; /* passa al valore x successivo */
+            }
+         if (!trovato)
+         {
+            fprintf(stderr, "Errore alla riga %d\n", r+1);
+            break;
+         }
+      }
+
+   /* controlla le colonne */
+   for (c=0; c<lato; c++)
+      for (x=1; x<=lato; x++)
+      {
+         /* cerca il valore x nella colonna c */
+         trovato = FALSE;
+         for (r=0; r<lato; r++)
+            if (mx[r][c]==x)
+            {
+               trovato = TRUE;
+               break; /* passa al valore x successivo */
+            }
+         if (!trovato)
+         {
+            fprintf(stderr, "Errore alla colonna %d\n", c+1);
+            break;
+         }
+      }
+
+   /* controlla i riquadri */
+   for (r=0; r<lato; r+=n)
+      for (c=0; c<lato; c+=n)
+         for (x=1; x<=lato; x++)
+         {
+            /* cerca il valore x nel riquadro */
+            trovato = FALSE;
+            for (i=0; i<n; i++)
+               for (j=0; j<n; j++)
+                  if (mx[r+i][c+j]==x)
+                  {
+                     trovato = TRUE;
+                     goto altroX; /* passa al valore x successivo */
+                  }
+            altroX:
+            if (!trovato)
+            {
+               fprintf(stderr, "Errore nel riquadro %d\n", 
+                                                      n*(r/n)+c/n+1);
+               break;
+            }
+         }
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   I riquadri sono contati per righe da sinistra a destra, dall'alto
+   in basso a partire da 1, il numero del riquadro si calcola con
+   la formule (3*(r/3)+c/3+1) nel caso lato=9.
+   Essendo numeri piccoli si potrebbero usare anche dei char.
+*/
+
+
+/* =============================================================== */
+/*  12                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <float.h>
+#define R 20
+#define C 20
+
+int main()
+{
+   double sup[R+2][C+2];
+   int r, c, x, y, xmin, ymin, passo;
+   FILE *fp;
+   char file[FILENAME_MAX];
+
+   printf("Input file: ");
+   gets(file);
+   if ( (fp=fopen(file, "r")) == NULL )
+   {
+      fprintf(stderr, "Impossibile aprire il file: %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   /* crea un contorno altissimo intorno alla superficie, cosi'
+      che non serva codificare i casi particolari che si verificano
+      quando la cella attuale e' al bordo della superficie
+      DBL_MAX e’ il valore max per un double (<float.h>) */
+
+   for (c=0; c<C+2; c++)
+      sup[0][c]=sup[R+1][c]=DBL_MAX;
+   for (r=0; r<R+2; r++)
+      sup[r][0]=sup[r][C+1]=DBL_MAX;
+
+   for (r=1; r<=R; r++)
+      for (c=1; c<=C; c++)
+         fscanf(fp, "%lf", &sup[r][c]);
+   fclose(fp);
+
+   printf("Posizione iniziale\n");
+   do
+   {
+      printf("- coordinata X (0-%d): ", C-1);
+      scanf("%d", &x);
+   }while (x<0 || x >= C);
+   do
+   {
+      printf("- coordinata Y (0-%d): ", R-1);
+      scanf("%d", &y);
+   }while (y<0 || y >= R);
+
+   printf("Percorso della pallina\n"
+          "----------------------\n");
+   passo = 0;
+   xmin=x;
+   ymin=y;
+   do
+   {
+      x = xmin;
+      y = ymin;
+      printf("%d - (%d,%d) [%f]\n", passo, x, y, sup[y][x]);
+      /* controlla le celle adiacenti in cui puo' scendere,
+         cerca il minimo valore delle celle */
+      for (r=y-1; r<=y+1; r++)
+         for (c=x-1; c<=x+1; c++)
+            if (sup[r][c]<sup[ymin][xmin])
+            {
+               xmin=c;
+               ymin=r;
+            }
+      passo++;
+   }while (x!=xmin || y!=ymin);   /* no celle piu' in basso */
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*  13                                                             */
+/* =============================================================== */
+
+/* VARIAZIONI AL PRECEDENTE PER OTTENERE I DIVERSI TIPI DI MOVIMENTO
+   ================================================================
+
+   PER IL MOVIMENTO SIA IN DIAGONALE SIA VERSO NORD/SUD/EST/OVEST:
+   ---------------------------------------------------------------
+      for (r=y-1; r<=y+1; r++)
+         for (c=x-1; c<=x+1; c++)
+            if (sup[r][c]<sup[ymin][xmin])
+            {
+               xmin=c;
+               ymin=r;
+            }
+
+
+   PER IL MOVIMENTO SOLO IN DIAGONALE (primo modo):
+   ------------------------------------------------
+      for (r=y-1; r<=y+1; r+=2)              /* notare +=2 */
+         for (c=x-1; c<=x+1; c+=2)           /* notare +=2 */
+            if (sup[r][c]<sup[ymin][xmin])
+            {
+               xmin=c;
+               ymin=r;
+            }
+      passo++;
+   }while (x!=xmin);
+
+   Nota:
+   Muovendosi in diagonale, entrambe le coordinate cambiano
+   sempre, quindi e' sufficiente verificare se e' variata una
+   qualsiasi delle 2 (la x o la y, entrambe e' sovrabbondante).
+
+
+   PER IL MOVIMENTO SOLO IN DIAGONALE (secondo modo):
+   --------------------------------------------------
+      for (r=-1; r<=+1; r++)
+         for (c=-1; c<=+1; c++)
+            if (abs(r+c)==1 && sup[y+r][x+c]<sup[ymin][xmin])
+            {
+               xmin=x+c;
+               ymin=y+r;
+            }
+      passo++;
+   }while (x!=xmin);
+
+   Note:
+   Rispetto alla soluzione precedente, r e c assumono non il valore
+   delle coordinate della cella da valutare, ma il valore dello
+   scostamento dalla cella centrale da cui spostarsi.
+
+   Muovendosi in diagonale, entrambe le coordinate cambiano
+   sempre, quindi e' sufficiente verificare se e' variata una
+   qualsiasi delle 2 (la x o la y, entrambe e' sovrabbondante).
+
+   Usare gli scostamenti r e c, nonostante introduca la qui
+   trascurabile inefficienza di dover calcolare ogni volta gli
+   indici, permette di riconoscere in quale cella intorno a quella
+   centrale si sta valutando il valore, infatti abs(r+c) vale 1 solo
+   nelle celle sopra, sotto e ai lati della cella centrale, come si
+   puo' vedere nello schema seguente dove sono riportate le somme di
+   r e c per tutti i valori che esse assumono:
+
+          -1  0 +1    <-- c
+          +--+--+--+
+   r--> -1|-2|-1| 0|
+          +--+--+--+
+         0|-1| 0|+1|
+          +--+--+--+
+        +1| 0|+1|+2|
+          +--+--+--+
+*/
+
+
+
+/* =============================================================== */
+/*  14                                                             */
+/* =============================================================== */
+
+/*
+   MOVIMENTO SOLO VERSO NORD/SUD/EST/OVEST:
+   ----------------------------------------
+      for (r=-1; r<=+1; r++)
+         for (c=-1; c<=+1; c++)
+            if (abs(r+c)==1 && sup[y+r][x+c]<sup[ymin][xmin])
+            {
+               xmin=x+c;
+               ymin=y+r;
+            }
+      passo++;
+   }while (x!=xmin || y!=ymin);
+
+   Nota:
+   abs(r+c) vale 1 solo nelle celle sopra, sotto e ai lati della
+   cella centrale
+
+*/

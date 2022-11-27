@@ -1,0 +1,183 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   25-ADT_Soluzioni.txt                                          */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   0  ESEMPIO DELLE SLIDE                                        */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include "counter.h"
+
+int main()
+{
+   int v;
+   Counter x = newCounter();
+   Counter y = newInitializedCounter(10);
+
+   v = getCounter(x);
+   v = getCounter(y);
+   v = howmanyCounter();
+
+   incCounter(x);
+
+   v = getCounter(x);
+
+   resetCounter(x);
+
+   v = getCounter(x);
+
+   deleteCounter(y);
+   v = howmanyCounter();
+
+   deleteCounter(x);
+
+   return EXIT_SUCCESS;
+}
+
+---------- FILE counter.h ----------------------------------
+
+/* Tipo Counter, cosi' come visto dal programma
+   il tipo CounterInnerType e' definito in counter.c */
+typedef struct CounterInnerType * Counter;
+
+
+/* Costruttore di un Counter con valore iniziale 0 */
+Counter newCounter(void);
+
+/* Costruttore di un Counter con il valore indicato */
+Counter newInitializedCounter(int initialValue);
+
+/* Restituisce il valore del Counter indicato */
+int getCounter(Counter c);
+
+/* Restituisce il numero di Counter creati */
+int howmanyCounter(void);
+
+/* Azzera un Counter */
+void resetCounter(Counter c);
+
+/* Incrementa un Counter */
+void incCounter(Counter c);
+
+/* Distruttore di un Counter */ 
+void deleteCounter(Counter c);
+
+------------ FILE counter.c ----------------------------------
+
+#include <stdlib.h>
+#include "counter.h" /* da includere per i prototipi e per 
+                         il tipo Counter */
+
+/* Struttura su cui si basa Counter */
+/* e' definito qui e non nell'header perche' non sia visibile 
+    fuori dal file */
+struct CounterInnerType
+{
+    int x;	
+};
+
+/* Tipo Counter, cosi' come visto dal programma */
+/* deve essere visibile pubblicamente quindi viene definito 
+     nell'header e non qui */
+/* typedef struct CounterInnerType *Counter; */
+
+/****************************/
+/* VARIABILI PRIVATE LOCALI */
+/****************************/
+
+/* Variabile (globale) che tiene conto di quanti Counter sono 
+   stati creati. Deve essere privata dell'ADT, quindi static */
+static int numCounters = 0;
+
+
+/****************************/
+/* FUNZIONI PRIVATE LOCALI */
+/****************************/
+
+/* Imposta il valore di un Counter al valore dato, e' una funzione 
+   di supporto: non deve essere utilizzata se non dai metodi di 
+   questo ADT, quindi static per renderla locale, inoltre non e' 
+   nell’interfaccia */
+static void setCounter(Counter c, int value)
+{
+   c->x = value;
+}
+
+
+/***************/
+/* COSTRUTTORI */
+/***************/
+
+
+/* Costruttore di un Counter con valore iniziale 0 */
+Counter newCounter(void)
+{
+   Counter c;
+
+   c = (Counter)malloc(sizeof(struct CounterInnerType)); /* privato*/
+   resetCounter(c);
+   numCounters++;
+   return c;
+}
+
+/* Costruttore di un Counter con il valore iniziale indicato */
+Counter newInitializedCounter(int initialValue)
+{
+   Counter c = newCounter();    /* usa l'altro costruttore */
+   setCounter(c, initialValue); /* chiamata ad una funzione locale */
+   return c;
+}
+
+/*********************/
+/* METODI DI ACCESSO */
+/*********************/
+
+/* Restituisce il valore del Counter indicato */
+int getCounter(Counter c)
+{
+   return c->x;
+}
+
+/* Restituisce il numero di Counter creati */
+int howmanyCounter(void)
+{
+   return numCounters;
+}
+
+
+/***************************/
+/* METODI DI MANIPOLAZIONE */
+/***************************/
+
+/* Azzera un Counter */
+void resetCounter(Counter c)
+{
+   c->x = 0;
+}
+
+/* Incrementa un Counter */
+void incCounter(Counter c)
+{
+   (c->x)++;
+}
+
+/***************/
+/* DISTRUTTORI */
+/***************/
+
+/* Distruttore di un Counter */ 
+void deleteCounter(Counter c)
+{
+   free(c);
+   numCounters--;
+}
+
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */

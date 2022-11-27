@@ -1,0 +1,559 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   13-Puntatori_Soluzioni.txt                                    */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXNUM 100
+
+int main()
+{
+   char v[MAXNUM], *p;
+
+   printf("Introduci la stringa: ");
+   gets(v);
+
+   p=v;
+   while (*p != '\0')
+      p++;
+
+   printf("Lunghezza: %d\n", p-v);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX 100
+
+int main()
+{
+   char v[MAX], *p, *q; 
+   int palin=1;
+
+   printf("Introduci la stringa: ");
+   gets(v);
+
+   p=v;             /* punta al primo carattere */
+   q=v+strlen(v)-1; /* punta all'ultimo carattere */
+   while (p < q)
+   {
+      if (*p++ != *q--)
+      {
+         palin = 0;
+         break;
+      }
+   }
+
+   if (palin)
+      printf("Palindroma\n");
+   else
+      printf("Non palindroma\n");
+
+   return EXIT_SUCCESS;
+}
+
+/* Altra soluzione */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX 100
+
+int main()
+{
+   char v[MAX], *p, *q; 
+
+   printf("Introduci la stringa: ");
+   gets(v);
+
+   p=v;             /* punta al primo carattere */
+   q=v+strlen(v)-1; /* punta all'ultimo carattere */
+   while (p < q  &&  *p++ == *q--)
+     ;
+   if (p>=q)         /* se si e' usciti dal while non perche' i 
+                        precedenti due car erano diversi allora P */
+      printf("Palindroma\n");
+   else
+      printf("Non palindroma\n");
+
+   return EXIT_SUCCESS;
+}
+/* Nota
+   Nella if si verifica se si e' usciti dal while 1) perche' i due
+   caratteri puntati da p e q erano diversi, oppure 2) perche' sono
+   state verificate tutte le coppie di caratteri: in questo caso i
+   due ultimi caratteri erano uguali
+*/
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXNUM 100
+
+int main()
+{
+   int a[MAXNUM], t;
+   int i, j, n;
+
+   printf("Quanti valori? ");
+   scanf("%d", &n);
+
+   for (i=0; i<n; i++)
+   {
+      printf("inserisci il %do valore: ", i+1);
+      scanf("%d", &a[i]);
+   }
+
+   for (i=0, j=n-1; i<j; i++, j--)
+   {
+      t = a[i];
+      a[i] = a[j];
+      a[j] = t;
+   }
+
+   for (i=0; i<n; i++)
+      printf("%d ", a[i]);
+   printf("\n");
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXNUM 100
+
+int main()
+{
+   int a[MAXNUM], t, *p, *q;
+   int n;
+
+   do
+   {
+      printf("Quanti valori? ");
+      scanf("%d", &n);
+   }while (n<0 || n>MAXNUM);
+
+   q = a+n;  /* punta all'elemento successivo all'ultimo */
+   for (p=a; p<q; p++)
+   {
+      printf("inserisci il %do valore: ", p-a+1);
+      scanf("%d", p);
+   }
+
+   for (p=a, q=a+n-1; p<q; p++, q--) /* a+n-1 punta all'ultimo */
+   {
+      t = *p;
+      *p = *q;
+      *q = t;
+   }
+
+   q = a+n;
+   for (p=a; p<q; p++)
+      printf("%d ", *p);
+   printf("\n");
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   5                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXSTR 100
+
+int main()
+{
+   char s[MAXSTR], *p;
+   printf("Introduci la stringa ");
+   gets(s);
+
+   if ((p=strchr(s, 'A')) != NULL && p - s < 10)
+      printf("Compare almeno una A tra i primi 10 caratteri\n");
+   else
+      printf("Non compare nessuna A tra i primi 10 caratteri\n");
+
+   return EXIT_SUCCESS;
+}
+
+/* Altra soluzione */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXSTR 100
+
+int main()
+{
+   char s[MAXSTR]="", *p;
+   printf("Introduci la stringa ");
+   gets(s);
+
+   if ((p=memchr(s, 'A', 10)) != NULL)
+      printf("C'e' almeno una A tra i primi 10 caratteri\n");
+   else
+      printf("Non ci sono A tra i primi 10 caratteri\n");
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   Il parametro 10 nella memchr limita la ricerca ai primi 10 
+   caratteri, ma poiche' la stringa introdotta potrebbe essere piu'
+   corta e la memchr comunque scandisce 10 caratteri, bisogna essere
+   sicuri che oltre il \0 non ci sia una A dovuta ad una allocazione
+   precedente della memoria, per questo si inizializza s a tutti \0
+*/
+
+
+/* =============================================================== */
+/*   6                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXNUM 100
+
+int main()
+{
+   char a[MAXNUM], b[MAXNUM], *p, *q;
+   int i, spazio, n, nn;
+   
+   printf("Dammi la prima stringa: ");
+   gets(a);
+   printf("Dammi la seconda stringa: ");
+   gets(b);
+
+   if (strlen(a)+strlen(b)+1 > MAXNUM)
+   {
+      printf("La lunghezza finale eccede il massimo: %d\n", MAXNUM);
+      return EXIT_FAILURE;
+   }
+
+   p=a+strlen(a);
+   q=b;
+   while ( (*p++ = *q++) != '\0')
+      ;
+
+   printf("%s\n", a);
+   
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   7                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXNUM 100
+
+int main()
+{
+   char a[MAXNUM], b[MAXNUM], *p, *q;
+   
+   printf("Dammi la prima stringa piu' lunga: ");
+   gets(a);
+   printf("Dammi la seconda stringa piu' corta: ");
+   gets(b);
+
+   p = a + strlen(a)-1; /* p punta all'ultimo carattere di a */
+   q = b + strlen(b)-1; /* q punta all'ultimo carattere di b */
+
+   while ( (q>=b && *p == *q) )
+   {
+      p--;
+      q--;
+   }
+   if (q>b)
+      printf("Non e' la parte terminale\n");
+   else
+      printf("E' la parte terminale\n");
+   
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   8                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXNUM 100
+
+int main()
+{
+   int a[MAXNUM], t, *p, *q;
+   int n;
+   
+   do
+   {
+      printf("Quanti valori? ");
+      scanf("%d", &n);
+   }while (n<0 || n>MAXNUM);
+
+   q = a+n;  /* punta all'elemento successivo all'ultimo */
+   for (p=a; p<q; p++)
+   {
+      printf("inserisci il %do valore: ", p-a+1);
+      scanf("%d", p);
+   }
+
+   for (p=a; p<a+n-1; p++)
+      for (q=p+1; q<a+n; q++)
+         if (*p > *q)
+            t=*p, *p=*q, *q=t;
+   q = a+n;
+   for (p=a; p<q; p++)
+      printf("%d ", *p);
+   printf("\n");
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   9                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXNUM 100
+
+int main()
+{
+   char v[MAXNUM], *p, *q;
+
+   printf("Introduci la stringa: ");
+   gets(v);
+
+   p = v;
+   q = v+(int)( (strlen(v)+1)/2.0 ) ; /* 1o char della 2a meta' */
+   
+   while (*q != '\0' && *p++ == *q++)
+     ;
+         
+   if (*--p == *--q)
+      printf("E' composta da due parti uguali\n");
+   else
+      printf("Non e' composta da due parti uguali\n");
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*  10                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXSTR 100
+
+int main()
+{
+   char a[MAXSTR], b[MAXSTR], t[MAXSTR], *p;
+   int n;
+
+   printf("Introduci la prima stringa: ");
+   gets(a);
+   printf("Introduci la seconda stringa: ");
+   gets(b);
+
+   if (strlen(a) < strlen(b)) /* a contiene sempre la piu' lunga */
+   {
+      strcpy(t, a);
+      strcpy(a, b);
+      strcpy(b, t);
+   }
+
+   n = 0;
+   p = a;
+   while ((p=strstr(p, b)) != NULL)
+   {
+      p++; /* sposta il punto di partenza oltre il primo 
+              carattere ogni volta */
+      n++; /* numero di volte che viene trovato */
+   }
+
+   printf("La stringa piu' corta compare %d volte in quella "
+          "piu' lunga\n", n);
+   
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*  11                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#define MAXNUM 100
+
+int main()
+{
+   char file[FILENAME_MAX], a[MAXNUM], *p, *q;
+   int nn, l;
+   char c;
+   FILE *fp, *fp2;
+
+   printf("Nome del file da leggere: ");
+   gets(file);
+   if ( (fp=fopen(file, "r")) == NULL)
+   {
+      printf("Non posso aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Nome del file da scrivere: ");
+   gets(file);
+   if ( (fp2=fopen(file, "w")) == NULL)
+   {
+      printf("Non posso aprire il file %s\n", file);
+      return EXIT_FAILURE;
+   }
+
+   printf("Massima lunghezza: ");
+   scanf("%d", &nn);
+   
+   while (fgets(a, MAXNUM,fp) != NULL)  /* mette in a anche il \n */
+   {
+      p = a;
+      while (*p != '\0')
+      {
+         l = strlen(p);
+         if (*(p+l-1)=='\n')
+         {
+            *(p+l-1) = '\0';        /* toglie il \n, se c'e' */
+            l--;
+         }
+         
+         if (l<=nn)
+         {
+            fputs(p, fp2);
+            fputs("\n", fp2);
+            break;             /* finita la riga */
+         }
+         
+         /* entra qui se la stringa e' > di nn */
+         q = p+nn; /* punta al chr successivo all'ultimo degli nn */
+         while (*q != ' ' && q>=p)   /* cerca indietro lo spazio */
+            q--;
+         
+         if (*q == ' ') /* spazio trovato? */
+         {
+            *q = '\0';        /* sostituisce \0 allo spazio cosi' 
+                                 termina la stringa */
+            fputs(p, fp2);
+            fputs("\n", fp2);
+            p = q+1;         /* p punta ora al primo carattere dopo
+                                lo spazio tolto */
+            continue;
+         }
+         else                /* spazio non trovato, spezza alla 
+                                posizione nn */              
+         {    
+            q = p+nn;        /* punta al char successivo all'ultimo
+                                degli nn */
+            c = *q;          /* salva in c il chr alla posiz. q */ 
+            *q = '\0';       /* sostituisce \0 allo spazio cosi' 
+                                termina la stringa */
+            fputs(p, fp2);
+            fputs("\n", fp2);
+            *q = c;          /* ripristinina il chr alla posiz. q */
+            p = q;
+         }                   
+      }  /* while che spezza una riga */
+   } /* while di input delle righe*/                  
+   fclose(fp);
+   fclose(fp2);
+   
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*  12                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXRIGHE 200
+#define MAXLEN 200
+
+int main()
+{
+    FILE *fp;
+    char righe[MAXRIGHE][MAXLEN+1]; /* matrice di caratteri per contenere tutte le righe lette dal file, +1 perche' memorizza anche il \n */
+    char file[FILENAME_MAX];
+    char *p[MAXRIGHE];    /* vettore di puntatori a char, ciascuno puntera' a una riga di righe */
+    char *tmp;
+    int i, j;
+    int numrighe;
+
+    printf("File da leggere: ");
+    gets(file);
+    if((fp=fopen(file, "r")) == NULL)
+    {
+        fprintf(stderr, "Il file %s non esiste\n", file);
+        return EXIT_FAILURE;
+    }
+
+    /* legge il file, al massimo MAXRIGHE righe */
+
+    for(i=0; i<MAXRIGHE && fgets(righe[i], MAXLEN, fp)!=NULL; i++) /* fgets legge anche i \n finali */
+        p[i] = righe[i];  /* inizializza il vettore p in modo che  p[i] punti a riga[i] */
+    numrighe = i;
+
+    /* riordina le righe scambiando i puntatori */
+    for(i=0; i<numrighe-1; i++)
+        for(j=i+1; j<numrighe; j++)
+            if(strcmp(p[i], p[j])>0)  /* confronta le stringhe puntate da p[i] e p[j] */
+            {
+                tmp = p[i];  /* scambia il valore dei puntatori */
+                p[i] = p[j];
+                p[j] = tmp;
+
+            }
+
+    for(i=0; i<numrighe; i++)
+        printf("%s", p[i]); /* la puts aggiungerebbe un carattere \n oltre a quello che c'e' gia' */
+
+    return EXIT_SUCCESS;
+}

@@ -1,0 +1,180 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   21-Complementi-2_Soluzioni.txt                                */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int argc, char *argv[])
+{
+   double a, b, c = 0;
+   enum {NO, SI} errore;
+
+   if (argc != 4)
+   {
+      fprintf(stderr, "Specificare: operando operatore operando\n");
+      return EXIT_FAILURE;
+   }
+   a = atof(argv[1]);
+   b = atof(argv[3]);
+   errore = NO;
+   switch (argv[2][0])
+   {
+   case '+':
+      c = a+b;
+      break;
+   case '-':
+      c = a-b;
+      break;
+   case '*':
+      c = a*b;
+      break;
+   case '/':
+      c = a/b;
+      break;
+   default:
+      errore = SI;
+      break;
+   }
+   if (!errore)
+      printf("%f\n", c);
+   else
+      fprintf(stderr, "Operando \'%c\' sconosciuto\n", argv[2][0]);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXRIGA 128
+
+int main(int argc, char *argv[])
+{
+   FILE *fpIN, *fpOUT;
+   char riga[MAXRIGA];
+   int i;
+
+   if (argc < 3)
+   {
+      fprintf(stderr, "Utilizzo: cat file1 file2 ... file\n");
+      fprintf(stderr, "Concatena file1, file2, ... in file\n");
+      return EXIT_FAILURE;
+   }
+
+   /* apre il file di output, chiuso solo alla fine del programma */
+   /* argv[argc-1] e' l' ultimo file indicato (output file) */
+   if ((fpOUT = fopen(argv[argc-1], "w")) == NULL)
+   {
+      fprintf(stderr, "Impossibile aprire file di output %s\n",
+                                                     argv[argc-1]);
+      return EXIT_FAILURE;
+   }
+
+   /* uno per uno, apre e copia i file di input in fpOUT */
+   for (i=1; i<argc-1; i++)   /* esclude argv[0] e argv[argc-1] */
+   {
+      if ((fpIN = fopen(argv[i], "r")) == NULL)
+      {
+         fprintf(stderr, "Impossibile aprire file %s (ignorato)\n",
+                                                          argv[i]);
+         continue;
+      }
+      while (fgets(riga, MAXRIGA, fpIN) != NULL)
+         fputs(riga, fpOUT);
+      fclose(fpIN);
+
+      /* l'ultima riga potrebbe non avere il \n, se manca e se non 
+         sta elaborando l'ultimo file (argc-2) aggiunge il \n */
+      if (i < argc-2 && riga[strlen(riga)-1] != '\n')
+         fputs("\n", fpOUT);
+   }
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* Altra soluzione */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAXRIGA 128
+
+int main(int argc, char *argv[])
+{
+   FILE *fpIN, *fpOUT;
+   char riga[MAXRIGA];
+
+   if (argc < 3)
+   {
+      fprintf(stderr, "Utilizzo: cat file1 file2 ... file\n");
+      fprintf(stderr, "Concatena file1, file2, ... in file\n");
+      return EXIT_FAILURE;
+   }
+
+   /* apre il file di output, chiuso solo alla fine del programma */
+   if ((fpOUT = fopen(argv[--argc], "w")) == NULL)
+   {
+      fprintf(stderr, "Impossibile aprire il file di output %s", 
+                                                       argv[argc]);
+      return EXIT_FAILURE;
+   }
+
+   /* uno per uno, apre e copia i file di input in fpOUT */
+   /* usa argc per contare i file ancora da copiare */
+   while (--argc > 0)
+   {
+      if ((fpIN = fopen(*++argv, "r")) == NULL)
+      {
+         fprintf(stderr, "Impossibile aprire file %s (ignorato)\n",
+                                                            *argv);
+         continue;
+      }
+      while (fgets(riga, MAXRIGA, fpIN) != NULL)
+         fputs(riga, fpOUT);
+      
+      /* l'ultima riga potrebbe non avere il \n, se manca e se non 
+         sta elaborando l'ultimo file (argc>1) aggiunge il \n */
+      if (argc > 1 && riga[strlen(riga)-1] != '\n')
+         fputs("\n", fpOUT);
+      fclose(fpIN);
+   }
+   fclose(fpOUT);
+
+   return EXIT_SUCCESS;
+}
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *mstrcat(char *prima, ...)
+{
+
+}
+
+int main()
+{
+
+
+   return EXIT_SUCCESS;
+}

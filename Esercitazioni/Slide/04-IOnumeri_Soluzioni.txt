@@ -1,0 +1,52 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   04-Tipi_Soluzioni.txt                                         */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double a, b, c, d;
+   double media;
+
+   printf("Primo valore: ");
+   scanf("%lf", &a);
+   printf("Secondo valore: ");
+   scanf("%lf", &b);
+   printf("Terzo valore: ");
+   scanf("%lf", &c);
+   printf("Quarto valore: ");
+   scanf("%lf", &d);
+   media = (a+b+c+d)/4;
+   printf("La media e': %.2f\n", media);
+   
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   double x;
+
+   printf("Introduci un valore: ");
+   scanf("%lf", &x);
+   printf("Visualizzazione con %%f: %f\n", x);
+   printf("Visualizzazione con %%e: %e\n", x);
+   printf("Visualizzazione con %%g: %g\n", x);
+   
+   return 0;
+}
+

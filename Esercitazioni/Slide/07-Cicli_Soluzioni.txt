@@ -1,0 +1,739 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   07-Cicli_Soluzioni.txt                                        */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#define N 100
+
+int main()
+{
+   int v, somma;
+   int i;
+      
+   somma = 0;
+   for (i=1; i<=N; i++)
+   {
+      printf("Inserire il %do valore: ", i);
+      scanf("%d", &v);
+      somma += v;
+   }
+   printf("Media: %f\n", (double)somma/N);
+
+   return 0;
+}
+
+/* Nota:
+   Si noti l'uso della #define e il cast di somma, alternativamente
+   si sarebbe potuto definire N come 100.0 
+   Il ciclo parte da 1 per poter scrivere piu' semplicemente la
+   printf. */
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int v, somma;
+   int i, n;
+      
+   somma = 0;
+   printf("Quanti valori? ");
+   scanf("%d", &n);
+   
+   for (i=1; i<=n; i++)
+   {
+      printf("Inserire il %do valore: ", i);
+      scanf("%d", &v);
+      somma += v;
+   }
+   printf("Somma: %d\n", somma);
+   printf("Media: %f\n", (double)somma/n);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+/* Prima soluzione */
+/* con ciclo while */
+
+#include <stdio.h>
+
+int main()
+{
+   int v, somma;
+   int cont;
+      
+   somma = 0;
+   cont = 0;
+   printf("Inserire il 1o valore: ");
+   scanf("%d", &v);
+   while (v >= 18 && v <= 30)
+   {
+      cont++;
+      somma += v;
+      printf("Inserire il %do valore: ", cont+1);
+      scanf("%d", &v);
+   }
+   if (cont > 0)
+      printf("Media: %f\n", (double)somma/cont);
+
+   return 0;
+}
+
+
+/* Altra soluzione */
+/* con ciclo do-while */
+
+#include <stdio.h>
+
+int main()
+{
+   int v, somma;
+   int cont;
+      
+   somma = 0;
+   cont = 0;
+   do
+   {
+      printf("Inserire il %do valore: ", cont+1);
+      scanf("%d", &v);
+      cont++;
+      somma += v;
+   }while (v >= 18 && v <= 30);
+   cont--;
+   somma -= v;
+   if (cont > 0)
+      printf("Media: %f\n", (double)somma/cont);
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int v, max;
+   int i, n;
+
+   printf("Quanti? ");
+   scanf("%d", &n);
+   
+   printf("Inserire il 1o valore: ");  /* chiede il primo valore */
+   scanf("%d", &v);
+   max = v;             /* il primo valore e' anche l'attuale max */
+
+   for (i=1; i<n; i++)  /* parte da 1 e non da 0 perche' il primo */ 
+   {                    /*  e' gia' stato letto */
+      printf("Inserire il %do valore: ", i+1);
+      scanf("%d", &v);
+      if (v>max)
+         max = v;
+   }
+   printf("Massimo: %d\n", max);
+
+   return 0;
+}
+
+/* Nota
+Per impostare il valore iniziale di max si possono seguire diverse
+soluzioni:
+1) Si imposta il max al primo valore (come nell'esempio precedente).
+   Questo metodo funziona sempre ed e' indipendente dal tipo di dato
+   della variabile in quanto e' uno dei valori effettivamente introdotti.
+   Se si inizializza fuori dal ciclo, il ciclo non viene ritardato;
+   se si mette nel ciclo un'istruzione  if (i==0) max=valore;
+   quella if viene eseguita ogni volta inutilmente (ma per programmi
+   piccoli va comunque bene). Questa e' solitamente la soluzione 
+   preferibile nel caso di vettori e matrici (max = mx[0][0];).
+2) Si imposta max a un valore costante deciso dal programmatore in 
+   base al tipo di dato e a che cosa rappresentano i valori.
+   Se ad esempio i valori sono aree o distanze, dato che queste non
+   possono essere negative si puo' impostare max a 0 o a un valore 
+   negativo: qualsiasi valore introdotto sarà maggiore (o uguale). 
+   Ma se i valori in input possono invece essere qualsiasi (es. 
+   temperature), bisogna considerare che potrebbero essere introdotti 
+   anche solo valori negativi e quindi in questo caso se max=0, max 
+   non verrebbe mai aggiornato (sono tutti inferiori) ossia resterebbe 
+   pari a 0, valore che non è neppure uno di quelli introdotti 
+   dall'utente, producendo quindi un risultato errato.
+3) Si imposta max al valore piu' piccolo possibile per quel tipo di dato. 
+   Si usano i valori costanti forniti dal compilatore attraverso i file 
+   di #include (vedere le slide sui tipi di dati).
+   Nel caso di valori interi si deve includere <limits.h>, ad esempio 
+   per gli int il valore piu' piccolo è  disponibile la costante INT_MIN
+   (per gli altri interi e' simile) e questo è un valore negativo.
+   Nel caso di valori floating point si deve includere <float.h>, ma 
+   l'intero piu' piccolo è un valore positivo, ad es. per i float la 
+   costante FLT_MIN potrebbe essere 1E-37 (molto piccola ma positiva),
+   quindi il valore piu' negativo con cui inizializzare max è in realta' 
+   -FLT_MAX (–1E+37).
+   Questo metodo e' sicuramente efficace, ma se si deve adattare il 
+   programma perche' usi un altro tipo di dato, anche la constante va 
+   cambiata, cosa che non capita con i metodi precedenti.
+*/
+
+
+/* =============================================================== */
+/*   5                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   int v, max, min, somma;
+   int i, n;
+
+   printf("Quanti? ");
+   scanf("%d", &n);
+   
+   printf("Inserire il 1o valore: ");
+   scanf("%d", &v);
+   max = v;
+   min = v;
+   somma = v;
+
+   for (i=1; i<n; i++)
+   {
+      printf("Inserire il %do valore: ", i+1);
+      scanf("%d", &v);
+      somma += v;
+      if (v>max)
+         max = v;
+      else if (v<min)      /* vedi nota */
+         min = v;
+   }
+   printf("Massimo: %d\n", max);
+   printf("Minimo: %d\n", min);
+   printf("Somma: %d\n", somma);
+   printf("Media: %f\n", (double)somma/n);
+
+   return 0;
+}
+
+/* Nota
+Qui si chiedono sia il max sia il min, l'aver utilizzato il primo
+valore per impostare sia max sia min permette di usare l'else,
+in quanto qualsiasi valore letto non può essere contemporaneamente
+maggiore del max e minore del min. Quell’else permette di minimizzare
+il numero di esecuzioni del secondo if, quidi e' piu' efficiente
+Invece nel caso si fossero inizializzati i valori di max e min 
+a valori ben definiti (ad esempio a il min a INT_MAX e il max a 
+INT_MIN), quell'else NON puo' essere usato e l'esecuzione e'
+meno efficiente. Infatti, qualora fosse inserito un solo valore o
+i valori immessi fossero tutti crescenti, ogni iterazione 
+aggiornerebbe sempre solo max e l’else non sarebbe mai eseguito, 
+quindi il valore di min resterebbe il valore dell’inizializzazione,
+quindi errato.
+*/
+
+
+/* =============================================================== */
+/*   6                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+int main()
+{
+   int n;
+   double fatt;
+
+   printf("Numero di cui calcolare il fattoriale: ");
+   scanf("%d", &n);
+
+   fatt = 1;               /* fatt = 1 e' fuori dal for perche' */
+   for ( ; n>0 ; n--)      /* non ne e' l'indice (stile) */
+      fatt = fatt * n;     /* fatt *= n; */
+
+   printf("Fattoriale: %.0f\n", fatt);
+
+   return 0;
+}
+
+
+/* Altra soluzione */
+
+   fatt = 1;
+   while (n>0)      /* n>1 e' ancora meglio: inutile molt. per 1 */      
+      fatt *= n--;
+
+/* Altra soluzione */
+
+   fatt = 1;
+   for (i=1; i<=n; i++)  /* i=2 e' meglio: inutile moltipl. per 1 */      
+     fatt *= i;
+
+/* Altra soluzione (peggiore perche' esegue piu' operazioni) */
+
+   fatt = 1;
+   for (i=0; i<n; i++)
+     fatt = fatt * (n-i);   /* fatt *= n-i; */
+
+
+/* =============================================================== */
+/*   7                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+
+int main()
+{
+   int i, n;
+   double a, b, c;       /* tipi con ampio range */
+
+   printf("Quanti numeri? ");
+   scanf("%d", &n);
+
+   a = 1;
+   b = 1;
+   if (n>=1)
+      printf("1 ");
+   if (n>=2)
+      printf("1 ");
+   for (i=2; i<n; i++)   /* n>=3, se n<3 non entra nel for */
+   {
+      c = a + b;
+      printf("%.0f ", c);
+      a = b;
+      b = c;
+   }
+   printf("\n");
+
+   return 0;
+}
+
+/* Nota
+In questo caso si sa a priori quante volte il ciclo debba essere
+eseguito, la presenza di una variabile di conteggio suggerisce che 
+un ciclo FOR sia preferibile agli altri.
+*/
+
+/* Altra soluzione */
+
+#include<stdio.h>
+
+int main()
+{
+   int i, n;
+   double a, b, c;       /* tipi con ampio range */
+
+   printf("Quanti numeri? ");
+   scanf("%d", &n);
+
+   a = 0;
+   b = 1;
+   printf("1 ");
+   for (i=1; i<n; i++)
+   {
+      c = a + b;
+      printf("%.0f ", c);
+      a = b;
+      b = c;
+   }
+   printf("\n");
+
+   return 0;
+}
+
+/* Altra soluzione */
+
+#include<stdio.h>
+
+int main()
+{
+   int i, n;
+   double a, b, c;       /* tipi con ampio range */
+
+   printf("Quanti numeri? ");
+   scanf("%d", &n);
+
+   a = 1;
+   b = 1;
+
+   for (i=0; i<n; i++)
+   {
+      c = a + b;
+      printf("%.0f ", a);
+      a = b;
+      b = c;
+   }
+   printf("\n");
+
+   return 0;
+}
+
+/* Altra soluzione */
+
+#include<stdio.h>
+
+int main()
+{
+   int i, n;
+   double a, b;       /* tipi con ampio range */
+
+   printf("Quanti numeri? ");
+   scanf("%d", &n);
+
+   a = 0;
+   b = 1;
+   for (i=0; i<n; i++)
+      if (i%2)
+      {
+          a += b;
+          printf("%.0f ", a);
+      }
+      else
+      {
+          b += a;
+          printf("%.0f ", b);
+      }
+   printf("\n");
+
+   return 0;
+}
+
+
+
+/* =============================================================== */
+/*   8                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+
+int main()
+{
+   double n, a, b, c;     /* tipi con ampio range, anche n */
+
+   printf("Massimo numero? ");
+   scanf("%lf", &n);
+
+   a = 1;
+   b = 1;
+   if (n>=1)
+      printf("1 1 ");
+   c = a + b;
+   while (c<=n)
+   {
+      printf("%.0f ", c);
+      a = b;
+      b = c;
+      c = a + b;
+   }
+   printf("\n");
+
+   return 0;
+}
+
+/* Nota
+In questo caso NON si sa quante volte il ciclo verra' eseguito,
+l'assenza di una variabile di conteggio e la presenza di una 
+condizione sui valori prodotti dal corpo del ciclo suggeriscono che
+un ciclo WHILE o DO-WHILE sia preferibile a un ciclo FOR.
+*/
+
+
+/* =============================================================== */
+/*   9                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+   unsigned long x;
+   unsigned long j;
+   int primo; /* variabile flag, assume valori: 0=NO, 1=SI' */
+
+   printf("Inserire numero: ");
+   scanf("%lu", &x);
+   primo = 1;             /* supponiamo sia primo... */
+   for (j=2 ; j<x; j++)
+      if (x%j==0)
+         primo = 0;       /* ... salvo dimostrazione contraria */
+   if (primo==1 || x==1)
+      printf("%lu e' primo\n", x);
+   else
+      printf("%lu non e' primo\n", x);
+
+   return 0;
+}
+
+/* Nota
+   Si suppone che il numero sia primo e poi si verifica se ci sono
+   divisori controllando tutti i valori da 2 a x-1.
+   Se non sono stati trovati divisori il numero e' primo.
+*/
+
+
+/* Altra soluzione */
+
+
+#include <stdio.h>
+
+int main()
+{
+   unsigned long x;
+   unsigned long j;
+
+   printf("Inserire numero: ");
+   scanf("%lu", &x);
+   for (j=2 ; j<x && x%j!=0; j++)
+      ;
+   if (j==x || x==1)
+      printf("%lu e' primo\n", x);
+   else
+      printf("%lu non e' primo\n", x);
+
+   return 0;
+}
+
+/* Nota
+   Il ciclo for continua fintantoche' ci sono valori da controllare
+   (j<x) e questi non sono divisori di x (x%j!=0).
+   Ossia il ciclo termina se capita uno dei seguenti casi:
+   1) ha controllato tutti i valori j da 2 a x-1 e non ha mai 
+      trovato un divisore, 
+   2) ha trovato un divisore.
+   Un numero e' primo se non e' stato trovato un divisore.
+   Per stabilire dopo l'esecuzione del ciclo se è stato trovato un 
+   divisore non e' utile valutare se x%j==0 in quanto questo e'
+   sempre vero a ciclo terminato:
+   - se ha trovato un divisore j di x (caso 2) x%j==0,
+   - se non ha trovato un divisore di x, alla fine del ciclo j==x 
+     (ovviamente x e' divisore di se stesso).
+   Allora l'unica possibilta' per sapere se ci sono stati divisori
+   e' quella di stabilire se e' uscito dal for a seguito del caso 1),
+   cioe` verificare se j==x. Poiche' il controllo viene fatto dai 
+   numeri a partire da 2, per far si' che anche 1 sia indicato come 
+   primo viene incluso come caso speciale nella if (in alternativa
+   si poteva scrivere if (j>=x) in quanto j>x si ha solo per x==1).
+
+   Nota 2
+   Dato che, come indicato sopra, a fine ciclo x%j==0 sempre, si puo'
+   scrivere come condizione del for solo x%j!=0 rendendo cosi' il
+   ciclo piu' veloce (c'e' una condizione piu' semplice da valutare).
+   Ma se il valore in input e' 1, il calcolo x%j da' sempre 1 ossia 
+   si crea un ciclo infinito, basta prevenire il problema con una if:
+
+   if (x!=1)
+      for (j=2 ; x%j!=0; j++)
+         ;
+
+*/
+
+
+/* =============================================================== */
+/*  10                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+
+int main()
+{
+    unsigned long x;
+    unsigned long j;
+
+    printf("Inserire numero: ");
+    scanf("%lu", &x);
+    if (x%2!=0 && x>3)
+        for (j=3 ; j*j<=x && x%j!=0; j+=2)
+            ;
+    if (x<=3 || (x%2!=0 && j*j>x) )
+        printf("%lu e' primo\n", x);
+    else
+        printf("%lu non e' primo\n", x);
+
+    return 0;
+}
+
+/* Nota
+   Al fine di risparmiare calcoli, un controllo preliminare elimina
+   dalla valutazione iterativa i valori pari (che si sa non essere
+   primi) e i valori 1, 2 e 3 (che si sa essere primi).
+   Rispetto alla Nota 2 dell'esercizio precedente, qui e' ovviamente 
+   necessario indicare il valore massimo da verificare (e' una delle 
+   ottimizzazioni).
+   Poiche' i valori da considerare nel calcolo dei resti solo quelli 
+   dispari (avendo eliminato i pari con la if iniziale) il ciclo for 
+   inizia da 3 e incrementa di 2 ogni volta.
+   La condizione finale indica come numeri primi quelli <=3 e quelli
+   dispari per i quali tutte le divisioni hanno avuto resto non zero,
+   fino a superare sqrt(x), ossia j*j>x per evitare la sqrt().
+*/
+
+
+/* =============================================================== */
+/*  11                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int n;
+    unsigned long j;
+    unsigned long x;
+
+    printf("Quanti numeri primi? ");
+    scanf("%d", &n);
+
+    if (n>=1)
+        printf("1 ");
+    if (n>=2)
+        printf("2 ");
+    if (n>=3)
+        printf("3 ");
+    n-=2;
+    for (x=5; n>0; x+=2)
+    {
+        // verifica se x è primo
+        for (j=3 ; j*j<=x && x%j!=0; j+=2)
+            ;
+        if (j*j>x)
+        {
+            printf("%lu ", x);
+            n--;
+        }
+    }
+    return 0;
+}
+
+/* Nota
+   Rispetto all'esercizio precedente, non servono alcuni controlli
+   in quanto i valori da verificare sono gia' (parzialmente) 
+   selezionati dal ciclo di ripetizione su x.
+*/
+
+
+/* =============================================================== */
+/*  12                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+   double x, ex;
+   int k;
+   int kf; /* fattoriale di k */
+   int n;  /* numero di frazioni */
+
+   printf("Numero? ");
+   scanf("%lf", &x);
+   printf("Quante frazioni? ");
+   scanf("%d", &n);
+
+   kf = 1; /* inizializza il fattoriale di k */
+   ex = 1.0; /* inizializza la sommatoria con il primo valore */
+   for (k=1; k<=n; k++)
+   {
+      /* calcola k! e lo mette in kf */
+      kf *= k;  /* oppure: for(i=k; k>=2; k--) kf *= i; */
+
+      /* calcola e somma la frazione successiva */
+      ex += pow(x,k) / kf;
+   }
+   
+   printf("Esponenziale calcolato: %.20f\n", ex);
+   printf("Esponenziale con funzione: %.20f\n", exp(x));
+   printf("Differenza: %.20f\n", ex - exp(x));
+
+   return 0;
+}
+
+/* Nota
+   %.20f perche' altrim. mostra solo 6 cifre dopo la virgola
+*/
+
+
+/* =============================================================== */
+/*  13                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+#define MAXVAL 99
+
+int main()
+{
+   int x, v;
+   
+   srand(time(NULL));
+
+   x = rand() % (MAXVAL+1);
+
+   do
+   {
+      printf("Introduci un valore intero tra 0 e %d: ", MAXVAL);
+      scanf("%d", &v);
+      if (v<x)
+         printf("Troppo basso!\n");
+      else if (v>x)
+         printf("Troppo alto!\n");
+   }while(x!=v);
+
+   printf("Trovato!\n");
+
+   return 0;
+}
+
+
+/* =============================================================== */
+/*  14                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <float.h>
+
+int main()
+{
+   double a, x, xp;
+
+   printf("Numero? ");
+   scanf("%lf", &a);
+
+   if (a == 0)
+      printf("%f\n", 0.0);
+   else if (a < 0)
+      printf("Valore immaginario\n");
+   else
+   {
+      x = a; /* xp e' il valore precedente di x */
+      do
+      {
+         xp = x;                 /* salva la x di prima in xp */
+         x = .5 * (xp + a / xp); /* nuova approssimazione x */
+      }while (xp - x > DBL_EPSILON);  /* continua finche' x varia */
+      printf("%.20f\n", x);
+   }
+
+   return 0;
+}
+
+/* Nota
+   L'approssimazione continua finche' il nuovo valore e quello
+   precedente sono apprezzabilmente (DBL_EPSILON) diversi.
+*/

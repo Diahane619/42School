@@ -1,0 +1,211 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   10-Complementi-1_Soluzioni.txt                                */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+/* metodi diversi come esempi di possibili soluzioni */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+   unsigned char a;
+   unsigned short b;
+   unsigned int c = 0;
+   unsigned long d = 0;
+   int cont;
+
+/* char ***************************/
+
+   cont = 0;
+   for (a = (unsigned char)~0; a != 0; a >>= 1)
+      cont++;
+   printf("char: %d bit\n", cont);
+   /* funziona solo se e' unsigned, cosi' si ha la certezza che i bit
+      introdotti sono 0 */
+
+   
+/* short *************************/
+
+   cont = 0;
+   b = (unsigned short)~0;
+   while (b>>cont != 1) /* si ferma quando il valore rimasto e' 1 */
+      cont++;
+   cont++;
+   printf("short: %d bit\n", cont);
+
+   /******* altra soluzione *******/
+
+   cont = 0;
+   b = (unsigned short)~0;
+   while (b>>cont != 0) /* si ferma quando trova il primo 0 */
+      cont++;
+   printf("short: %d bit\n", cont);
+   /* questa soluzione non rispetta lo standard che richiede che 
+      il valore a destra di >> sia STRETTAMENTE MINORE del numero 
+      di bit del valore da sottoporre a shift */
+
+
+/* int ***************************/
+
+   cont = 0;
+   for (c = (unsigned int)~0; c != 0; c <<= 1)
+      cont++;
+   printf("int: %d bit\n", cont);
+   /* funziona anche con i signed perche' vengono comunque 
+      introdotti zeri a destra */
+
+
+/* long **************************/
+
+   d = ~0UL;
+   cont = (int)ceil(log(d)/log(2));
+   printf("long: %d bit\n", cont);
+   /* d = (unsigned long int)~0; non e' corretto se i long hanno 
+      piu' bit (es. 64) degli int (es. 32): ~0 da' un numero composto
+      da 32 bit a 1 e le promozioni integrali estenderebbero il 
+      valore per il long aggiungendo 32 bit 0 in testa */
+
+   return EXIT_SUCCESS;
+}
+/* Nota: i cast servono in quanto l'espressione ~0 produce un 
+   signed int negativo per effetto della "promozione integrale" e 
+   il compilatore genera quindi un warning per l'assegnazione di un 
+   signed int ad uno dei tipi unsigned. Il troncamento che viene 
+   effettuato e' comunque corretto e necessario */
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   int x;
+   int i;
+   int cont; /* num di bit in un int */
+   
+   /* conta i bit di un int */
+   cont = 0;
+   for (x = ~0; x != 0; x <<= 1)
+      cont++;
+
+   printf("Numero intero? ");
+   scanf("%d", &x);
+   
+   for (i=cont-1; i>=0 ; i--)
+     printf("%d", x>>i & 1); 
+   printf("\n");
+   
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   (x>>i & 1) applica a x uno shift verso destra di i posizioni e
+   poi maschera tutti i bit tranne quello piu' a destra, per cui il
+   numero intero risultante sara' o 0 o 1 (di tipo int per promozione
+   integrale).
+   Questa operazione quindi visualizza il bit di posizione i-esima 
+   come numero intero, essa viene ripetuta per tutti i bit. 
+   Lo shift a destra e' di un numero di posizioni inferiore a cont,
+   come richiesto dallo standard. Non importa sapere se i bit 
+   aggiunti a sinistra per effetto dello shift siano 0 o 1 in quanto
+   vengono mascherati dall'& */
+
+
+/* =============================================================== */
+/*   3                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   int x, y;
+   int i;
+   int cont;  /* num di bit in un int */
+   int bit_1; /* num bit a 1 */
+   
+   /* conta i bit di un int */
+   cont = 0;
+   for (x = ~0; x != 0; x <<= 1)
+      cont++;
+
+   printf("Numero intero (con segno)? ");
+   scanf("%d", &x);
+    
+   bit_1 = 0;
+   for (i=cont-1; i>=0 ; i--)
+   {
+      y = x>>i & 1;    /* (1) */
+      printf("%d", y); /* visualizza il bit */
+      bit_1 += y;
+   }
+   printf("\n");
+   
+   printf("%d bit a 1\n", bit_1);
+
+   return EXIT_SUCCESS;
+}
+
+/* Nota
+   (1) y = x>>i & 1;  vale 1 se in posizione i-esima c'e' un 1, 
+                      vale 0 se c'e' 0
+*/
+
+
+/* =============================================================== */
+/*   4                                                             */
+/* =============================================================== */
+
+#include<stdio.h>
+#include <stdlib.h>
+#define MAXDIR 10
+
+int main()
+{
+   unsigned int x;
+   int n, i;
+   int cont; /* num di bit in un int */
+   char direzione[MAXDIR]; /* richiesta della direzione */
+
+   cont = 0; /* conta i bit di un int */
+   for (x = (unsigned int)~0; x != 0; x >>= 1)
+      cont++;
+
+   printf("Numero intero senza segno? ");
+   scanf("%u", &x);
+   printf("Numero di posizioni? ");
+   scanf("%d", &n);
+   n %= cont;   /* riduce piu' rotaz. ad una sola dimax n-1 bit */
+   printf("Direzione? ([d]estra/[s]inistra) ");
+   scanf("%s", &direzione);
+   if (direzione[0] == 's')
+      n = cont - n;  /* rotazione a sin di n equivale a 
+                        rotazione a destra di cont-n */
+
+   /* visualizza il numero dato */
+   for (i=cont-1; i>=0 ; i--)
+     printf("%d", x>>i & 1);
+   printf("\n");
+   
+   x = (x>>n) | (x << (cont-n));
+   
+   /* visualizza il numero dato */
+   for (i=cont-1; i>=0 ; i--)
+     printf("%d", x>>i & 1);
+   printf("\n");
+   
+   return EXIT_SUCCESS;
+}

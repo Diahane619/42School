@@ -1,0 +1,254 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   22-Liste_Soluzioni.txt                                        */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "lista_int.h"
+
+int main()
+{
+
+   int v;
+   char scelta[5];
+
+   do
+   {
+      printf("Operazioni possibili:\n");
+      printf("a. AddToHead\n");
+      printf("b. AddToTail\n");
+      printf("c. RemoveFromHead\n");
+      printf("d. RemoveFromTail\n");
+      printf("e. ClearAll\n");
+      printf("x. Exit\n");
+      printf("\nScelta: ");
+      scanf("%s", scelta);
+
+      switch (scelta[0])
+      {
+      case 'a':
+         printf("Valore da inserire: ");
+         scanf("%d", &v);
+         if (AddToHead(v) == LIST_ERROR)
+            printf("Errore!\n");
+         break;
+      case 'b':
+         printf("Valore da inserire: ");
+         scanf("%d", &v);
+         if (AddToTail(v) == LIST_ERROR)
+            printf("Errore!\n");
+         break;
+      case 'c':
+         if (RemoveFromHead(&v) == LIST_ERROR)
+            printf("Errore!\n");
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      case 'd':
+         if (RemoveFromTail(&v) == LIST_ERROR)
+            printf("Errore!\n");
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      case 'e':
+         ClearAll();
+         break;
+      }
+   }while (scelta[0] != 'x');
+   return EXIT_SUCCESS;
+}
+
+------------- ALTRO FILE .C -----------------------
+#include <stdlib.h>
+#include "lista_int.h"
+
+static struct nodo
+{
+   int valore;
+   struct nodo * next;
+} *head=NULL, *p, *q;
+
+int AddToHead(int v)
+{
+   if ((p=(struct nodo *)malloc(sizeof(struct nodo))) != NULL)
+   {
+      p->valore = v;
+      p->next = head;
+      head = p;
+      return LIST_OK;
+   }
+   else
+      return LIST_ERROR;
+}
+
+int RemoveFromHead(int *v)
+{
+   if (head != NULL)
+   {
+      *v = head->valore;
+      p=head;
+      head = head->next;
+      free(p);
+      return LIST_OK;
+   }
+   else
+      return LIST_ERROR;   
+}
+
+
+int AddToTail(int v)
+{
+   if (head == NULL)
+      return AddToHead(v);
+   else
+   {
+      q=head;
+      while (q->next != NULL)
+         q=q->next;
+      if ((p=(struct nodo *)malloc(sizeof(struct nodo))) != NULL)
+      {
+         p->valore = v;
+         p->next = NULL;
+         q->next = p;
+         return LIST_OK;
+      }
+      else
+         return LIST_ERROR;
+   }
+}
+
+int RemoveFromTail(int *v)
+{
+   if (head == NULL)
+      return LIST_ERROR;
+   else if (head->next == NULL)
+   {
+      *v = head->valore;
+      free(head);
+      head = NULL;
+      return LIST_OK;
+   }
+   else
+   {
+      q=head;
+      while (q->next->next != NULL)
+         q=q->next;
+      *v = q->next->valore;
+      free(q->next);
+      q->next=NULL;
+      return LIST_OK;
+   }
+} 
+
+void ClearAll(void)
+{
+   int v;
+   while (RemoveFromHead(&v) != LIST_ERROR)
+      ;
+}
+
+------------- FILE lista_int.h -----------------------
+int AddToHead(int);
+int AddToTail(int);
+int RemoveFromHead(int *);
+int RemoveFromTail(int *);
+void ClearAll(void);
+#define LIST_OK 0
+#define LIST_ERROR 1
+
+
+/* =============================================================== */
+/*   2                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "stackcoda_lista_int.h"
+#include "lista_int.h"
+
+int main()
+{
+   
+   int v;
+   char scelta[5];
+   
+   do
+   {
+      printf("Operazioni possibili:\n");
+      printf("a. push\n");
+      printf("b. pop\n");
+      printf("c. Enqueue\n");
+      printf("d. Dequeue\n");
+      printf("x. Exit\n");
+      printf("\nScelta: ");
+      scanf("%s", scelta);
+      
+      switch (scelta[0])
+      {
+      case 'a':
+         printf("Valore da introdurre: ");
+         scanf("%d", &v);
+         if (push(v) == STACK_ERROR)
+            printf("Stack pieno!\n");
+         break;
+      case 'b':
+         if (pop(&v) == STACK_ERROR)
+            printf("Stack vuoto!\n");   
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      case 'c':
+         printf("Valore da introdurre: ");
+         scanf("%d", &v);
+         if (enqueue(v) == QUEUE_ERROR)
+            printf("Coda piena!\n");
+         break;
+      case 'd':
+         if (dequeue(&v) == QUEUE_ERROR)
+            printf("Coda vuota!\n");
+         else
+            printf("Valore prelevato: %d\n", v);
+         break;
+      }
+   }while (scelta[0] != 'x');
+   return EXIT_SUCCESS;
+}
+/* =============================================================== */
+/* Nota
+   Questo main e' l'unione dei main usati per provare le funzioni 
+   per stack e coda. L'ordine degli include "stackcoda_lista_int.h"
+   e "lista_int.h" NON e' importante perche' dopo ogni sostituzione
+   (espansione di macro), il preprocessore ri-valuta la riga per 
+   eventuali ulteriori sostituzioni
+*/
+
+------------- ALTRO FILE .C ----------------------------
+/* E' lo stesso file dell'esercizio precedente */
+
+------------- FILE list_int.h --------------------------
+/* e' lo stesso dell'esercizio precedente */
+
+------------- FILE stackcoda_lista_int.h -----------------------
+#define push AddToHead
+#define pop RemoveFromHead
+#define enqueue AddToHead
+#define dequeue RemoveFromTail
+#define STACK_OK LIST_OK
+#define STACK_ERROR LIST_ERROR
+#define QUEUE_OK LIST_OK
+#define QUEUE_ERROR LIST_ERROR
+/* Nota
+   Questo viene incluso nel solo main, fa sostituire i nomi delle
+   funzioni per stack e coda con quelli appropriati utilizzanti 
+   liste.
+   Il file delle funzioni non viene modificato (la funzione Clear 
+   non verra' utilizzata e quindi e' sovrabbondante).
+*/
+

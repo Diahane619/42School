@@ -1,0 +1,41 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   18-FileBinari_Soluzioni.txt                                   */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+TRACCIA
+- si mantengono gli elementi dell'agenda utilizzati all' inizio del
+  file, quindi gli elementi vuoti sono tutti successivi a questi
+- la posizione dei singoli elementi può essere mantenuta o 
+  memorizzando il numero d'ordine nel file oppure il valore
+  restituito da ftell/fgetpos
+- è utile memorizzare il num. di record e/o la posizione dell'ultimo
+
+Programma principale
+- apre il file con r+
+- se dà errore
+  apre il file con w+
+  lo inizializza scrivendo MAXNOMI elementi vuoti (sentinelle)
+  fa un flush
+- legge il file dall'inizio e salva nel vettore i nomi/cognomi/pos
+- ordina alfabeticamente il vettore
+- mostra il menu
+
+Funzioni
+- Aggiunta:
+  aggiunge il nuovo record in fondo al file
+  aggiunge l'informazione al vettore (se necessario, lo riordina)
+- Rimozione:
+  copia l'ultimo record al posto di quello da cancellare
+  azzera il record finale
+  elimina l'elemento dal vettore
+- Ricerca:
+  ricerca dicotomica nel vettore, prende la posizione e recupera il record
+- Lista:
+  scorre il vettore ordinato

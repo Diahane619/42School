@@ -1,0 +1,143 @@
+/* =============================================================== */
+/*   CORSO DI PROGRAMMAZIONE IN C (C89)                            */
+/*   Claudio Fornaro                                               */
+/*   Ver. 3 - 2021                                                 */
+/*   24-AlberiBin_Soluzioni.txt                                    */
+/* =============================================================== */
+
+/* =============================================================== */
+/*   1                                                             */
+/* =============================================================== */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "alberi.h"
+
+
+int main()
+{
+
+   Nodep head = NULL;
+   insertNode(2, &head);
+   insertNode(1, &head);
+   insertNode(1, &head);
+   insertNode(2, &head);
+   insertNode(2, &head);
+   insertNode(3, &head);
+   insertNode(3, &head);
+   insertNode(2, &head);
+
+   printf("In order:\n");
+   inOrder(head);
+   printf("Pre order:\n");
+   preOrder(head);
+   printf("Post order:\n");
+   postOrder(head);
+
+
+   if (findNode(3, head) == OK)
+      printf("Trovato!\n");
+
+   return EXIT_SUCCESS;
+}
+
+------------- FILE alberi.c  -----------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include "alberi.h"
+
+/* inserisce un nodo, OK o NO */
+int insertNode(int val, Nodep *h)
+{
+   Nodep p;
+   if (*h==NULL)
+   {
+      if ((p=malloc(sizeof(Node))) == NULL)
+         return NO;
+      p->val = val;
+      p->count = 1;
+      p->l = NULL;
+      p->r = NULL;
+      *h = p;
+      return OK;
+   }
+   else
+   {
+      if (val > (*h)->val)
+         insertNode(val, &(*h)->r);
+      else if (val < (*h)->val)
+         insertNode(val, &(*h)->l);
+      else
+         (*h)->count++;
+      return OK;
+   }
+}
+
+/* cerca un nodo, ne restituisce il puntatore o NULL */
+Nodep findNode(int val, Nodep h)
+{
+   if (h==NULL)
+      return NULL;
+   else if (val > h->val)
+      return findNode(val, h->r);
+   else if (val < h->val)
+      return findNode(val, h->l);
+   else
+      return h;
+}
+
+/* stampa il contenuto di un nodo */
+void printNode(Nodep p)
+{
+   if (p!=NULL)
+      printf("%d: %d\n", p->val, p->count);
+}
+
+void inOrder(Nodep h)
+{
+   if (h!=NULL)
+   {
+      inOrder(h->l);
+      printNode(h);
+      inOrder(h->r);
+   }
+}
+
+void preOrder(Nodep h)
+{
+   if (h!=NULL)
+   {
+      printNode(h);
+      inOrder(h->l);
+      inOrder(h->r);
+   }
+}
+
+void postOrder(Nodep h)
+{
+   if (h!=NULL)
+   {
+      inOrder(h->l);
+      inOrder(h->r);
+      printNode(h);
+   }
+}
+
+------------- FILE alberi.h  -----------------------
+#define OK 1
+#define NO 0
+
+typedef struct node * Nodep;
+typedef struct node
+{
+   int val;
+   int count;
+   Nodep l, r;
+} Node;
+
+int insertNode(int val, Nodep *h);
+Nodep findNode(int val, Nodep h);
+void inOrder(Nodep h);
+void preOrder(Nodep h);
+void postOrder(Nodep h);
+void printNode(Nodep h);
