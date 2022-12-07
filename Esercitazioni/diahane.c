@@ -1,12 +1,18 @@
 #include <stdio.h>
 
-int	 main()
+typedef enum
 {
-	int	a;
+lunedi,
+martedi,
+mercoledi,
+giovedi,
+venerdi,
+sabato,
+domenica
+} WEEKDAY;
 
-	scanf("%d", &a);
-	if (a%2 == 0)
-	printf("Pari\n");
-	else
-	printf("Dispari\n");
+int main(void)
+{
+WEEKDAY day = martedi;
+printf("%d\n", day);
 }
