@@ -17,7 +17,7 @@ void	ft_putstr(const char *str, int *res)
 	int	i;
 
 	if (!str)
-		*count += write(1, "(null)", 6);
+		*res += write(1, "(null)", 6);
 	else
 	{
 		i = 0;
