@@ -12,6 +12,27 @@
 
 #include "ft_printf.h"
 
+void	ft_placeholder(va_list args, const char *format, int *res, int *i)
+{
+	if (format[*i] == '%')
+		ft_putchar(format[*i], res);
+	else if (format[*i] == 'c')
+		ft_putchar(va_arg(args, int), res);
+	else if (format[*i] == 's')
+		ft_putstr(va_arg(args, char *), res);
+	else if (format[*i] == 'd' || format[*i] == 'i')
+		ft_putnbr(va_arg(args, int), res);
+	else if (format[*i] == 'u')
+		ft_putunbr(va_arg(args, unsigned int), res);
+	else if (format[*i] == 'x')
+		ft_puthex(va_arg(args, unsigned int), res);
+	else if (format[*i] == 'X')
+		ft_putuphex(va_arg(args, unsigned int), res);
+	else if (format[*i] == 'p')
+		ft_putpointer(va_arg(args, void *), res);
+	*i += 1;
+}
+
 int ft_printf(const char *format, ...) // Il format rappresenta tutto il contenuto tra i doppi apici del 
                                        // printf e (...) sono i vari parametri (variabili int, char, str) associati ai relativi placeholder(%d, %c, %s)
 {
