@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2022/11/23 12:56:12 by francevi         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:41:56 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// Elimina la linea trovata
+// Ritorna il contenuto del file senza la la prima linea
 char	*ft_next(char *buffer)
 {
 	int		i;
@@ -33,7 +33,7 @@ char	*ft_next(char *buffer)
 // Trova la lunghezza della prima linea
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-// Se arriva alla fine ritorna NULL
+// Se arriva alla fine del file ritorna NULL
 	if (!buffer[i])
 	{
 		free(buffer);
@@ -43,7 +43,7 @@ char	*ft_next(char *buffer)
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	// line == buffer
+	// Fino a che non arriva alla fine del file mi copi il contenuto rimanente del file in line e poi liberi la variabile statica buffer
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
@@ -72,11 +72,12 @@ char	*ft_line(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
-	// Se la fine della linea è \0 o \n, sostituiscila con \n
+	// Se la fine della linea è \0 o \n, sostituiscila con \n e poi mi ritorna la linea
 	if (buffer[i] && buffer[i] == '\n')
 		line[i++] = '\n';
 	return (line);
 }
+
 
 char	*read_file(int fd, char *res)
 {
