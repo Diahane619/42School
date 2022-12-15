@@ -57,5 +57,5 @@ int ft_printf(const char *format, ...) // Il format rappresenta tutto il contenu
 		}
 	}
 	va_end (args); // chiude la variadica
-	return (count); // ritorna il risultato finale
+	return (count); // ritorna il numero dei caratteri stampati
 }
