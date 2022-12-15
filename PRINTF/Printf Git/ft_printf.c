@@ -39,7 +39,7 @@ int ft_printf(const char *format, ...) // Il format rappresenta tutto il contenu
 {
 	int	i; // contatore di format
 	int	len; // lunghezza totale di format
-	int	count; // il risultato finale del printf (il format dopo le tutte le conversioni dei formati) 
+	int	count; // il numero dei caratteri stampati (il format dopo le tutte le conversioni dei formati) 
 	va_list args; // dichiarazione del numero di argomenti per la funzione variadica 
 
 	va_start (args, format); // faccio partire la funzione variadica passondogli gli argomenti (che varieranno) e il contenuto (format) 
