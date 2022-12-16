@@ -82,30 +82,17 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	char	*line;
 	int		fd1;
-	int		fd2;
-	int		fd3;
-	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/test.txt", O_RDONLY);
-	fd2 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/test2.txt", O_RDONLY);
-	fd3 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/empty.txt", O_RDONLY);
 	
+	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
 	while (line)
 	{
 		line = get_next_line(fd1);
 		printf("line(fd1): %s", line);
 		free(line);
-		line = get_next_line(fd2);
-		printf("line(fd2): %s", line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line(fd3): %s", line);
-		free(line);
 	}
 	close(fd1);
-	close(fd2);
-	close(fd3);
-	return (0);
-} */
+}
