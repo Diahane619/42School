@@ -73,7 +73,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 
 /*
 * ---------
-* FT_GET_LINE
+* FT_PRENDIRIGA
 * ---------
 * Estrae la riga (che termina con un'interruzione di riga (`\n`) + (`\0`)) 
 * dalla variabile statica.
@@ -84,7 +84,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 * -------------
 */
 
-char	*ft_get_line(char *left_str)
+char	*ft_prendiriga(char *left_str)
 {
 	int		i;
 	char	*str;
@@ -113,7 +113,7 @@ char	*ft_get_line(char *left_str)
 }
 
 /*
-* FT_NEW_LEFT_STR
+* FT_RIMASTO
 * -------------
 * Memorizza nella variabile statica cumulativa la nuova variabile aggiornata con qualsiasi cosa
 * viene lasciato dall'originale, meno la riga estratta.
@@ -124,7 +124,7 @@ char	*ft_get_line(char *left_str)
 * riga estratta.
 */
 
-char	*ft_new_left_str(char *left_str)
+char	*ft_rimasto(char *left_str)
 {
 	int		i;
 	int		j;
