@@ -10,21 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+
 /*
-* GET_NEXT_LINE
-* -------------
-* DESCRIZIONE
-* Questa funzione prende un file descriptor(fd) aperto e restituisce la riga successiva.
-* Questa funzione ha un comportamento indefinito durante la lettura da un file binario.
-* PARAMETRI
-* #1. Un descrittore di file
-* VALORI DI RITORNO
-* In caso di successo, get_next_line restituisce una stringa con la riga completa che termina con
-* un'interruzione di riga (`\n`) quando ce n'è una.
-* Se si verifica un errore o non c'è altro da leggere, restituisce NULL.
-* ------------------------------------------------- ---------------------------
-* FUNZIONI AUSILIARIE
-* -------------------
 * READ_TO_LEFT_STR
 * -----------------
 * DESCRIZIONE
@@ -37,11 +28,6 @@
 * Il nuovo valore della variabile statica con buffer unito per la persistenza delle informazioni,
 * o NULL in caso di errore.
 */
-
-#include "get_next_line.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
 
 char	*ft_read_to_left_str(int fd, char *left_str)
 {
@@ -66,6 +52,21 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	free(buff);
 	return (left_str);
 }
+
+/*
+* GET_NEXT_LINE
+* -------------
+* DESCRIZIONE
+* Questa funzione prende un file descriptor(fd) aperto e restituisce la riga successiva.
+* Questa funzione ha un comportamento indefinito durante la lettura da un file binario.
+* PARAMETRI
+* #1. Un descrittore di file
+* VALORI DI RITORNO
+* In caso di successo, get_next_line restituisce una stringa con la riga completa che termina con
+* un'interruzione di riga (`\n`) quando ce n'è una.
+* Se si verifica un errore o non c'è altro da leggere, restituisce NULL.
+* ------------------------------------------------- ---------------------------
+*/
 
 char	*get_next_line(int fd)
 {

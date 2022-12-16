@@ -10,28 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-* ---------
-* GET_LINE
-* ---------
-* Estrae la riga (che termina con un'interruzione di riga (`\n`) + (`\0`)) 
-* dalla variabile statica.
-* PARAMETRI
-* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
-* VALORI DI RITORNO
-* La stringa con la riga completa che termina con un'interruzione di riga (`\n`) + (`\0`).
-* -------------
-* NEW_LEFT_STR
-* -------------
-* Memorizza nella variabile statica cumulativa la nuova variabile aggiornata con qualsiasi cosa
-* viene lasciato dall'originale, meno la riga estratta.
-* PARAMETRI
-* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
-* VALORI DI RITORNO
-* La nuova stringa aggiornata con tutto ciò che è rimasto dallo statico originale, meno il
-* riga estratta.
-*/
-
 #include "get_next_line.h"
 
 size_t	ft_strlen(char *s)
@@ -92,6 +70,20 @@ char	*ft_strjoin(char *left_str, char *buff)
 	return (str);
 }
 
+
+/*
+* ---------
+* FT_GET_LINE
+* ---------
+* Estrae la riga (che termina con un'interruzione di riga (`\n`) + (`\0`)) 
+* dalla variabile statica.
+* PARAMETRI
+* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
+* VALORI DI RITORNO
+* La stringa con la riga completa che termina con un'interruzione di riga (`\n`) + (`\0`).
+* -------------
+*/
+
 char	*ft_get_line(char *left_str)
 {
 	int		i;
@@ -119,6 +111,18 @@ char	*ft_get_line(char *left_str)
 	str[i] = '\0'; // Se trova '\0'(fine) mi ritorna il puntatore alla stringa copiata
 	return (str);
 }
+
+/*
+* FT_NEW_LEFT_STR
+* -------------
+* Memorizza nella variabile statica cumulativa la nuova variabile aggiornata con qualsiasi cosa
+* viene lasciato dall'originale, meno la riga estratta.
+* PARAMETRI
+* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
+* VALORI DI RITORNO
+* La nuova stringa aggiornata con tutto ciò che è rimasto dallo statico originale, meno il
+* riga estratta.
+*/
 
 char	*ft_new_left_str(char *left_str)
 {
