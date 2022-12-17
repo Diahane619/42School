@@ -112,17 +112,38 @@ char	*read_file(int fd, char *res)
 }
 
 char	*get_next_line(int fd)
-{
+{	
 	static char	*buffer;
 	char		*line;
 
-	// error handling
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0) // gestione degli errori
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	buffer = read_file(fd, buffer); // lettura file e salvataggio dentro la varibile buffer
+	if (!buffer) //controllo esistenza contenuto file
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
+	line = ft_line(buffer); // inserisce ogni linea dentro la variabile line
+	buffer = ft_next(buffer); // aggiorna buffer (senza le linee precedenti)
 	return (line);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	char	*line;
+	int		fd1;
+	int 	i;
+
+	i = 0;
+	
+	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
+	while (i < 10)
+	{
+		line = get_next_line(fd1);
+		printf("line(fd1): %s", line);
+		free(line);
+		i++;
+	}
+	close(fd1);
+}
+*/

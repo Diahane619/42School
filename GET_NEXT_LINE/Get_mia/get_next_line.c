@@ -83,8 +83,8 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*
-int	main(void)
+
+/*int	main(void)
 {
 	char	*line;
 	int		fd1;
