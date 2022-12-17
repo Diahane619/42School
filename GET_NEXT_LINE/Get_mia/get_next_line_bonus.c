@@ -73,18 +73,15 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*left_str;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (0);
-	left_str = ft_unisci(fd, left_str);
-	if (!left_str)
-		return (NULL);
-	line = ft_prendiriga(left_str);
-	left_str = ft_rimasto(left_str);
+	left_str[1024] = *ft_unisci(fd, &left_str[1024]);
+	line = ft_prendiriga(&left_str[1024]);
+	left_str[1024] = *ft_rimasto(&left_str[1024]);
 	return (line);
 }
 
-/*
-int	main(void)
+/*int	main(void)
 {
 	char	*line;
 	int		fd1;
