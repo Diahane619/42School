@@ -22,7 +22,18 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// Ritorna il contenuto del file senza la la prima linea
+/*
+* FT_NEXT
+* -------------
+* Memorizza nella variabile statica cumulativa la nuova variabile aggiornata con qualsiasi cosa
+* viene lasciato dall'originale, meno la riga estratta.
+* PARAMETRI
+* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
+* VALORI DI RITORNO
+* La nuova stringa aggiornata con tutto ciò che è rimasto dallo statico originale, meno il
+* riga estratta.
+*/
+
 char	*ft_next(char *buffer)
 {
 	int		i;
@@ -33,24 +44,36 @@ char	*ft_next(char *buffer)
 // Trova la lunghezza della prima linea
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-// Se arriva alla fine del file ritorna NULL
+// Se arriva alla fine del file liberami buffer ritorna NULL
 	if (!buffer[i])
 	{
 		free(buffer);
 		return (NULL);
 	}
-	// La lunghezza del file - La lunghezza della prima linea + 1
+	// Alloca memoria per la lunghezza del file - La lunghezza della prima linea + 1
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	// Fino a che non arriva alla fine del file mi copi il contenuto rimanente del file in line e poi liberi la variabile statica buffer
+	// Fino a che non arriva alla fine del file mi copi il contenuto rimanente del file in line, mi liberi la variabile statica buffer e mi ritorni line
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
 
-// Prende la linea per fare il return
+/*
+* ---------
+* FT_LINE
+* ---------
+* Estrae la riga (che termina con un'interruzione di riga (`\n`) + (`\0`)) 
+* dalla variabile statica.
+* PARAMETRI
+* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
+* VALORI DI RITORNO
+* La stringa con la riga completa che termina con un'interruzione di riga (`\n`) + (`\0`).
+* -------------
+*/
+
 char	*ft_line(char *buffer)
 {
 	char	*line;
@@ -66,7 +89,7 @@ char	*ft_line(char *buffer)
 	// malloc fino alla fine
 	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
-	// line = buffer
+	// Mi copi il contenuto di buffer in line
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
@@ -78,6 +101,19 @@ char	*ft_line(char *buffer)
 	return (line);
 }
 
+/*
+* FT_READ_FILE
+* -----------------
+* DESCRIZIONE
+* Prende il file descriptor aperto e salva su una variabile "buff" quanto letto
+* Poi lo unisce alla variabile statica cumulativa per la persistenza delle informazioni.
+* PARAMETRI
+* #1. Un descrittore di file.
+* #2. Puntatore alla variabile statica cumulativa delle esecuzioni precedenti di get_next_line.
+* VALORI DI RITORNO
+* Il nuovo valore della variabile statica con buffer unito per la persistenza delle informazioni,
+* o NULL in caso di errore.
+*/
 
 char	*read_file(int fd, char *res)
 {
@@ -92,7 +128,7 @@ char	*read_file(int fd, char *res)
 	byte_read = 1;
 	while (byte_read > 0)
 	{
-		// while not eof read
+		// leggi fino a che non arriva alla fine del file
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
 		{
@@ -110,6 +146,21 @@ char	*read_file(int fd, char *res)
 	free(buffer);
 	return (res);
 }
+
+/*
+* GET_NEXT_LINE
+* -------------
+* DESCRIZIONE
+* Questa funzione prende un file descriptor(fd) aperto e restituisce la riga successiva.
+* Questa funzione ha un comportamento indefinito durante la lettura da un file binario.
+* PARAMETRI
+* #1. Un descrittore di file
+* VALORI DI RITORNO
+* In caso di successo, get_next_line restituisce una stringa con la riga completa che termina con
+* un'interruzione di riga (`\n`) quando ce n'è una.
+* Se si verifica un errore o non c'è altro da leggere, restituisce NULL.
+* ------------------------------------------------- ---------------------------
+*/
 
 char	*get_next_line(int fd)
 {	

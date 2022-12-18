@@ -14,6 +14,10 @@
 # define GET_NEXT_LINE_H
 
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -24,7 +28,7 @@ char	*ft_unisci(int fd, char *left_str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strjoin(char *left_str, char *buff);
 size_t	ft_strlen(char *s);
-char	*ft_prendiriga(char *left_str);
-char	*ft_rimasto(char *left_str);
+char	*ft_riga(char *left_str);
+char	*ft_resto(char *left_str);
 
 #endif

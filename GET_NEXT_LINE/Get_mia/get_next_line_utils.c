@@ -70,82 +70,54 @@ char	*ft_strjoin(char *left_str, char *buff)
 	return (str);
 }
 
-
-/*
-* ---------
-* FT_PRENDIRIGA
-* ---------
-* Estrae la riga (che termina con un'interruzione di riga (`\n`) + (`\0`)) 
-* dalla variabile statica.
-* PARAMETRI
-* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
-* VALORI DI RITORNO
-* La stringa con la riga completa che termina con un'interruzione di riga (`\n`) + (`\0`).
-* -------------
-*/
-
-char	*ft_prendiriga(char *left_str)
+char	*ft_riga(char *left_str)
 {
 	int		i;
-	char	*str;
+	char	*riga;
 
-	i = 0; // inizializzo il contatore 
-	if (!left_str[i]) // se la stringa non esiste ritorna NULL
+	i = 0;
+	if (!left_str[i])
 		return (NULL);
-	while (left_str[i] && left_str[i] != '\n') // fin quando non trova '\n' continua a scorrere
+	while (left_str[i] && left_str[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2)); //alloco memoria al puntatore della stringa (+2 = (`\n`) + (`\0`))
-	if (!str) // check malloc
+	riga = (char *)malloc(sizeof(char) * (i + 2));
+	if (!riga)
 		return (NULL);
-	i = 0; //riporto il contatore della stringa a 0
-	while (left_str[i] && left_str[i] != '\n') // fin quando non trova '\n' mi copia il contenuto della stringa
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
 	{
-		str[i] = left_str[i];
+		riga[i] = left_str[i];
 		i++;
 	}
-	if (left_str[i] == '\n') // Se trova '\n' continua a copiare
+	if (left_str[i] && left_str[i] == '\n')
 	{
-		str[i] = left_str[i];
+		riga[i] = '\n';
 		i++;
 	}
-	str[i] = '\0'; // Se trova '\0'(fine) mi ritorna il puntatore alla stringa copiata
-	return (str);
+	return (riga);
 }
 
-/*
-* FT_RIMASTO
-* -------------
-* Memorizza nella variabile statica cumulativa la nuova variabile aggiornata con qualsiasi cosa
-* viene lasciato dall'originale, meno la riga estratta.
-* PARAMETRI
-* #1. Il puntatore alla variabile statica cumulativa dalle esecuzioni precedenti di get_next_line.
-* VALORI DI RITORNO
-* La nuova stringa aggiornata con tutto ciò che è rimasto dallo statico originale, meno il
-* riga estratta.
-*/
-
-char	*ft_rimasto(char *left_str)
+char	*ft_resto(char *left_str)
 {
 	int		i;
 	int		j;
-	char	*str;
+	char	*riga;
 
-	i = 0; // inizializzo il contatore
-	while (left_str[i] && left_str[i] != '\n') // fin quando non trova '\n' continua a scorrere
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
 		i++;
-	if (!left_str[i]) // se la stringa non esiste liberamela e ritorna NULL
+	if (!left_str[i])
 	{
 		free(left_str);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1)); //alloco memoria alla variabile statica per tutto il contenuto - la lunghezza della stringa precedente
-	if (!str) //check malloc
+	riga = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	if (!riga)
 		return (NULL);
 	i++;
-	j = 0; // inizializzo un nuovo contatore
-	while (left_str[i]) // fin tanto che la stringa precedente esiste mi copi il suo contenuto nella variabile statica
-		str[j++] = left_str[i++];
-	str[j] = '\0'; // chiudo la nuova stringa e svuoto la variabile statica
-	free(left_str); 
-	return (str); // mi ritorna la nuova stringa aggiornata con tutto ciò che è rimasto dallo statico originale, meno il riga estratta.
+	j = 0;
+	while (left_str[i])
+		riga[j++] = left_str[i++];
+	free(left_str);
+	return (riga);
 }
