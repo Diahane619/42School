@@ -19,7 +19,7 @@ size_t	ft_strlen(char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] != '\0')
+	while (s[i])
 		i++;
 	return (i);
 }
@@ -61,7 +61,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 	i = -1;
 	j = 0;
 	if (left_str)
-		while (left_str[++i] != '\0')
+		while (left_str[++i])
 			str[i] = left_str[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
