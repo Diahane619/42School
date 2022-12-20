@@ -12,14 +12,71 @@
 
 #include "get_next_line.h"
 
+char	*ft_free(char *buffer, char *buf)
+{
+	char	*temp;
+
+	temp = ft_strjoin(buffer, buf);
+	free(buffer);
+	return (temp);
+}
+
+char	*ft_riga(char *left_str)
+{
+	int		i;
+	char	*riga;
+
+	i = 0;
+	if (!left_str[i])
+		return (NULL);
+	while (left_str[i] && left_str[i] != '\n')
+		i++;
+	riga = ft_calloc(i + 2, sizeof(char));
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
+	{
+		riga[i] = left_str[i];
+		i++;
+	}
+	if (left_str[i] && left_str[i] == '\n')
+	{
+		riga[i] = '\n';
+		i++;
+	}
+	return (riga);
+}
+
+char	*ft_resto(char *left_str)
+{
+	int		i;
+	int		j;
+	char	*riga;
+
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
+		i++;
+	if (!left_str[i])
+	{
+		free(left_str);
+		return (NULL);
+	}
+	riga = ft_calloc((ft_strlen(left_str) - i + 1), sizeof(char));
+	i++;
+	j = 0;
+	while (left_str[i])
+		riga[j++] = left_str[i++];
+	free(left_str);
+	return (riga);
+}
+
 char	*ft_unisci(int fd, char *left_str)
 {
 	char	*buffer;
 	int		leggibyte;
 
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
+	if (!left_str)
+		left_str = ft_calloc(1, 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	leggibyte = 1;
 	while (leggibyte > 0)
 	{
@@ -30,7 +87,9 @@ char	*ft_unisci(int fd, char *left_str)
 			return (NULL);
 		}
 		buffer[leggibyte] = 0;
-		left_str = ft_strjoin(left_str, buffer);
+		left_str = ft_free(left_str, buffer);
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
 	free(buffer);
 	return (left_str);
