@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-// join and free
+// Unisci il contenuto della variabile satica e poi liberala
 char	*ft_free(char *buffer, char *buf)
 {
 	char	*temp;
