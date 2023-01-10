@@ -13,8 +13,6 @@
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
-# define OPEN_MAX 1000000
-
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>

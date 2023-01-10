@@ -98,7 +98,7 @@ char	*ft_unisci(int fd, char *left_str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*left_str[OPEN_MAX];
+	static char	*left_str[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
