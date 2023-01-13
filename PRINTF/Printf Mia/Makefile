@@ -9,7 +9,7 @@ OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) ft_printf.h
+$(NAME) : $(OBJ)
 		@ar rc $(NAME) $(OBJ)
 
 clean:
