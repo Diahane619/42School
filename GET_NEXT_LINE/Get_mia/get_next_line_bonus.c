@@ -12,13 +12,18 @@
 
 #include "get_next_line_bonus.h"
 
-char	*ft_free(char *buffer, char *buf)
+int	contains_newline(const char *s)
 {
-	char	*temp;
+	int	i;
 
-	temp = ft_strjoin(buffer, buf);
-	free(buffer);
-	return (temp);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 char	*ft_riga(char *left_str)
@@ -69,40 +74,45 @@ char	*ft_resto(char *left_str)
 	return (riga);
 }
 
-char	*ft_unisci(int fd, char *left_str)
+void	ft_read_line(int fd, char **keep, char **tmp)
 {
-	char	*buffer;
-	int		leggibyte;
+	char	*buf;
+	int		r;
 
-	if (!left_str)
-		left_str = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	leggibyte = 1;
-	while (leggibyte > 0)
+	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	if (!buf)
+		return ;
+	r = 1;
+	while (r > 0)
 	{
-		leggibyte = read(fd, buffer, BUFFER_SIZE);
-		if (leggibyte == -1)
+		r = read(fd, buf, BUFFER_SIZE);
+		if (r == -1)
 		{
-			free(buffer);
-			return (NULL);
+			ft_free_strs(&buf, keep, tmp);
+			return ;
 		}
-		buffer[leggibyte] = 0;
-		left_str = ft_free(left_str, buffer);
-		if (ft_strchr(buffer, '\n'))
+		buf[r] = '\0';
+		*tmp = ft_strdup(*keep);
+		ft_free_strs(keep, 0, 0);
+		*keep = ft_strjoin(*tmp, buf);
+		ft_free_strs(tmp, 0, 0);
+		if (contains_newline(*keep))
 			break ;
 	}
-	free(buffer);
-	return (left_str);
+	ft_free_strs(&buf, 0, 0);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
+	char		*tmp;
 	static char	*left_str[1024];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	left_str[fd] = ft_unisci(fd, left_str[fd]);
+	line = NULL;
+	tmp = NULL;
+	ft_read_line(fd, &left_str[fd], &tmp);
 	if (!left_str[fd])
 		return (NULL);
 	line = ft_riga(left_str[fd]);

@@ -40,41 +40,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	char	*str;
-
-	str = (char *)s;
-	while (*str != c && *str != 0)
-		str++;
-	if (*str == c)
-		return (str);
-	else
-		return (NULL);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
-}
-
 void	*ft_calloc(size_t elementCount, size_t elementSize)
 {
 	char	*res;
+	size_t	i;
 
 	res = malloc(elementSize * elementCount);
 	if (!res)
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
+	i = 0;
+	while (i < elementCount)
+	{
+		res[i] = '\0';
+		i++;
+	}
 	return (res);
 }
 
@@ -86,4 +65,45 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	int		i;
+
+	if (!s1)
+		return (ft_strdup(""));
+	i = 0;
+	while (s1[i])
+		i++;
+	s2 = ft_calloc(i + 1, sizeof(char));
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
+}
+
+void	ft_free_strs(char **str, char **str2, char **str3)
+{
+	if (str && *str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	if (str2 && *str2)
+	{
+		free(*str2);
+		*str2 = NULL;
+	}
+	if (str3 && *str3)
+	{
+		free(*str3);
+		*str3 = NULL;
+	}
 }

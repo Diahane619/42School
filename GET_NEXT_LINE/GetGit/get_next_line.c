@@ -102,7 +102,7 @@ char	*ft_line(char *buffer)
 }
 
 /*
-* FT_READ_FILE
+* FT_READ_LINE
 * -----------------
 * DESCRIZIONE
 * Prende il file descriptor aperto e salva su una variabile "buff" quanto letto
@@ -115,36 +115,32 @@ char	*ft_line(char *buffer)
 * o NULL in caso di errore.
 */
 
-char	*read_file(int fd, char *res)
+void	ft_read_line(int fd, char **keep, char **tmp)
 {
-	char	*buffer;
-	int		byte_read;
+	char	*buf;
+	int		r;
 
-	// malloc if res dont exist
-	if (!res)
-		res = ft_calloc(1, 1);
-	// malloc buffer
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	byte_read = 1;
-	while (byte_read > 0)
+	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	if (!buf)
+		return ;
+	r = 1;
+	while (r > 0)
 	{
-		// leggi fino a che non arriva alla fine del file
-		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read == -1)
+		r = read(fd, buf, BUFFER_SIZE);
+		if (r == -1)
 		{
-			free(buffer);
-			return (NULL);
+			ft_free_strs(&buf, keep, tmp);
+			return ;
 		}
-		// 0 to end for leak
-		buffer[byte_read] = 0;
-		// join and free
-		res = ft_free(res, buffer);
-		// quit if \n find
-		if (ft_strchr(buffer, '\n'))
+		buf[r] = '\0';
+		*tmp = ft_strdup(*keep);
+		ft_free_strs(keep, 0, 0);
+		*keep = ft_strjoin(*tmp, buf);
+		ft_free_strs(tmp, 0, 0);
+		if (contains_newline(*keep))
 			break ;
 	}
-	free(buffer);
-	return (res);
+	ft_free_strs(&buf, 0, 0);
 }
 
 /*
@@ -165,11 +161,14 @@ char	*read_file(int fd, char *res)
 char	*get_next_line(int fd)
 {	
 	static char	*buffer;
+	char		*tmp;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0) // gestione degli errori
+	if (fd < 0 || BUFFER_SIZE <= 0) // gestione degli errori
 		return (NULL);
-	buffer = read_file(fd, buffer); // lettura file e salvataggio dentro la varibile buffer
+	line = NULL;
+	tmp = NULL;
+	ft_read_line(fd, &buffer, &tmp); // lettura file e salvataggio dentro la varibile buffer
 	if (!buffer) //controllo esistenza contenuto file
 		return (NULL);
 	line = ft_line(buffer); // inserisce ogni linea dentro la variabile line
@@ -177,7 +176,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* #include <stdio.h>
+/*#include <stdio.h>
 
 int	main(void)
 {
@@ -187,7 +186,7 @@ int	main(void)
 
 	i = 0;
 	
-	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/Get_mia/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
+	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/GetGit/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
 	while (i < 10)
 	{
 		line = get_next_line(fd1);
@@ -196,5 +195,4 @@ int	main(void)
 		i++;
 	}
 	close(fd1);
-}
-*/
+}*/

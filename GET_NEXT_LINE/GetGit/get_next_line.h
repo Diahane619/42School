@@ -25,9 +25,9 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChar );
-void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t elementCount, size_t elementSize);
 size_t	ft_strlen(const char *theString);
-
+char	*ft_strdup(const char *s1);
+void	ft_free_strs(char **str, char **str2, char **str3);
+int		contains_newline(const char *s);
 #endif

@@ -40,6 +40,47 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	int		i;
+
+	if (!s1)
+		return (ft_strdup(""));
+	i = 0;
+	while (s1[i])
+		i++;
+	s2 = ft_calloc(i + 1, sizeof(char));
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
+}
+
+void	ft_free_strs(char **str, char **str2, char **str3)
+{
+	if (str && *str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	if (str2 && *str2)
+	{
+		free(*str2);
+		*str2 = NULL;
+	}
+	if (str3 && *str3)
+	{
+		free(*str3);
+		*str3 = NULL;
+	}
+}
+
 char	*ft_strchr(const char *string, int searchedChar )
 {
 	char	*str;
@@ -86,4 +127,18 @@ size_t	ft_strlen(const char *theString)
 	while (theString[i])
 		i++;
 	return (i);
+}
+
+int	contains_newline(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
