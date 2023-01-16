@@ -176,7 +176,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int	main(void)
 {
@@ -195,4 +195,4 @@ int	main(void)
 		i++;
 	}
 	close(fd1);
-}*/
+}
