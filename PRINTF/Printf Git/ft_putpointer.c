@@ -18,7 +18,7 @@ void	ft_putpointer(void *p, int *count)
 		ft_putstr("(nil)", count);
 	else
 	{
-		ft_putstr("0x", count);
+		ft_putstr("0x", count); //indirizzo del puntatore
 		ft_puthex((unsigned long long)p, count);
 	}
 }

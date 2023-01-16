@@ -22,5 +22,5 @@ void	ft_putuphex(unsigned int n, int *count)
 	else if (n < 10)
 		ft_putchar(n + 48, count);
 	else
-		ft_putchar(n + 55, count);
+		ft_putchar(n + 55, count); //n - 10 + 'A'
 }

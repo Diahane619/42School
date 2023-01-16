@@ -53,7 +53,7 @@ int ft_printf(const char *format, ...) // Il format rappresenta tutto il contenu
 		else
 		{	
 			i += 1; // vado al carattere dopo il %
-			ft_print(args, format, &count, &i); // controlla il tipo di placeholder(%cdiusxXp) e lo rimpiazza con il valore degli args 
+			ft_print(args, format, &count, &i); // controlla il tipo di placeholder(%cduisxXp) e lo rimpiazza con il valore degli args 
 		}
 	}
 	va_end (args); // chiude la variadica

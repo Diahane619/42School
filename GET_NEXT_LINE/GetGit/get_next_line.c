@@ -187,7 +187,7 @@ int	main(void)
 	i = 0;
 	
 	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/GetGit/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
-	while (i < 10)
+	while (i < 100)
 	{
 		line = get_next_line(fd1);
 		printf("line(fd1): %s", line);
