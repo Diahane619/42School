@@ -81,7 +81,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 
 	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
 	if (!buf)
-		return ;
+		return (0);
 	r = 1;
 	while (r > 0)
 	{
@@ -89,7 +89,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 		if (r == -1)
 		{
 			ft_free_strs(&buf, keep, tmp);
-			return ;
+			return (0);
 		}
 		buf[r] = '\0';
 		*tmp = ft_strdup(*keep);
