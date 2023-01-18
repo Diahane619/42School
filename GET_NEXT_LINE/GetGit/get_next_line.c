@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/01/18 16:50:16 by francevi         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:51:39 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int	main(void)
 
 	i = 0;
 	
-	fd1 = open("/nfs/homes/francevi/VsCode/42School/GET_NEXT_LINE/GetGit/tests/J. K. Rowling - Harry Potter 1 - Sorcerer's Stone.txt", O_RDONLY);
+	fd1 = open("/home/diahane619/42School/GET_NEXT_LINE/GetGit/tests/J. K. Rowling - Harry Potter 3 - Prisoner of Azkaban.txt", O_RDONLY);
 	while (i < 100)
 	{
 		line = get_next_line(fd1);
