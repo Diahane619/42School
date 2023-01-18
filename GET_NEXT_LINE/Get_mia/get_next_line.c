@@ -119,4 +119,5 @@ char	*get_next_line(int fd)
 	left_str = ft_resto(left_str);
 	return (line);
 }
-feivjo
+
+diocane
