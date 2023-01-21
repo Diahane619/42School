@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/01/18 16:51:39 by francevi         ###   ########.fr       */
+/*   Updated: 2023/01/18 17:38:42 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,12 +165,12 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0) // gestione degli errori
-		return (NULL);
-	line = NULL;
-	tmp = NULL;
+		return (0);
+	line = 0;
+	tmp = 0;
 	ft_read_line(fd, &buffer, &tmp); // lettura file e salvataggio dentro la varibile buffer
 	if (!buffer) //controllo esistenza contenuto file
-		return (NULL);
+		return (0);
 	line = ft_line(buffer); // inserisce ogni linea dentro la variabile line
 	buffer = ft_next(buffer); // aggiorna buffer (senza le linee precedenti)
 	return (line);
