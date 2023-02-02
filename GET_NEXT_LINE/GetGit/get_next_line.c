@@ -164,15 +164,15 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0) // gestione degli errori
+	if (fd < 0 || BUFFER_SIZE <= 0) // controllo esistenza file e dimensioni valide di BufferSize
 		return (0);
 	line = 0;
 	tmp = 0;
 	ft_read_line(fd, &buffer, &tmp); // lettura file e salvataggio dentro la varibile buffer
 	if (!buffer) //controllo esistenza contenuto file
 		return (0);
-	line = ft_line(buffer); // inserisce ogni linea dentro la variabile line
-	buffer = ft_next(buffer); // aggiorna buffer (senza le linee precedenti)
+	line = ft_line(buffer); // Prende ogni prima linea dal contenuto del file salvato nella variabile statica(buffer) che si aggiorna, come?(vedi riga 175)
+	buffer = ft_next(buffer); // aggiorna la variabile statica buffer (senza le linee precedenti,)
 	return (line);
 }
 

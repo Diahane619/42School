@@ -79,7 +79,7 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 	char	*buf;
 	int		r;
 
-	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
+	buf = malloc(sizeof(*buf) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
 	r = 1;
