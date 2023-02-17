@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/01/18 17:38:42 by francevi         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:37:22 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,26 +120,49 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 	char	*buf;
 	int		r;
 
+	/*Qui viene allocato lo spazio di memoria per il buffer di lettura buf, 
+	della dimensione di BUFFER_SIZE byte più uno. 
+	Se l'allocazione fallisce, la funzione termina immediatamente.*/
 	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
+	/*Inizializzo r a 1 in modo da entrare in un ciclo di lettura, 
+	nel quale la funzione read legge fino a BUFFER_SIZE byte 
+	dal file descriptor fd e li memorizza nel buffer buf.
+	Il numero di byte letti viene restituito in r*/
 	r = 1;
 	while (r > 0)
 	{
 		r = read(fd, buf, BUFFER_SIZE);
+		/*Se la lettura fallisce, la funzione chiama ft_free_strs 
+		per liberare la memoria allocata per buf, keep e tmp,
+		quindi esce dalla funzione.*/
 		if (r == -1)
 		{
 			ft_free_strs(&buf, keep, tmp);
 			return ;
 		}
+		/*Aggiungo un terminatore di stringa nullo '\0' al buffer buf 
+		alla fine dei byte letti. Questo assicura che la stringa letta
+		sia correttamente terminata.*/
 		buf[r] = '\0';
+		/*Salva il contenuto di keep in tmp utilizzando la funzione ft_strdup.
+		keep viene liberato utilizzando la funzione ft_free_strs, 
+		in modo che possa essere successivamente ricreato come 
+		una nuova stringa contenente il contenuto precedente di keep 
+		più il contenuto appena letto dal file. 
+		Ciò viene fatto utilizzando la funzione ft_strjoin. 
+		Infine, la memoria di tmp viene liberata utilizzando ft_free_strs.*/
 		*tmp = ft_strdup(*keep);
 		ft_free_strs(keep, 0, 0);
 		*keep = ft_strjoin(*tmp, buf);
 		ft_free_strs(tmp, 0, 0);
+		/*Controlla se la stringa keep contiene un carattere newline (\n).
+		Se sì, esce dal ciclo di lettura.*/
 		if (contains_newline(*keep))
 			break ;
 	}
+	/*Infine, libera la memoria allocata per buf utilizzando ft_free_strs.*/
 	ft_free_strs(&buf, 0, 0);
 }
 
