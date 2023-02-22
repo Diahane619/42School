@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/02/17 15:37:22 by francevi         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:01:55 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ char	*ft_line(char *buffer)
 * FT_READ_LINE
 * -----------------
 * DESCRIZIONE
-* Prende il file descriptor aperto e salva su una variabile "buff" quanto letto
-* Poi lo unisce alla variabile statica cumulativa per la persistenza delle informazioni.
+* Prende il file descriptor aperto e salva su una variabile "buf" quanto letto
+* Poi lo unisce alla variabile statica cumulativa "keep" per la persistenza delle informazioni.
 * PARAMETRI
 * #1. Un descrittore di file.
 * #2. Puntatore alla variabile statica cumulativa delle esecuzioni precedenti di get_next_line.
@@ -126,8 +126,8 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 	buf = malloc(sizeof * buf * (BUFFER_SIZE + 1));
 	if (!buf)
 		return ;
-	/*Inizializzo r a 1 in modo da entrare in un ciclo di lettura, 
-	nel quale la funzione read legge fino a BUFFER_SIZE byte 
+	/*Inizializzo r a 1 in modo da entrare in un ciclo di lettura 
+	dovedove la funzione read legge fino a BUFFER_SIZE byte 
 	dal file descriptor fd e li memorizza nel buffer buf.
 	Il numero di byte letti viene restituito in r*/
 	r = 1;
@@ -146,23 +146,23 @@ void	ft_read_line(int fd, char **keep, char **tmp)
 		alla fine dei byte letti. Questo assicura che la stringa letta
 		sia correttamente terminata.*/
 		buf[r] = '\0';
-		/*Salva il contenuto di keep in tmp utilizzando la funzione ft_strdup.
-		keep viene liberato utilizzando la funzione ft_free_strs, 
+		/*Salva il contenuto di "keep" in "tmp" utilizzando la funzione "ft_strdup".
+		"keep" viene liberato utilizzando la funzione "ft_free_strs", 
 		in modo che possa essere successivamente ricreato come 
-		una nuova stringa contenente il contenuto precedente di keep 
+		una nuova stringa contenente il contenuto precedente di keep (che ora è in tmp) 
 		più il contenuto appena letto dal file. 
-		Ciò viene fatto utilizzando la funzione ft_strjoin. 
+		Ciò viene fatto utilizzando la funzione "ft_strjoin". 
 		Infine, la memoria di tmp viene liberata utilizzando ft_free_strs.*/
 		*tmp = ft_strdup(*keep);
 		ft_free_strs(keep, 0, 0);
 		*keep = ft_strjoin(*tmp, buf);
 		ft_free_strs(tmp, 0, 0);
 		/*Controlla se la stringa keep contiene un carattere newline (\n).
-		Se sì, esce dal ciclo di lettura.*/
+		Se sì, esce dal ciclo di lettura*/
 		if (contains_newline(*keep))
 			break ;
 	}
-	/*Infine, libera la memoria allocata per buf utilizzando ft_free_strs.*/
+	/*Infine, libera la memoria allocata per buf utilizzando "ft_free_strs".*/
 	ft_free_strs(&buf, 0, 0);
 }
 
