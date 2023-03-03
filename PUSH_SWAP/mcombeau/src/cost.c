@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:09:18 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 17:48:37 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:11:14 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* get_cost:
-*	Calculates the cost of moving each element of stack B into the correct
-*	position in stack A.
-*	Two costs are calculated:
-*		cost_b represents the cost of getting the element to the top of the B stack
-*		cost_a represents the cost of getting to the right position in stack A.
-*	If the element is in the bottom half of the stack, the cost will be negative,
-*	if it is in the top half, the cost is positive. 
+* Calcola il costo di spostamento di ogni elemento della stack B nella corretta
+* posizione nella stack A.
+* Vengono calcolati due costi:
+* 	cost_b rappresenta il costo per portare l'elemento in cima allo stack B
+* 	cost_a rappresenta il costo per raggiungere la posizione corretta nello stack A.
+* Se l'elemento si trova nella metà inferiore della pila, il costo sarà negativo,
+* Se è nella metà superiore, il costo è positivo. 
 */
 void	get_cost(t_stack **stack_a, t_stack **stack_b)
 {

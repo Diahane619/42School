@@ -1,21 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 14:04:00 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 15:11:18 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* is_sorted:
-*	Checks if a stack is sorted.
-*	Returns 0 if the stack is not sorted, 1 if it is sorted.
-*/
+* Controlla se uno stack è ordinato.
+* Restituisce 0 se lo stack non è ordinato, 1 se viene ordinato.*/
 int	is_sorted(t_stack *stack)
 {
 	while (stack->next != NULL)
@@ -28,8 +15,8 @@ int	is_sorted(t_stack *stack)
 }
 
 /* push_swap:
-*	Chooses a sorting method depending on the number
-*	of values to be sorted.
+* Sceglie un metodo di ordinamento a seconda del numero
+* di valori da ordinare.
 */
 static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 {
@@ -42,9 +29,9 @@ static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 }
 
 /* main:
-*	Checks if the input is correct, in which case it initializes stacks a and b,
-*	assigns each value indexes and sorts the stacks. When sorting is done, frees
-*	the stacks and exits.
+*controlla se l'input è corretto, in qual caso inizializza le stack a e b,
+*assegna ogni indice di valore e ordina gli stack. quando l'ordinamento è terminato, frees
+*le stack e uscite.
 */
 int	main(int ac, char **av)
 {

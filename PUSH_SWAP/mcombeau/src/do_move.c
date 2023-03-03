@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   do_move.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:26:29 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 18:19:44 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:51:36 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* do_rev_rotate_both:
-*	Reverse rotates both stack A and B until one of them is in position.
-*	The given cost is negative since both positions are in the bottom half
-*	of their respective stacks. The cost is increased as the stacks are
-*	rotated, when one reaches 0, the stack has been rotated as far as possible
-*	and the top position is correct.
+* Il retro ruota sia impilare A e B fino a quando uno di essi è in posizione.
+* Il costo dato è negativo poiché entrambe le posizioni sono nella metà inferiore
+* dei loro rispettivi stack.Il costo è aumentato come sono le pile
+* ruotato, quando uno raggiunge 0, lo stack è stato ruotato il più possibile
+* e la posizione massima è corretta.
 */
 static void	do_rev_rotate_both(t_stack **a, t_stack **b,
 												int *cost_a, int *cost_b)
@@ -31,12 +31,11 @@ static void	do_rev_rotate_both(t_stack **a, t_stack **b,
 }
 
 /* do_rotate_both:
-*	Rotates both stack A and B until one of them is in position.
-*	The given cost is positive since both positions are in the top half
-*	of their respective stacks. The cost is decreased as the stacks are
-*	rotated, when one reaches 0, the stack has been rotated as far as possible
-*	and the top position is correct.
-*/
+* Ruota sia lo stack A che B fino a quando uno di essi è in posizione.
+* Il costo dato è positivo poiché entrambe le posizioni sono nella metà superiore
+* dei loro rispettivi stack.Il costo è ridotto come sono le pile
+* ruotato, quando uno raggiunge 0, lo stack è stato ruotato il più possibile
+* e la posizione massima è corretta.*/
 static void	do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 {
 	while (*cost_a > 0 && *cost_b > 0)
@@ -48,10 +47,9 @@ static void	do_rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 }
 
 /* do_rotate_a:
-*	Rotates stack A until it is in position. If the cost is negative,
-*	the stack will be reverse rotated, if it is positive, it will be 
-*	rotated.
-*/
+* Ruota lo stack A fino a quando non è in posizione.Se il costo è negativo,
+* Lo stack sarà ruotato inverso, se è positivo, lo sarà
+* ruotato.*/
 static void	do_rotate_a(t_stack **a, int *cost)
 {
 	while (*cost)
@@ -70,9 +68,9 @@ static void	do_rotate_a(t_stack **a, int *cost)
 }
 
 /* do_rotate_b:
-*	Rotates stack B until it is in position. If the cost is negative,
-*	the stack will be reverse rotated, if it is positive, it will be 
-*	rotated.
+* Ruota lo stack B fino a quando non è in posizione.Se il costo è negativo,
+* Lo stack sarà ruotato inverso, se è positivo, lo sarà
+* ruotato.
 */
 static void	do_rotate_b(t_stack **b, int *cost)
 {
@@ -92,12 +90,12 @@ static void	do_rotate_b(t_stack **b, int *cost)
 }
 
 /* do_move:
-*	Chooses which move to make to get the B stack element to the correct
-*	position in stack A.
-*	If the costs of moving stack A and B into position match (i.e. both negative
-*	of both positive), both will be	rotated or reverse rotated at the same time.
-*	They might also be rotated separately, before finally pushing the top B element
-*	to the top stack A.
+* Sceglie quale muoversi da fare per ottenere l'elemento stack B al corretto
+* posizione in stack A.
+* Se i costi di spostamento dello stack A e B in posizione corrispondono (ovvero entrambi negativi
+* di entrambi i positivi), entrambi saranno ruotati o inversi ruotati contemporaneamente.
+* Potrebbero anche essere ruotati separatamente, prima di spingere finalmente l'elemento B in alto
+* All'alto stack A.
 */
 void	do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {

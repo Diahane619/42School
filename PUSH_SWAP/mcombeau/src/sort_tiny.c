@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_tiny.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:41:01 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 14:03:55 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* find_highest_index:
-*	Returns the highest index in a stack.
-*/
+* Restituisce l'indice più alto in uno stack.*/
 static int	find_highest_index(t_stack *stack)
 {
 	int		index;
@@ -30,18 +17,17 @@ static int	find_highest_index(t_stack *stack)
 }
 
 /* tiny_sort:
-*	Sorts a stack of 3 numbers in 2 or fewer moves. The sorting is done by index
-*	rather than value. Example:
-*		values:		 0	 9	 2
-*		indexes:	[1]	[3]	[2]
-*	Solution, 2 moves:
-*	rra:
-*		values:		 2	 0	 9
-*		indexes:	[2]	[1]	[3]
-*	sa:
-*		values:		 0	 2	 9
-*		indexes:	[1]	[2]	[3]
-*/
+* Ordina uno stack di 3 numeri in 2 o meno mosse.L'ordinamento viene eseguito per indice
+* piuttosto che valore.Esempio:
+* Valori: 0 9 2
+* indici: [1] [3] [2]
+* Soluzione, 2 mosse:
+* RRA:
+* Valori: 2 0 9
+* indici: [2] [1] [3]
+* sa:
+* Valori: 0 2 9
+* indici: [1] [2] [3]*/
 void	tiny_sort(t_stack **stack)
 {
 	int		highest;

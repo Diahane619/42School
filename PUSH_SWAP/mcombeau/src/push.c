@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:05:01 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 13:22:28 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* push:
-*	Pushes the top element of src stack to the top of dest stack.
-*/
+* Spinge l'elemento superiore dello stack SRC nella parte superiore dello stack DEST.*/
 static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*tmp;
@@ -28,9 +15,8 @@ static void	push(t_stack **src, t_stack **dest)
 }
 
 /* do_pa:
-*	Pushes the top element of stack b to the top of stack a.
-*	Prints "pa" to the standard output.
-*/
+* Spinge l'elemento superiore dello stack B nella parte superiore dello stack A.
+* Stampa "PA" all'output standard.*/
 void	do_pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
@@ -38,9 +24,8 @@ void	do_pa(t_stack **stack_a, t_stack **stack_b)
 }
 
 /* do_pb:
-*	Pushes the top element of stack a to the top of stack b.
-*	Prints "pb" to the standard output.
-*/
+* Spinge l'elemento superiore dello stack A nella parte superiore dello stack b.
+* Stampa "Pb" all'output standard.*/
 void	do_pb(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_a, stack_b);

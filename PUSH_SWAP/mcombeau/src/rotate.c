@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:18:17 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/09/28 11:13:19 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* rotate:
-*	The top element of the stack is sent to the bottom.
-*/
+* L'elemento superiore dello stack viene inviato in fondo.*/
 static void	rotate(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -28,9 +15,8 @@ static void	rotate(t_stack **stack)
 }
 
 /* do_ra:
-*	Sends the top element of stack a to the bottom.
-*	Prints "ra" to the standard output.
-*/
+* Invia l'elemento superiore dello stack A sul fondo.
+* Stampa "RA" all'output standard.*/
 void	do_ra(t_stack **stack_a)
 {
 	rotate(stack_a);
@@ -38,9 +24,8 @@ void	do_ra(t_stack **stack_a)
 }
 
 /* do_rb:
-*	Sends the top element of stack b to the bottom.
-*	Prints "rb" to the standard output.
-*/
+* Invia l'elemento superiore dello stack B sul fondo.
+* Stampa "RB" all'output standard.*/
 void	do_rb(t_stack **stack_b)
 {
 	rotate(stack_b);
@@ -48,10 +33,9 @@ void	do_rb(t_stack **stack_b)
 }
 
 /* do_rr:
-*	Sends the top element of both stack a and stack b to the bottom
-*	of their respective stacks.
-*	Prints "rr" to the standard output.
-*/
+* Invia l'elemento superiore di entrambi gli stack A e Stack B sul fondo
+* dei loro rispettivi stack.
+* Stampa "RR" all'output standard.*/
 void	do_rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate(stack_a);

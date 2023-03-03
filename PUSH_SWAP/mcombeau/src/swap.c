@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 16:55:55 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 13:25:21 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-/* swap:
-*	Swaps the top 2 elements of a stack.
-*	Does nothing if there is only one or no elements.
+/*swap:
+* Scambia i primi 2 elementi di una stack.
+* Non fa nulla se c'è solo uno o nessun elemento.
 */
 static void	swap(t_stack *stack)
 {
@@ -31,8 +19,8 @@ static void	swap(t_stack *stack)
 }
 
 /* do_sa:
-*	Swaps the top 2 elements of stack a.
-*	Prints "sa" to the standard output.
+* Scambia i primi 2 elementi della stack a.
+* Stampa "sa" sull'output standard.
 */
 void	do_sa(t_stack **stack_a)
 {
@@ -41,8 +29,8 @@ void	do_sa(t_stack **stack_a)
 }
 
 /* do_sb:
-*	Swaps the top 2 elements of stack b.
-*	Prints "sb" to the standard output.
+* Scambia i primi 2 elementi della stack b.
+* Stampa "sb" sull'output standard.
 */
 void	do_sb(t_stack **stack_b)
 {
@@ -51,9 +39,8 @@ void	do_sb(t_stack **stack_b)
 }
 
 /* do_ss:
-*	Swaps the top 2 elements of stack a and the top 2 elements
-*	of stack b.
-*	Prints "ss" to the standard output.
+* Scambia i primi 2 elementi di entrambe le stack
+* Stampa "ss" sull'output standard.
 */
 void	do_ss(t_stack **stack_a, t_stack **stack_b)
 {

@@ -1,21 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input_check.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 13:27:24 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/05/13 15:57:10 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* arg_is_number:
-*   Checks if the argument is a number. +1 1 and -1 are all valid numbers.
-*   Return: 1 if the argument is a number, 0 if not.
-*/
+* Controlla se l'argomento è un numero.+1 1 e -1 sono tutti numeri validi.
+* Restituzione: 1 Se l'argomento è un numero, 0 in caso contrario.*/
 static int	arg_is_number(char *av)
 {
 	int	i;
@@ -31,9 +18,8 @@ static int	arg_is_number(char *av)
 }
 
 /* have_duplicates:
-*   Checks if the argument list has duplicate numbers.
-*   Return: 1 if a duplicate is found, 0 if there are none.
-*/
+* Verifica se l'elenco degli argomenti ha numeri duplicati.
+* Restituisce: 1 se viene trovato un duplicato, 0 se non ce ne sono.*/
 static int	have_duplicates(char **av)
 {
 	int	i;
@@ -55,11 +41,10 @@ static int	have_duplicates(char **av)
 }
 
 /* arg_is_zero:
-*   Checks the argument is a 0 to avoid 0 +0 -0 duplicates
-*	and 0 0000 +000 -00000000 too.
-*   Return: 1 if the argument is a zero, 0 if it contains
-*	anything else than a zero.
-*/
+* Controlla l'argomento è un 0 per evitare 0 +0 -0 duplicati
+* e 0 0000 +000 -00000000.
+* Restituire: 1 se l'argomento è uno zero, 0 se contiene
+* Qualsiasi altra cosa che uno zero.*/
 static int	arg_is_zero(char *av)
 {
 	int	i;
@@ -75,9 +60,8 @@ static int	arg_is_zero(char *av)
 }
 
 /* is_correct_input:
-*   Checks if the given arguments are all numbers, without duplicates.
-*   Return: 1 if the arguments are valid, 0 if not.
-*/
+* Verifica se gli argomenti indicati sono tutti numeri, senza duplicati.
+* Restituzione: 1 Se gli argomenti sono validi, 0 in caso contrario.*/
 int	is_correct_input(char **av)
 {
 	int	i;
