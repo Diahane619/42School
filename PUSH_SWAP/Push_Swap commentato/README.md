@@ -2,12 +2,9 @@
 
 PUSH_SWAP è un progetto di algoritmo scolastico 42 in cui dobbiamo ordinare un determinato elenco di numeri casuali con un insieme limitato di istruzioni, utilizzando il numero più basso possibile di azioni.
 
-Stato ##
-Finito 05/09/2022.Grado: 100%
-
 ## utilizzo
 
-Git clone il repository e cd in esso.Quindi usa `` `make`` per compilare.
+Usa ``make`` per compilare.
 
 Quindi eseguilo con:
 
