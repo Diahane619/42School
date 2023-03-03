@@ -1,19 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:26:52 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/04/30 13:29:05 by mcombeau         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
 /* rev_rotate:
-*	Brings the bottom element of a stack to the top.
+Questo codice imposta una nuova testa su una pila (*stack). 
+Prende l'elemento finale della pila (tail) e l'elemento precedente 
+alla fine della pila (before_tail).
+Poi imposta la nuova testa della pila al punto finale della pila (tail) 
+e associa il punto precendete alla fine (before_tail) a NULL.
 */
 static void	rev_rotate(t_stack **stack)
 {
@@ -30,8 +22,8 @@ static void	rev_rotate(t_stack **stack)
 }
 
 /* do_rra:
-*	Brings the bottom element of stack a to the top.
-*	Prints "rra" to the standard output.
+*	Prende l'ultimo elemento della stack "a" e lo sposta in cima.
+*	STampa "rra".
 */
 void	do_rra(t_stack **stack_a)
 {
@@ -40,8 +32,8 @@ void	do_rra(t_stack **stack_a)
 }
 
 /* do_rrb:
-*	Brings the bottom element of stack b to the top.
-*	Prints "rrb" to the standard output.
+*	Prende l'ultimo elemento della stack "b" e lo sposta in cima.
+*	St xczzzampa "rrb".
 */
 void	do_rrb(t_stack **stack_b)
 {
@@ -50,9 +42,8 @@ void	do_rrb(t_stack **stack_b)
 }
 
 /* do_rrr:
-*	Brings the bottom element of both stack a and stack be
-*	to the top of their respective stacks.
-*	Prints "rrr" to the standard output.
+*	Prende l'ultimo elemento di entrambe le stack e lo posiziona in cima.
+*	Stampa "rrr"
 */
 void	do_rrr(t_stack **stack_a, t_stack **stack_b)
 {
