@@ -66,8 +66,3 @@ Il grado dipende da quanto sia efficiente il processo di smistamento del program
   * 3 punti per meno di 8500
   * 2 punti per meno di 10000
   * 1 punto per meno di 11500
-
-La convalida del progetto richiede almeno 80/100.
-
----
-Realizzato da mcombeau: mccombeau@student.42.fr |LinkedIn: [mccombeau] (https://www.linkedin.com/in/mia-combbeau-86653420b/) |Sito Web: [codequoi.com] (https://www.codequoi.com)
