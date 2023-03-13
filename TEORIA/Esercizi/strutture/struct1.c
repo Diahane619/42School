@@ -5,16 +5,17 @@
 struct struct_punti
 {
 	int	x;
-	int	y;
-} punti[4];
+	int	y;;
+};
 
 int main()
 {
+	struct struct_punti punti[4];
 	int i = 0;
 	while(i < 4)
 	{
-		scanf("%d", &punti[i].x);
-		scanf("%d", &punti[i].y);
+		printf("Punto %d, coordinate x e y (separate da spazio): ", i);
+		scanf("%d%d", &punti[i].x, &punti[i].y);
 		i++;
 	}
 	
