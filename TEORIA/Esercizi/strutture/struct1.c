@@ -25,8 +25,8 @@ int main()
     while (i < 4)
     {
         j = (i + 1) % 4;
-        perimetro += sqrt( (punti[i].x-punti[j].x)*(punti[i].x-punti[j].x) +
-                           (punti[i].y-punti[j].y)*(punti[i].y-punti[j].y) );
+        perimetro += sqrt((punti[i].x-punti[j].x)*(punti[i].x-punti[j].x) +
+                           (punti[i].y-punti[j].y)*(punti[i].y-punti[j].y));
 		i++;
 	}
     printf("Lunghezza perimetro: %d\n", perimetro);
