@@ -30,4 +30,25 @@ int main()
 		i++;
 	}
     printf("Lunghezza perimetro: %d\n", perimetro);
+
+	int distmin = sqrt( (punti[0].x-punti[1].x)*(punti[0].x-punti[1].x) +
+                    (punti[0].y-punti[1].y)*(punti[0].y-punti[1].y) );
+    int d = 0;
+	i = 0;
+	while (i < 4)
+    {
+		j = i + 1;
+		while (j < 4)
+        {
+            d = sqrt( (punti[i].x-punti[j].x)*(punti[i].x-punti[j].x) +
+                      (punti[i].y-punti[j].y)*(punti[i].y-punti[j].y) );
+            if (d < distmin)
+                distmin = d;
+		 	j++;
+        }
+		i++;
+	}
+    printf("Distanza minima tra i punti: %d\n", distmin);
+	
+	return EXIT_SUCCESS;
 }
