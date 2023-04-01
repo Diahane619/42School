@@ -6,14 +6,14 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:56:29 by iragusa           #+#    #+#             */
-/*   Updated: 2023/04/01 16:28:48 by francevi         ###   ########.fr       */
+/*   Updated: 2023/04/01 16:37:07 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LIBFTMINITALK_H
 # define LIBFTMINITALK_H
 # include <signal.h>
 # include	"libft/libft.h"
-# include	"libft/printf/ft_printf.h"
 
 typedef struct s_info
 {
