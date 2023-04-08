@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iragusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 19:12:00 by iragusa           #+#    #+#             */
-/*   Updated: 2023/01/18 19:36:17 by iragusa          ###   ########.fr       */
+/*   Updated: 2023/04/01 16:51:05 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftminitalk.h"
+
 
 void	ft_bitchar(int bit)
 {
