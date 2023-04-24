@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iragusa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 21:51:19 by iragusa           #+#    #+#             */
-/*   Updated: 2023/01/18 19:36:22 by iragusa          ###   ########.fr       */
+/*   Updated: 2023/04/24 12:43:52 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftminitalk.h"
+
 
 /*azione da fare quando ricevo il segnale dal server*/
 void	ft_action(int signum)
