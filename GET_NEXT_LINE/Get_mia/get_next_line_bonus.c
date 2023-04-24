@@ -23,7 +23,7 @@ int	contains_newline(const char *s)
 			return (1);
 		i++;
 	}
-	return (0);
+	return (0)gvgr
 }
 
 char	*ft_riga(char *left_str)
