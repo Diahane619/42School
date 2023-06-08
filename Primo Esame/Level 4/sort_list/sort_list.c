@@ -30,9 +30,3 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
  	// Restituzione del puntatore alla testa della lista
 	return (lst);
 }
- // Commenti esplicativi:
-// La funzione sort_list prende in input un puntatore alla testa della lista (lst) e un puntatore a una funzione di comparazione (cmp).
-// La funzione di comparazione deve prendere in input due interi e restituire un valore intero.
-// La funzione sort_list scorre la lista e confronta gli elementi adiacenti tramite la funzione di comparazione cmp.
-// Se la funzione cmp restituisce 0, i due elementi devono essere scambiati.
-// Alla fine della funzione, viene restituito il puntatore alla testa della lista ordinata.

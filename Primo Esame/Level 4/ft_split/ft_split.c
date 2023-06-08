@@ -1,14 +1,7 @@
-/* 
-Questo programma definisce una funzione ft_strncpy che copia 
-i primi n caratteri della stringa s2 in s1 e una 
-funzione ft_split che divide la stringa str in 
-sottostringhe separate da spazi, tabulazioni o newline e 
-restituisce un array di puntatori a 
-char che puntano alle sottostringhe.
-*/
 #include <stdlib.h>
 #include <stdio.h> 
- char *ft_strncpy(char *s1, char *s2, int n)
+ /* Questa funzione copia i primi n caratteri della stringa s2 nella stringa s1 */
+char *ft_strncpy(char *s1, char *s2, int n)
 {
 	// inizializza un contatore a -1 per inserire il primo carattere di s2 nell'arrey[0] invece che nell'arrey[1]
 	int i = -1;
@@ -20,7 +13,8 @@ char che puntano alle sottostringhe.
  	// restituisce s1
 	return (s1);
 }
- char	**ft_split(char *str)
+ /* Questa funzione divide una stringa in sottostringhe separate da spazi, tabulazioni o newline */
+char	**ft_split(char *str)
 {
 	// inizializza i contatori a 0
 	int i = 0;

@@ -1,25 +1,22 @@
-// Passed Moulinette 2019.09.01
-
-#include <stdlib.h>
-#include "ft_list.h"
-
-void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+// Questa funzione rimuove tutti gli elementi dalla lista 'begin_list' che corrispondono al valore di 'data_ref' utilizzando la funzione di confronto 'cmp'.
+// Se la lista è vuota o 'begin_list' è NULL, non viene eseguita alcuna operazione.
+// La funzione utilizza la ricorsione per scorrere tutti gli elementi della lista e rimuovere quelli corrispondenti.
+#include <stdlib.h> // inclusione della libreria standard di C
+#include "ft_list.h" // inclusione del file di header che definisce la struttura della lista
+ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)()) // definizione della funzione
 {
-	if (begin_list == NULL || *begin_list == NULL)
+	if (begin_list == NULL || *begin_list == NULL) // se la lista è vuota o è NULL, si esce dalla funzione
 		return;
-
-	t_list *cur = *begin_list;
-
-	if (cmp(cur->data, data_ref) == 0)
+ 	t_list *cur = *begin_list; // si inizializza un puntatore alla testa della lista
+ 	if (cmp(cur->data, data_ref) == 0) // se il valore del primo elemento corrisponde a quello da rimuovere
 	{
-		*begin_list = cur->next;
-		free(cur);
-		ft_list_remove_if(begin_list, data_ref, cmp);
+		*begin_list = cur->next; // il puntatore alla testa punta all'elemento successivo
+		free(cur); // si libera la memoria dell'elemento corrente
+		ft_list_remove_if(begin_list, data_ref, cmp); // si richiama la funzione ricorsivamente con il nuovo puntatore alla testa
 	}
-	cur = *begin_list;
-	ft_list_remove_if(&cur->next, data_ref, cmp);
+	cur = *begin_list; // si aggiorna il puntatore al valore della testa della lista
+	ft_list_remove_if(&cur->next, data_ref, cmp); // si richiama la funzione ricorsivamente per scorrere gli elementi successivi
 }
-
 //---------------------------------------------------------------------
 // #include <stdio.h>
 // #include <string.h>
