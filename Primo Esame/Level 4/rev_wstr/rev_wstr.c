@@ -1,11 +1,10 @@
-//Il seguente codice è un programma in C che prende una stringa come argomento dalla riga di comando e stampa la stringa senza spazi extra.
 #include <unistd.h>
  int main(int argc, char **argv)
 {
 	// Dichiarazione delle variabili
-	int start;
-	int end;
-	int i = 0;
+	int start; // Variabile per l'indice dell'inizio della parola
+	int end; // Variabile per l'indice alla fine della stringa
+	int i = 0; // Variabile per l'indice della stringa
  	// Controllo se è stato passato un solo argomento
 	if(argc == 2)
 	{   

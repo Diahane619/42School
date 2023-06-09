@@ -3,7 +3,7 @@ Questa funzione riceve un argomento in input, lo converte in un intero e lo scom
 Se l'argomento è 1, viene stampato direttamente "1". 
 In caso contrario, viene eseguita una divisione ripetuta per trovare tutti i fattori primi. 
 */
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
  int	main(int argc, char *argv[])
 {
