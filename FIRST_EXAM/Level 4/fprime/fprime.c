@@ -1,4 +1,4 @@
-/* 
+																						/* 
 Questa funzione riceve un argomento in input, lo converte in un intero e lo scompone in fattori primi. 
 Se l'argomento è 1, viene stampato direttamente "1". 
 In caso contrario, viene eseguita una divisione ripetuta per trovare tutti i fattori primi. 
