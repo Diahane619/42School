@@ -7,13 +7,12 @@
 	int			x;
 	int			y;
 }				t_point;
- /* Definiamo una struttura "t_point" che rappresenta un punto nella matrice, con coordinate x e y */
+/* Definiamo una struttura "t_point" che rappresenta un punto nella matrice, con coordinate x e y */
  void	fill(char **tab, t_point size, t_point cur, char to_fill)
 {
 	// Se le coordinate del punto corrente sono fuori dalla matrice
 	// o il carattere nella cella non corrisponde a quello di partenza, usciamo dalla funzione
-	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x
-		|| tab[cur.y][cur.x] != to_fill)
+	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || tab[cur.y][cur.x] != to_fill)
 		return;
  	// Altrimenti, impostiamo il carattere della cella corrente a "F" (per indicare che è stata visitata)
 	tab[cur.y][cur.x] = 'F';
