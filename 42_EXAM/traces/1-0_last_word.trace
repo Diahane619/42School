@@ -1,8 +1,0 @@
-----------------8<-------------[ START TEST 
-        💻 TEST
-./a.out "Manger pour vivre" 
-        🔎 YOUR OUTPUT:
-vivre^@SHELL=/usr/bin/zsh^@LSCOLORS=Gxfxcxdxbxegedabagacad^@SESSION_MANAGER=local/diahane619:@/tmp/.ICE-unix/1307,unix/diahane619:/tmp/.ICE-unix/1307^@USER_ZDOTDIR=/home/diahane619^@QT_ACCESSIBILITY=1^@COLORTERM=truecolor^@XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg^@LESS=-R^@XDG_MENU_PREFIX=gnome-^@TERM_PROGRAM_VERSION=1.78.2^@GNOME_DESKTOP_SESSION_ID=this-is-deprecated^@LANGUAGE=it:en_US:en^@MAKE_TERMOUT=/dev/pts/0^@LC_ADDRESS=it_IT.UTF-8^@GNOME_SHELL_SESSION_MODE=ubuntu^@LC_NAME=it_IT.UTF-8^@SSH_AUTH_SOCK=/run/user/1000/keyring/ssh^@XMODIFIERS=@im=ibus^@DESKTOP_SESSION=ubuntu^@LC_MONETARY=it_IT.UTF-8^@SSH_AGENT_PID=1260^@GTK_MODULES=gail:atk-bridge^@PWD=/home/diahane619/42School/42_EXAM/.system/grading^@LOGNAME=diahane619^@XDG_SESSION_DESKTOP=ubuntu^@XDG_SESSION_TYPE=x11^@GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1^@XAUTHORITY=/run/user/1000/gdm/Xauthority^@VSCODE_GIT_ASKPASS_NODE=/usr/share/code/code^@GJS_DEBUG_TOPICS=JS$
-        🗝 EXPECTED OUTPUT:
-vivre$
-----------------8<------------- END TEST ]

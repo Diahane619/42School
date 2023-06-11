@@ -1,0 +1,10 @@
+----------------8<-------------[ START TEST 
+        💻 TEST
+./a.out         🔎 YOUR OUTPUT:
+../../rendu/ft_list_size/ft_list_size.c: In function ‘ft_list_size’:
+../../rendu/ft_list_size/ft_list_size.c:19: error: expected ‘{’ at end of input
+   19 | int ft_list_size(t_list *begin_list)
+      | 
+
+        ❌ COMPILATION ERROR
+----------------8<------------- END TEST ]

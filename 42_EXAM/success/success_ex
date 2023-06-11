@@ -30,3 +30,6 @@ epur_str
 ft_strcpy
 last_word
 expand_str
+ulstr
+camel_to_snake
+ft_list_size

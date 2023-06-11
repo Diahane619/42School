@@ -1,0 +1,14 @@
+----------------8<-------------[ START TEST 
+        💻 TEST
+./a.out 
+        🔎 YOUR OUTPUT:
+../../rendu/camel_to_snake/camel_to_snake.c: In function ‘main’:
+../../rendu/camel_to_snake/camel_to_snake.c:32:2: warning: implicit declaration of function ‘retrun’ [-Wimplicit-function-declaration]
+   32 |  retrun(0);
+      |  ^~~~~~
+/usr/bin/ld: /tmp/ccR2AXQJ.o: in function `main':
+camel_to_snake.c:(.text+0x10d): undefined reference to `retrun'
+collect2: error: ld returned 1 exit status
+
+        ❌ COMPILATION ERROR
+----------------8<------------- END TEST ]

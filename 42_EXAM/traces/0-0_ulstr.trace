@@ -1,0 +1,8 @@
+----------------8<-------------[ START TEST 
+        💻 TEST
+./a.out "Papache est un sabre" "a" "o" 
+        🔎 YOUR OUTPUT:
+pAPACHE EST UN SABRE$
+        🗝 EXPECTED OUTPUT:
+$
+----------------8<------------- END TEST ]

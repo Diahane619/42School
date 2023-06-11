@@ -1,8 +1,0 @@
-----------------8<-------------[ START TEST 
-        💻 TEST
-./a.out " this        time it      will     be    more complex  . " 
-        🔎 YOUR OUTPUT:
-this                        time   it                  will               be            more   complex      .$
-        🗝 EXPECTED OUTPUT:
-this   time   it   will   be   more   complex   .$
-----------------8<------------- END TEST ]
