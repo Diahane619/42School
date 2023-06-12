@@ -1,7 +1,0 @@
-----------------8<-------------[ START TEST 
-        💻 TEST
-./a.out "three words apart"         🔎 YOUR OUTPUT:
- words apart (null)$
-        🗝 EXPECTED OUTPUT:
-three words apart (null)$
-----------------8<------------- END TEST ]

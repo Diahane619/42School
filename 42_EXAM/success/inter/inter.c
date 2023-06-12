@@ -5,42 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 10:07:48 by francevi          #+#    #+#             */
-/*   Updated: 2023/05/31 11:32:44 by francevi         ###   ########.fr       */
+/*   Created: 2023/06/11 14:14:59 by francevi          #+#    #+#             */
+/*   Updated: 2023/06/11 16:26:47 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-void inter(char *s1, char *s2)
-{
-	int ascii[128] = {0};
-	int i = 0;
-
-	while(s2[i])
+ int main(int argc, char *argv[]) 
+ {
+    int i = 0; 
+	int j;
+    int printed[256] = {0}; // array di flag per tenere traccia dei caratteri stampati
+    if (argc == 3) 
 	{
-		ascii[(int)s2[i]] = 1;
-		i++;
-	}
-	i = 0;
-	while (s1[i])
-	{
-		if (ascii[(int)s1[i]] == 1)
+        while (argv[1][i]) 
 		{
-			write(1, &s1[i], 1);
-			ascii[(int)s1[i]] = 2;
-		}
-		i++;
-	}
-}
-
-int main(int ac, char **av)
-{
-	if(ac == 3)
-	{
-		inter(av[1], av[2]);
-		write(1, "\n", 1);
-	}
-	else
-		write(1, "\n", 1);
+            j = 0;
+            while (argv[2][j] && argv[1][i] != argv[2][j])
+                j++;
+            if (argv[2][j] && !printed[(unsigned char)argv[1][i]])// stampa solo se il carattere non è già stato stampato 
+			{
+                write(1, &argv[1][i], 1);
+                printed[(unsigned char)argv[1][i]] = 1; // imposta il flag a 1 per indicare che il carattere è stato stampato
+            }
+            i++;
+        }
+    }
+    write(1, "\n", 1);
+    return (0);
 }

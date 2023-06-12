@@ -61,3 +61,25 @@ char	**ft_split(char *str)
  	// restituisce l'array di puntatori a char
 	return (out);
 }
+
+int main(int argc, char **argv)
+{
+	char	**split;
+	int		i;
+
+	if (argc == 2)
+	{
+		split = ft_split(argv[1]);
+			printf("%s ", split[0]);
+			printf("\n");
+		i = 1;
+		while (split[i] != 0)
+		{
+			printf("%s ", split[i]);
+			i++;
+		}
+		//printf("%s", split[i]);
+	}
+	printf("\n");
+    return (0);
+}
