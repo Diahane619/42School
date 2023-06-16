@@ -35,3 +35,11 @@ camel_to_snake
 ft_list_size
 first_word
 inter
+fizzbuzz
+max
+pgcd
+first_word
+ft_strcmp
+first_word
+ft_strcspn
+ft_range

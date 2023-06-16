@@ -1,4 +1,3 @@
-Ecco il codice con spiegazioni esplicative e commenti:
 /* Questo programma prende in input una stringa "argv[1]" e rimuove gli spazi e le tabulazioni iniziali e
  finali di ogni parola, lasciando solo uno spazio tra le parole. */
 #include <unistd.h>
