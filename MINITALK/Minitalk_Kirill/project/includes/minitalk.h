@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putuphex.c                                      :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 18:30:23 by francevi          #+#    #+#             */
-/*   Updated: 2022/12/11 18:30:23 by francevi         ###   ########.fr       */
+/*   Created: 2023/01/05 19:19:29 by kichkiro          #+#    #+#             */
+/*   Updated: 2023/02/15 10:31:31 by kichkiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-void	ft_putuphex(unsigned int n, int *res)
-{
-	if (n >= 16)
-	{
-		ft_putuphex(n / 16, res);
-		ft_putuphex(n % 16, res);
-	}
-	else if (n < 10)
-		ft_putchar(n + 48, res);
-	else
-		ft_putchar(n + 55, res);
-}
+# include "../lib/libft/include/libft.h"
+# include <signal.h>
+
+#endif
