@@ -1,12 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 12:36:59 by francevi          #+#    #+#             */
-/*   Updated: 2023/05/04 15:30:45 by francevi         ###   ########.fr       */
+/*   Created: 2022/11/07 17:15:48 by kichkiro          #+#    #+#             */
+/*   Updated: 2022/12/29 14:25:15 by kichkiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+/*!
+ * @brief 
+	If the ptr is not NULL, it is freed and set to NULL.
+ * @return 
+ 	NULL.
+ */
+void	*ft_free(void **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = 0;
+	}
+	return (*ptr);
+}

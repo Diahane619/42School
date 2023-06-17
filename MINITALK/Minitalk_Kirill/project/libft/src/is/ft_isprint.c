@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 19:19:29 by kichkiro          #+#    #+#             */
-/*   Updated: 2023/02/15 10:31:31 by kichkiro         ###   ########.fr       */
+/*   Created: 2022/10/04 19:02:56 by kichkiro          #+#    #+#             */
+/*   Updated: 2022/12/27 20:27:51 by kichkiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "../libft/include/libft.h"
-# include <signal.h>
-
-#endif
+/*!
+ * @brief 
+	Checks for any printable character including space.
+ * @return 
+	The values returned are nonzero if the character c falls into the tested 
+	class, and zero if not.
+ */
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}

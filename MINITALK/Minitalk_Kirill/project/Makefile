@@ -26,8 +26,8 @@ OBJS_CLIENT := $(SRCS_CLIENT:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS_SERVER := $(OBJS_SERVER:.o=.d)
 DEPS_CLIENT := $(OBJS_CLIENT:.o=.d)
 LIB         := ft
-LIB_TARGET  := ./lib/libft/libft.a 
-INCS        := ./includes ./lib/libft/include
+LIB_TARGET  := ./libft/libft.a 
+INCS        := ./includes ./libft/include
 CC          := clang
 CFLAGS      := -Wall -Wextra -Werror
 CPPFLAGS    := $(addprefix -I,$(INCS)) -MMD -MP
