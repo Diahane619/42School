@@ -13,7 +13,7 @@
 #ifndef MINITALK_BONUS_H
 # define MINITALK_BONUS_H
 
-# include "../lib/libft/include/libft.h"
+# include "../libft/include/libft.h"
 # include <signal.h>
 
 #endif
