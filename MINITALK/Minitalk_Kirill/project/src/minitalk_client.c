@@ -12,95 +12,84 @@
 
 #include "minitalk.h"
 
-volatile char	*g_bits_to_send = 0;
-
-/**
+volatile char *g_bits_to_send = 0; // Dichiarazione di una variabile globale char *g_bits_to_send
+ /**
  * @brief 
-	Encodes a character into 8 bits and appends the bits to a global char array.
+	Codifica un carattere in 8 bit e li aggiunge ad un array char globale.
  * @details 
-	The function takes a character and encodes it into 8 bits, which are then 
-	appended to a global char array, g_bits_to_send;
-	If the bit is 1, it appends '1' to the array, else it appends '0' to the 
-	array.
+	La funzione prende un carattere e lo codifica in 8 bit, che vengono poi 
+	aggiunti ad un array char globale, g_bits_to_send;
+	Se il bit è 1, aggiunge '1' all'array, altrimenti aggiunge '0'.
  * @param c 
- 	The character to be encoded.
+ 	Il carattere da codificare.
  */
-static void	encode_bits(char c)
+static void encode_bits(char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < 8)
+	size_t i; // Dichiarazione di una variabile di tipo size_t
+ 	i = 0;
+	while (i < 8) // Ciclo while che itera 8 volte
 	{
-		if (c & (1 << i))
-			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true);
+		if (c & (1 << i)) // Se il carattere "c" AND bit-shift di "i" è uguale a 1
+			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true); // Aggiungi '1' alla fine della variabile "g_bits_to_send"
 		else
-			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '0', true);
-		i++;
+			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '0', true); // Aggiungi '0' alla fine della variabile "g_bits_to_send"
+		i++; // Incremento di "i"
 	}
 }
-
-/**
+ /**
  * @brief 
-	Sends a message to a server process.
+	Invia un messaggio ad un processo server.
  * @details 
-	The function takes a server process ID and a message string, encodes each 
-	character of the message into bits and sends the bits to the server process 
-	using the signals SIGUSR1 and SIGUSR2;
-	Each bit is sent as a signal, with a delay of 50 microseconds between each 
-	signal.
+	La funzione prende l'ID di un processo server e una stringa di messaggio, codifica ogni 
+	carattere del messaggio in bit e invia i bit al processo server utilizzando i segnali SIGUSR1 e SIGUSR2;
+	Ogni bit viene inviato come segnale, con un ritardo di 50 microsecondi tra ogni segnale.
  * @param server_pid 
-	The ID of the server process.
+	L'ID del processo server.
  * @param message 
-	The message string to be sent to the server process.
+	La stringa di messaggio da inviare al processo server.
  */
-static void	send_message(pid_t server_pid, char *message)
+static void send_message(pid_t server_pid, char *message)
 {
-	int		sig;
-	size_t	i;
-	size_t	j;
-
-	sig = 0;
+	int sig; // Dichiarazione di una variabile di tipo int
+	size_t i, j; // Dichiarazione di due variabili di tipo size_t
+ 	sig = 0;
 	i = 0;
-	while (i < ft_strlen(message))
+	while (i < ft_strlen(message)) // Ciclo while che itera per la lunghezza della stringa "message"
 	{
-		encode_bits(message[i]);
+		encode_bits(message[i]); // Chiamata alla funzione "encode_bits" con il carattere "i" della stringa "message"
 		j = 0;
-		while (j < 8)
+		while (j < 8) // Ciclo while che itera 8 volte
 		{
-			if (g_bits_to_send[j] == '1')
-				sig = SIGUSR1;
+			if (g_bits_to_send[j] == '1') // Se il bit è uguale a '1'
+				sig = SIGUSR1; // Assegna il segnale SIGUSR1 alla variabile "sig"
 			else
-				sig = SIGUSR2;
-			kill(server_pid, sig);
-			usleep(50);
-			j++;
+				sig = SIGUSR2; // Assegna il segnale SIGUSR2 alla variabile "sig"
+			kill(server_pid, sig); // Invia il segnale "sig" al processo server con ID "server_pid"
+			usleep(50); // Delay di 50 microsecondi
+			j++; // Incremento di "j"
 		}
-		ft_free((void **)&g_bits_to_send);
-		i++;
+		ft_free((void **)&g_bits_to_send); // Libera la memoria allocata per la variabile "g_bits_to_send"
+		i++; // Incremento di "i"
 	}
 }
-
-/**
+ /**
  * @brief 
-	The main function.
+	La funzione principale.
  * @details 
-	The function takes two arguments: a server process ID and a message string;
-	If the number of arguments is not equal to 3, the function exits with an 
-	error message;
-	Otherwise, the function calls the send_message function with the given 
-	server process ID and message string.
+	La funzione prende due argomenti: l'ID di un processo server e una stringa di messaggio;
+	Se il numero di argomenti non è uguale a 3, la funzione termina con un messaggio di errore;
+	Altrimenti, la funzione chiama la funzione send_message con l'ID del processo server e la stringa di messaggio forniti.
  * @param argc 
-	The number of arguments passed to the program.
+	Il numero di argomenti passati al programma.
  * @param argv 
-	An array of strings containing the program arguments.
+	Un array di stringhe contenente gli argomenti del programma.
  * @return 
-	0 if the program runs successfully.
+	0 se il programma viene eseguito correttamente.
  */
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	if (argc != 3)
-		ft_exit("Wrong number of arguments...\n", RED_B, 2, 1);
-	send_message(ft_atoi(argv[1]), argv[2]);
-	return (0);
+	if (argc != 3) // Se il numero di argomenti non è uguale a 3
+		ft_exit("Numero di argomenti errato...\n", RED_B, 2, 1); // Stampa un messaggio di errore e termina il programma
+	send_message(ft_atoi(argv[1]), argv[2]); // Chiamata alla funzione "send_message" con il primo argomento convertito in intero e il secondo argomento come stringa
+	return (0); // Termina il programma con successo
 }
