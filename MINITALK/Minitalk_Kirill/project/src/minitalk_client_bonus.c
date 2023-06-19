@@ -12,26 +12,25 @@
 
 #include "minitalk_bonus.h"
 
+/* Dichiarazione della variabile globale "g_bits_to_send" di tipo "char" */
 volatile char	*g_bits_to_send = 0;
-
-/**
+ /**
  * @brief 
-	Encodes a character into 8 bits and appends the bits to a global char array.
+	La funzione codifica un carattere in 8 bit e li aggiunge ad un array di caratteri globale.
  * @details 
-	The function takes a character and encodes it into 8 bits, which are then 
-	appended to a global char array, g_bits_to_send;
-	If the bit is 1, it appends '1' to the array, else it appends '0' to the 
-	array.
+	La funzione prende un carattere e lo codifica in 8 bit, che vengono poi aggiunti ad un array di caratteri globale, g_bits_to_send;
+	Se il bit è 1, viene aggiunto '1' all'array, altrimenti viene aggiunto '0' all'array.
  * @param c 
- 	The character to be encoded.
+ 	Il carattere da codificare.
  */
 static void	encode_bits(char c)
 {
 	size_t	i;
-
+ 	/* Inizializzazione della variabile "i" a 0 */
 	i = 0;
 	while (i < 8)
 	{
+		/* Se il bit i-esimo del carattere "c" è 1, viene aggiunto '1' all'array "g_bits_to_send", altrimenti viene aggiunto '0' */
 		if (c & (1 << i))
 			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true);
 		else
@@ -39,86 +38,86 @@ static void	encode_bits(char c)
 		i++;
 	}
 }
-
-/**
+ /**
  * @brief 
-	Sends a message to a server process.
+	Invia un messaggio ad un processo server.
  * @details 
-	The function takes a server process ID and a message string, encodes each 
-	character of the message into bits and sends the bits to the server process 
-	using the signals SIGUSR1 and SIGUSR2;
-	Each bit is sent as a signal, with a delay of 50 microseconds between each 
-	signal.
+	La funzione prende l'ID di un processo server ed una stringa di messaggio, codifica ogni carattere del messaggio in bit e invia i bit al processo server utilizzando i segnali SIGUSR1 e SIGUSR2;
+	Ogni bit viene inviato come segnale, con un ritardo di 50 microsecondi tra ogni segnale.
  * @param server_pid 
-	The ID of the server process.
+	L'ID del processo server.
  * @param message 
-	The message string to be sent to the server process.
+	La stringa di messaggio da inviare al processo server.
  */
 static void	send_message(pid_t server_pid, char *message)
 {
 	int		sig;
 	size_t	i;
 	size_t	j;
-
+ 	/* Inizializzazione della variabile "sig" a 0 */
 	sig = 0;
 	i = 0;
 	while (i < ft_strlen(message))
 	{
+		/* Codifica il carattere "i" del messaggio in bit */
 		encode_bits(message[i]);
 		j = 0;
 		while (j < 8)
 		{
+			/* Se il bit j-esimo dell'array "g_bits_to_send" è 1, viene inviato il segnale SIGUSR1, altrimenti viene inviato il segnale SIGUSR2 */
 			if (g_bits_to_send[j] == '1')
 				sig = SIGUSR1;
 			else
 				sig = SIGUSR2;
+			/* Invia il segnale "sig" al processo server con ID "server_pid" */
 			kill(server_pid, sig);
+			/* Aggiunge un ritardo di 50 microsecondi tra ogni segnale inviato */
 			usleep(50);
 			j++;
 		}
+		/* Libera la memoria dell'array "g_bits_to_send" */
 		ft_free((void **)&g_bits_to_send);
 		i++;
 	}
 }
-
-/**
+ /**
  * @brief 
-	Signal handler function for SIGUSR1.
+	Funzione signal handler per SIGUSR1.
  * @details 
-	This function is called when the process receives the SIGUSR1 signal;
-	It simply waits for 1 microsecond.
+	Questa funzione viene chiamata quando il processo riceve il segnale SIGUSR1;
+	Attende semplicemente per 1 microsecondo.
  * @param sig 
-	The signal number.
+	Il numero del segnale.
  */
 static void	sig_handler(int sig)
 {
 	if (sig == SIGUSR1)
 		usleep(1);
 }
-
-/**
+ /**
  * @brief 
-	Sends a message to a server process.
+	Invia un messaggio ad un processo server.
  * @details 
-	This function takes the server process ID and the message to send as 
-	arguments; 
-	The message is encoded into bits, and each bit is sent to the server process 
-	using the SIGUSR1 and SIGUSR2 signals;
-	A delay of 50 microseconds is added between each signal.
+	Questa funzione prende l'ID del processo server ed il messaggio da inviare come argomenti; 
+	Il messaggio viene codificato in bit e ogni bit viene inviato al processo server utilizzando i segnali SIGUSR1 e SIGUSR2;
+	Viene aggiunto un ritardo di 50 microsecondi tra ogni segnale inviato.
  * @param server_pid 
-	The ID of the server process.
+	L'ID del processo server.
  * @param message 
-	The message string to be sent to the server process.
+	La stringa di messaggio da inviare al processo server.
  */
 int	main(int argc, char **argv)
 {
 	struct sigaction	act;
-
+ 	/* Verifica che il numero di argomenti sia corretto */
 	if (argc != 3)
-		ft_exit("Wrong number of arguments...\n", RED_B, 2, 1);
+		ft_exit("Numero di argomenti errato...\n", RED_B, 2, 1);
+ 	/* Inizializzazione della struttura "act" a 0 */
 	ft_bzero(&act, sizeof(act));
+	/* Imposta la funzione "sig_handler" come signal handler per il segnale SIGUSR1 */
 	act.sa_handler = &sig_handler;
 	sigaction(SIGUSR1, &act, NULL);
+	/* Invia il messaggio al processo server con ID "ft_atoi(argv[1])" */
 	send_message(ft_atoi(argv[1]), argv[2]);
 	return (0);
 }
