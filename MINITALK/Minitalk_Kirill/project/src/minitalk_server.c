@@ -27,11 +27,8 @@ volatile char	*g_received_bits = 0; // definisce una variabile globale volatile 
  */
 static char	decode_bits(volatile char *bits)
 {
-	char	c;
-	size_t	i;
-
-	c = 0; // inizializza la variabile c a 0
-	i = 0; // inizializza la variabile i a 0
+	char	c = 0; // inizializza la variabile c a 0
+	size_t	i = 0; // inizializza la variabile i a 0
 	while (i < 8) // esegue un ciclo while per 8 volte
 	{
 		if (bits[i] == '1') // se il bit corrente è uguale a '1'
