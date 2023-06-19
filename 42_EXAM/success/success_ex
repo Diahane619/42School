@@ -36,6 +36,7 @@ ft_list_size
 first_word
 inter
 fizzbuzz
+<<<<<<< HEAD
 max
 pgcd
 first_word
@@ -43,3 +44,17 @@ ft_strcmp
 first_word
 ft_strcspn
 ft_range
+=======
+ft_strcmp
+ft_strcmp
+rotone
+last_word
+epur_str
+rev_wstr
+ft_putstr
+camel_to_snake
+paramsum
+sort_list
+ft_swap
+swap_bits
+>>>>>>> rht

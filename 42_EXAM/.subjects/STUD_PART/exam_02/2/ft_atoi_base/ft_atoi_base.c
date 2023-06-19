@@ -50,8 +50,14 @@ int		ft_atoi_base(const char *str, int str_base)
 	result = 0;
 	while (is_blank(*str))
 		str++;
-	sign = (*str == '-') ? -1 : 1;
-	(*str == '-' || *str == '+') ? ++str : 0;
+	sign = 1;
+	if (*str == '-')
+	{
+    	sign = -1;
+    	++str;
+	}
+	else if (*str == '+')
+    	++str;
 	while (isvalid(*str, str_base))
 		result = result * str_base + value_of(*str++);
 	return (result * sign);
