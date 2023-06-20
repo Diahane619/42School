@@ -1,28 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minitalk_client.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 19:24:17 by kichkiro          #+#    #+#             */
-/*   Updated: 2023/04/06 22:41:37 by kichkiro         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minitalk.h"
 
 volatile char *g_bits_to_send = 0; // Dichiarazione di una variabile globale char *g_bits_to_send
- /**
- * @brief 
-	Codifica un carattere in 8 bit e li aggiunge ad un array char globale.
- * @details 
-	La funzione prende un carattere e lo codifica in 8 bit, che vengono poi 
-	aggiunti ad un array char globale, g_bits_to_send;
-	Se il bit è 1, aggiunge '1' all'array, altrimenti aggiunge '0'.
- * @param c 
- 	Il carattere da codificare.
- */
+
+// La funzione encode_bits prende un carattere come parametro e lo codifica in 8 bit. Questi bit vengono poi aggiunti ad un array char globale, g_bits_to_send. Se il bit è 1, viene aggiunto '1' all'array, altrimenti viene aggiunto '0'. La funzione utilizza un ciclo while che itera 8 volte per codificare ogni bit del carattere. All'interno del ciclo, viene utilizzato l'operatore AND bit a bit per verificare se il bit corrente del carattere è 1. Se è 1, viene aggiunto '1' all'array g_bits_to_send utilizzando la funzione ft_char_append, altrimenti viene aggiunto '0'.
 static void encode_bits(char c)
 {
 	size_t i; // Dichiarazione di una variabile di tipo size_t
@@ -36,18 +16,10 @@ static void encode_bits(char c)
 		i++; // Incremento di "i"
 	}
 }
- /**
- * @brief 
-	Invia un messaggio ad un processo server.
- * @details 
-	La funzione prende l'ID di un processo server e una stringa di messaggio, codifica ogni 
-	carattere del messaggio in bit e invia i bit al processo server utilizzando i segnali SIGUSR1 e SIGUSR2;
-	Ogni bit viene inviato come segnale, con un ritardo di 50 microsecondi tra ogni segnale.
- * @param server_pid 
-	L'ID del processo server.
- * @param message 
-	La stringa di messaggio da inviare al processo server.
- */
+
+/* La funzione send_message prende l'ID di un processo server e una stringa di messaggio come parametri.
+La funzione codifica ogni carattere del messaggio in bit utilizzando la funzione encode_bits e invia i
+ bit al processo server utilizzando i segnali SIGUSR1 e SIGUSR2. Ogni bit viene inviato come segnale, con un ritardo di 50 microsecondi tra ogni segnale. La funzione utilizza un ciclo while che itera per la lunghezza della stringa di messaggio per codificare ogni carattere del messaggio in bit. All'interno del ciclo, viene chiamata la funzione encode_bits con il carattere corrente della stringa di messaggio come parametro. Viene quindi utilizzato un altro ciclo while che itera 8 volte per inviare ogni bit del carattere codificato al processo server. All'interno di questo ciclo, viene verificato se il bit corrente è uguale a '1'. Se è uguale a '1', viene assegnato il segnale SIGUSR1 alla variabile sig, altrimenti viene assegnato il segnale SIGUSR2. Viene quindi inviato il segnale sig al processo server con ID server_pid utilizzando la funzione kill. Viene quindi eseguito un delay di 50 microsecondi utilizzando la funzione usleep. Alla fine del ciclo interno, viene liberata la memoria allocata per la variabile g_bits_to_send utilizzando la funzione ft_free.
 static void send_message(pid_t server_pid, char *message)
 {
 	int sig; // Dichiarazione di una variabile di tipo int
@@ -72,20 +44,12 @@ static void send_message(pid_t server_pid, char *message)
 		i++; // Incremento di "i"
 	}
 }
- /**
- * @brief 
-	La funzione principale.
- * @details 
-	La funzione prende due argomenti: l'ID di un processo server e una stringa di messaggio;
-	Se il numero di argomenti non è uguale a 3, la funzione termina con un messaggio di errore;
-	Altrimenti, la funzione chiama la funzione send_message con l'ID del processo server e la stringa di messaggio forniti.
- * @param argc 
-	Il numero di argomenti passati al programma.
- * @param argv 
-	Un array di stringhe contenente gli argomenti del programma.
- * @return 
-	0 se il programma viene eseguito correttamente.
- */
+
+/*La funzione principale main prende due argomenti: l'ID di un processo server e 
+una stringa di messaggio. Se il numero di argomenti non è uguale a 3, la funzione 
+termina con un messaggio di errore utilizzando la funzione ft_exit.
+Altrimenti, la funzione chiama la funzione send_message con l'ID del processo server
+e la stringa di messaggio forniti come parametri.*/
 int main(int argc, char **argv)
 {
 	if (argc != 3) // Se il numero di argomenti non è uguale a 3
