@@ -15,7 +15,7 @@ static void encode_bits(char c)
  	i = 0;
 	while (i < 8) // Ciclo while che itera 8 volte
 	{
-		if (c & (1 << i)) // Se il carattere "c" AND bit-shift di "i" è uguale a 1
+		if (c & (1 << i)) // Se il carattere "c" esiste & la "i" del bit che scorre è uguale a 1
 			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true); // Aggiungi '1' alla fine della variabile "g_bits_to_send"
 		else
 			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '0', true); // Aggiungi '0' alla fine della variabile "g_bits_to_send"
