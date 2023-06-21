@@ -1,48 +1,57 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fizzbuzz.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/04 10:55:11 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/04 11:37:38 by francevi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
+<<<<<<< HEAD
 
-void ft_putchar(char c)
+int putnumbr(int n)
 {
-    write(1, &c, 1);
-}
+    char number[10] = "0123456789";
 
-void ft_putnbr(int n)
+    if(n > 9)
+        putnumbr(n / 10);
+    write(1, &number[n % 10], 1);
+=======
+void ft_write_number(int n)
 {
-    if (n >= 10)
-    {
-        ft_putnbr(n / 10);
-        ft_putnbr(n % 10);
-    }
-    else
-        ft_putchar(n + '0');
+	char s[10] = "0123456789";
+
+	if(n > 9)
+		ft_write_number(n / 10);
+	write(1, &s[n % 10], 1);
+>>>>>>> rht
 }
 
 int main()
 {
-	int n = 1;
+    int n = 1;
 
+<<<<<<< HEAD
+    while(n <= 100)
+    {
+        if(n % 15 == 0)
+            write(1, "fizzbuzz", 8);
+        else if(n % 3 == 0)
+            write(1, "fizz", 4);
+        else if(n % 5 == 0)
+            write(1, "buzz", 4);
+        else
+            putnumbr(n);
+            write(1, "\n", 1);
+        n++;
+    }
+=======
 	while(n <= 100)
 	{
-		if(n % 3 == 0 && n % 5 == 0)
-			write(1, "fizzbuzz", 8);
+		if(n % 15 == 0)
+			write(1, "fizzbuzz\n", 9);
 		else if(n % 3 == 0)
-			write(1, "fizz", 4);
+			write(1, "fizz\n", 5);
 		else if(n % 5 == 0)
-			write(1, "buzz", 4);
+			write(1, "buzz\n", 5);
 		else
-			ft_putnbr(n);
-			n++;
-		write(1, "\n", 1);
+		{
+			ft_write_number(n);
+			write(1, "\n", 1);
+		}
+		n++;
 	}
+>>>>>>> rht
 }

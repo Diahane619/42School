@@ -31,7 +31,6 @@ int main(int ac, char *av[])
 	char *tmp;
 	char *rev;
 	int len;
-
 	if (ac == 2)
 	{
 		tmp = av[1];
