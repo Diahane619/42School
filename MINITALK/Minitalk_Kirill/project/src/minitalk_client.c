@@ -30,7 +30,7 @@ con un ritardo di 50 microsecondi tra ogni segnale. La funzione utilizza un cicl
 la lunghezza della stringa di messaggio per codificare ogni carattere del messaggio in bit.
 All'interno del ciclo, viene chiamata la funzione encode_bits con il carattere corrente della
 stringa di messaggio come parametro. Viene quindi utilizzato un altro ciclo while che itera 8
-volte per inviare ogni bit del carattere codificato al processo server. 
+volte per inviare ogni bit del carattere codificato al processo server.
 All'interno di questo ciclo, viene verificato se il bit corrente è uguale a '1'. Se è uguale a '1', viene
 assegnato il segnale SIGUSR1 alla variabile sig, altrimenti viene assegnato il segnale SIGUSR2. 
 Viene quindi inviato il segnale sig al processo server con ID server_pid utilizzando la funzione kill. 
