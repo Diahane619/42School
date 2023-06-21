@@ -35,3 +35,8 @@ camel_to_snake
 ft_list_size
 first_word
 inter
+rot_13
+ft_strcmp
+expand_str
+first_word
+camel_to_snake

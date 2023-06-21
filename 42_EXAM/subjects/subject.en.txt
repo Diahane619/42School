@@ -1,26 +1,20 @@
-Assignment name  : hidenp
-Expected files   : hidenp.c
-Allowed functions: write
+Assignment name  : ft_atoi_base
+Expected files   : ft_atoi_base.c
+Allowed functions: None
 --------------------------------------------------------------------------------
 
-Write a program named hidenp that takes two strings and displays 1
-followed by a newline if the first string is hidden in the second one,
-otherwise displays 0 followed by a newline.
+Write a function that converts the string argument str (base N <= 16)
+to an integer (base 10) and returns it.
 
-Let s1 and s2 be strings. We say that s1 is hidden in s2 if it's possible to
-find each character from s1 in s2, in the same order as they appear in s1.
-Also, the empty string is hidden in any string.
+The characters recognized in the input are: 0123456789abcdef
+Those are, of course, to be trimmed according to the requested base. For
+example, base 4 recognizes "0123" and base 16 recognizes "0123456789abcdef".
 
-If the number of parameters is not 2, the program displays a newline.
+Uppercase letters must also be recognized: "12fdb3" is the same as "12FDB3".
 
-Examples :
+Minus signs ('-') are interpreted only if they are the first character of the
+string.
 
-$>./hidenp "fgex.;" "tyf34gdgf;'ektufjhgdgex.;.;rtjynur6" | cat -e
-1$
-$>./hidenp "abc" "2altrb53c.sse" | cat -e
-1$ 
-$>./hidenp "abc" "btarc" | cat -e
-0$
-$>./hidenp | cat -e
-$
-$>
+Your function must be declared as follows:
+
+int	ft_atoi_base(const char *str, int str_base);
