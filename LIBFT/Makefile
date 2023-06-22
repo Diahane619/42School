@@ -6,7 +6,7 @@
 #    By: francevi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/22 09:57:49 by francevi          #+#    #+#              #
-#    Updated: 2023/06/22 13:38:01 by francevi         ###   ########.fr        #
+#    Updated: 2023/06/22 15:51:53 by francevi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,26 +29,58 @@ SRCS	:= \
 	\
 	fd/ft_putchar_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_exit.c \
 
-OBJS = $(SRCS:.c=.o)
+SRC_DIR     := src
+BUILD_DIR   := .build
+SRCS        := $(SRCS:%=$(SRC_DIR)/%)
+OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+DEPS        := $(OBJS:.o=.d)
+CC          := clang
+CFLAGS      := -Wall -Wextra -Werror
+CPPFLAGS    := -MMD -MP -I include
+AR          := ar
+ARFLAGS     := -r -c -s
+RM          := rm -rf
+MAKEFLAGS   := --no-print-directory
+DIR_DUP     = mkdir -p $(@D)
 
-GCC = gcc
-CFLAGS = -Wall -Wextra -Werror
-ARFLAGS = -rcs
-RM = rm -rf
+.PHONY: clean fclean re
+.SILENT:
 
-all: $(NAME)
+# Rules ----------------------------------------------------------------------->
+
+all: header $(NAME)
 
 $(NAME): $(OBJS)
-	ar $(ARFLAGS) $(NAME) $(OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	$(info ${BOLD}Creating  -> ${YELLOW}$(NAME)${NO_COLOR})
 
-%.o: %.c
-	$(GCC) $(CFLAGS) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(DIR_DUP)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(info ${BOLD}Compiling -> ${YELLOW}$@${NO_COLOR})
+
+-include $(DEPS)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(BUILD_DIR)
 
 fclean: clean
-	$(RM) $(NAME) $(NAME).so
+	$(RM) $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
+# Style ----------------------------------------------------------------------->
+
+RED 		:= ${shell tput setaf 1}
+YELLOW		:= ${shell tput setaf 3}
+BLUE		:= ${shell tput setaf 4}
+NO_COLOR	:= ${shell tput sgr0}
+BOLD		:= ${shell tput bold}
+
+header:
+	${info }
+	${info ${BOLD}${YELLOW}LIBFT${NO_COLOR}}
+
+# ------------------------------------------------------------------------------
