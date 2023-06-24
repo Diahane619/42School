@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 17:15:48 by kichkiro          #+#    #+#             */
-/*   Updated: 2022/12/29 14:25:15 by kichkiro         ###   ########.fr       */
+/*   Created: 2023/06/24 10:09:27 by francevi          #+#    #+#             */
+/*   Updated: 2023/06/24 10:21:28 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
-/*!
- * @brief 
-	If the ptr is not NULL, it is freed and set to NULL.
- * @return 
- 	NULL.
- */
-void	*ft_free(void **ptr)
-{
-	if (*ptr)
-	{
-		free(*ptr);
-		*ptr = 0;
-	}
-	return (*ptr);
-}
+# include "../libft/include/libft.h"
+# include <signal.h>
+
+#endif

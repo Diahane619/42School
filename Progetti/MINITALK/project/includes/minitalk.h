@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kichkiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 18:41:59 by kichkiro          #+#    #+#             */
-/*   Updated: 2022/12/27 20:27:47 by kichkiro         ###   ########.fr       */
+/*   Created: 2023/06/24 10:08:58 by francevi          #+#    #+#             */
+/*   Updated: 2023/06/24 10:21:35 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-/*!
- * @brief 
-	Checks for a digit (0 through 9).
- * @return 
-	The values returned are nonzero if the character c falls into the tested 
-	class, and zero if not.
- */
-int	ft_isdigit(int c)
-{
-	return (c >= 48 && c <= 57);
-}
+# include "../libft/include/libft.h"
+# include <signal.h>
+
+#endif
