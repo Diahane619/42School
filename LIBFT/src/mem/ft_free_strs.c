@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_free_strs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 18:30:48 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/24 08:54:20 by francevi         ###   ########.fr       */
+/*   Created: 2023/06/24 09:27:50 by francevi          #+#    #+#             */
+/*   Updated: 2023/06/24 09:27:52 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n, int *res)
+void	ft_free_strs(char **str, char **str2, char **str3)
 {
-	if (n == -2147483648)
+	if (str && *str)
 	{
-		ft_putstr("-2147483648", res);
-		return ;
+		free(*str);
+		*str = NULL;
 	}
-	if (n < 0)
+	if (str2 && *str2)
 	{
-		n = -n;
-		ft_putchar(('-'), res);
+		free(*str2);
+		*str2 = NULL;
 	}
-	if (n >= 10)
-		ft_putnbr(n / 10, res);
-	ft_putchar(n % 10 + 48, res);
+	if (str3 && *str3)
+	{
+		free(*str3);
+		*str3 = NULL;
+	}
 }

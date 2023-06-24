@@ -65,7 +65,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int		ft_memcmp(void *dest, const void *src, size_t n);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *nptr);
@@ -103,7 +103,10 @@ char	*ft_ultoa_hex(uintptr_t n);
 #  define BUFFER_SIZE 420
 # endif
 
-char	*ft_get_next_line(int fd);
+char	*get_next_line(int fd);
+char	*ft_riga(char *left_str);
+char	*ft_resto(char *left_str);
+void	ft_read_line(int fd, char **keep, char **tmp);
 void	ft_free_strs(char **str, char **str2, char **str3);
 int		contains_newline(const char *s);
 

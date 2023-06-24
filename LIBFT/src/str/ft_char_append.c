@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:48:02 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/22 12:54:06 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:38:42 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ char		*ft_char_append(char *s, char c, bool to_free)
 	while (i--)
 		str[i] = s[i];
 	if (to_free && s)
-		ft_free((voi **)&s);
+		ft_free((void **)&s);
 	return(str);
 }
