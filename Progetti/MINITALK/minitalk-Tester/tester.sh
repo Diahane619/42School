@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-PATH_TO_CLIENT="../client"
+PATH_TO_CLIENT="../project/client"
 
 # Colors
 Black='\e[0;30m'
