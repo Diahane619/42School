@@ -6,13 +6,14 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 10:07:57 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/24 10:34:08 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/26 08:07:35 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile char	*g_received_bits = 0; // definisce una variabile globale volatile di tipo char puntatore, inizializzata a 0
+volatile char	*g_received_bits = 0; // definisce una variabile globale volatile di tipo char puntatore
+//inizializzata a 0
 
 /* La funzione decode_bits prende un array di char contenente 8 bit come parametro e decodifica i bit
 in un carattere utilizzando operatori bitwise. La funzione utilizza un ciclo while che 

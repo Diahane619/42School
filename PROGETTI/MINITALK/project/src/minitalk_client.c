@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 10:07:35 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/24 10:07:39 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:55:17 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ static void encode_bits(char c)
 	while (i < 8) // Ciclo while che itera 8 volte
 	{
 		if (c & (1 << i)) // Se il carattere "c" esiste & la "i" del bit che scorre è uguale a 1
-			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true); // Aggiungi '1' alla fine della variabile "g_bits_to_send"
+			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '1', true); 
+			// Aggiungi '1' alla fine della variabile "g_bits_to_send"
 		else
-			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '0', true); // Aggiungi '0' alla fine della variabile "g_bits_to_send"
+			g_bits_to_send = ft_char_append((char *)g_bits_to_send, '0', true); 
+			// Aggiungi '0' alla fine della variabile "g_bits_to_send"
 		i++; // Incremento di "i"
 	}
 }
