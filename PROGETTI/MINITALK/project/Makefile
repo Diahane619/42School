@@ -6,7 +6,7 @@
 #    By: francevi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/24 10:08:18 by francevi          #+#    #+#              #
-#    Updated: 2023/06/24 10:21:55 by francevi         ###   ########.fr        #
+#    Updated: 2023/06/27 14:47:42 by francevi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 NAME		:= minitalk
 NAME_SERVER	:= server
 NAME_CLIENT	:= client
-SRCS_SERVER := minitalk_server.c
-SRCS_CLIENT := minitalk_client.c
+SRCS_SERVER := server.c
+SRCS_CLIENT := client.c
 SRC_DIR     := src
 SRCS_SERVER := $(SRCS_SERVER:%=$(SRC_DIR)/%)
 SRCS_CLIENT := $(SRCS_CLIENT:%=$(SRC_DIR)/%)
@@ -81,8 +81,8 @@ re:
 
 # Bonus ----------------------------------------------------------------------->
 
-SRCS_SERVER_BONUS 	:= minitalk_server_bonus.c
-SRCS_CLIENT_BONUS 	:= minitalk_client_bonus.c
+SRCS_SERVER_BONUS 	:= server_bonus.c
+SRCS_CLIENT_BONUS 	:= client_bonus.c
 SRCS_SERVER_BONUS 	:= $(SRCS_SERVER_BONUS:%=$(SRC_DIR)/%)
 SRCS_CLIENT_BONUS 	:= $(SRCS_CLIENT_BONUS:%=$(SRC_DIR)/%)
 OBJS_SERVER_BONUS 	:= $(SRCS_SERVER_BONUS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

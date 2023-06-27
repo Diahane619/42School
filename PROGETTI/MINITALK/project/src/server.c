@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:01:55 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/27 14:28:05 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:14:05 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static char	decode_bits(volatile char *bits)
 
 	while(i < 8)
 	{
-		if(bits[i] == '1')
+		if (bits[i] == '1')
 			c |= (1 << i);
 		else
 			c |= 0;
 		i++;
 	}
+	return(c);
 }
 
 static void sig_handler(int sig)
@@ -54,7 +55,7 @@ int main(int ac, char **av)
 	(void)av;
 	if(ac != 1)
 		ft_exit("Troppi argomenti..\n", RED_B, 2, 1);
-	ft_printf("%sServer PID ->%s %i&s\n", WHITE_B, CYAN_B, getpid(), RESET);
+	ft_printf("%sServer PID ->%s %i%s\n", WHITE_B, CYAN_B, getpid(), RESET);
 	while(true)
 	{
 		ft_bzero(&act, sizeof(act));

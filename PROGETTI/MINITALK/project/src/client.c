@@ -6,13 +6,13 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:23:15 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/27 14:01:09 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:09:59 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile char *g_bit_to_send = 0;
+volatile char *g_bits_to_send = 0;
 
 static void	encode_bits(char c)
 {
@@ -29,16 +29,17 @@ static void	encode_bits(char c)
 
 static void send_message(pid_t server_pid, char *message)
 {
-	int sig = 0;
+	int sig;
 	size_t i, j;
+	sig = 0;
 	i = 0;
 	while(i < ft_strlen(message))
 	{
-		encode_bits(message[i])
+		encode_bits(message[i]);
 		j = 0;
 		while(j < 8)
 		{
-			if(g_bit_to_send[j] == '1')
+			if (g_bits_to_send[j] == '1')
 				sig = SIGUSR1;
 			else
 				sig = SIGUSR2;
@@ -46,9 +47,9 @@ static void send_message(pid_t server_pid, char *message)
 			usleep(50);
 			j++;
 		}
+		ft_free((void **)&g_bits_to_send);
+		i++;
 	}
-	ft_free((void **)&g_bits_to_send);
-	i++:
 }
 
 int main(int ac, char **av)
