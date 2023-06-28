@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:33:10 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/27 15:10:26 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/28 09:10:57 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void send_message(pid_t server_pid, char *message)
 	i = 0;
 	while(i < ft_strlen(message))
 	{
-		encode_bits(message[i])
+		encode_bits(message[i]);
 		j = 0;
 		while(j < 8)
 		{
@@ -47,7 +47,7 @@ static void send_message(pid_t server_pid, char *message)
 			j++;
 		}
 		ft_free((void **)&g_bits_to_send);
-		i++:
+		i++;
 	}
 }
 
@@ -59,6 +59,8 @@ static void	sig_handler(int sig)
 
 int main(int ac, char **av)
 {
+	struct sigaction	act;
+	
 	if(ac != 3)
 		ft_exit("Numero di argomenti errato...\n", RED_B, 2, 1);
 	ft_bzero(&act, sizeof(act));

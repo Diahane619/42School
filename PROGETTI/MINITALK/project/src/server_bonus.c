@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:01:55 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/27 14:38:15 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/28 09:07:13 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	decode_bits(volatile char *bits)
 			c |= 0;
 		i++;
 	}
+	return(c);
 }
 
 static void sig_handler(int sig)
