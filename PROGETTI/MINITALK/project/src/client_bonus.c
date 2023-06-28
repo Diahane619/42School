@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:33:10 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/28 09:10:57 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:32:36 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void send_message(pid_t server_pid, char *message)
 static void	sig_handler(int sig)
 {
 	if (sig == SIGUSR1)
-		usleep(1);
+		usleep(50);
 }
 
 int main(int ac, char **av)
