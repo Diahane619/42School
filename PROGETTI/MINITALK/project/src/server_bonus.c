@@ -6,11 +6,11 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:01:55 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/28 09:07:13 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:29:52 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 volatile char	*g_received_bits = 0;
 
