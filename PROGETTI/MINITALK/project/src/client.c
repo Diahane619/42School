@@ -44,7 +44,7 @@ static void send_message(pid_t server_pid, char *message)
 			else
 				sig = SIGUSR2;
 			kill(server_pid, sig);
-			usleep(500);
+			usleep(50);
 			j++;
 		}
 		ft_free((void **)&g_bits_to_send);
