@@ -6,13 +6,13 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:01:55 by francevi          #+#    #+#             */
-/*   Updated: 2023/06/29 12:28:22 by francevi         ###   ########.fr       */
+/*   Updated: 2023/06/29 14:36:56 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-volatile char	*g_received_bits = 0;
+volatile char	*g_received_bits = NULL;
 
 static char	decode_bits(volatile char *bits)
 {
@@ -23,8 +23,6 @@ static char	decode_bits(volatile char *bits)
 	{
 		if (bits[i] == '1')
 			c |= (1 << i);
-		else
-			c |= 0;
 		i++;
 	}
 	return(c);
