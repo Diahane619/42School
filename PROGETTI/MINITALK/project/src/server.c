@@ -48,12 +48,12 @@ static void sig_handler(int sig)
 
 int main(int ac, char **av)
 {
-	struct sigaction	act; //guarda la struttura sigaction
+	struct sigaction	act;
 
 	(void)av;
 	if(ac != 1)
 		ft_exit("Troppi argomenti...\n", RED, 2, 1);
-	ft_printf("%sServer PID ->%s%i%s\n", BLUE, GREEN, getpid(), RESET); //guardati getpid
+	ft_printf("%sServer PID ->%s%i%s\n", BLUE, GREEN, getpid(), RESET);
 	while(true)
 	{
 		ft_bzero(&act, sizeof(act));

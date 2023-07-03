@@ -40,11 +40,11 @@ static void send_message(pid_t server_pid, char *message) //guarda la definzione
 		while(j < 8)
 		{
 			if (g_bits_to_send[j] == '1')
-				sig = SIGUSR1; //guarda la definizione di SIG
+				sig = SIGUSR1;
 			else
 				sig = SIGUSR2;
-			kill(server_pid, sig); //guarda la definizione di kill
-			usleep(50); //guarda la definizione di usleep
+			kill(server_pid, sig);
+			usleep(50);
 			j++;
 		}
 		ft_free((void **)&g_bits_to_send);

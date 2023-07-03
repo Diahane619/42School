@@ -62,7 +62,7 @@ int main(int ac, char **av)
 	struct sigaction	act;
 	
 	if(ac != 3)
-		ft_exit("Numero di argomenti errato...\n", RED_B, 2, 1);
+		ft_exit("Numero di argomenti errato...\n", RED, 2, 1);
 	ft_bzero(&act, sizeof(act));
 	act.sa_handler = &sig_handler;
 	sigaction(SIGUSR1, &act, NULL);
