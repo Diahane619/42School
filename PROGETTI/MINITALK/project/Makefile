@@ -6,7 +6,7 @@
 #    By: francevi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/24 10:08:18 by francevi          #+#    #+#              #
-#    Updated: 2023/06/28 14:17:15 by francevi         ###   ########.fr        #
+#    Updated: 2023/07/03 07:20:13 by francevi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,22 +98,3 @@ bonus: header $(OBJS_SERVER_BONUS) $(OBJS_CLIENT_BONUS) $(LIB_TARGET)
 	${info ${BOLD}Creating  -> ${BLUE}$(NAME_SERVER)${NO_COLOR}}
 	$(CC) $(LDFLAGS) $(OBJS_CLIENT_BONUS) $(LDLIBS) -o $(NAME_CLIENT)
 	${info ${BOLD}Creating  -> ${BLUE}$(NAME_CLIENT)${NO_COLOR}}
-
-# Style ----------------------------------------------------------------------->
-
-RED 		:= ${shell tput setaf 1}
-YELLOW		:= ${shell tput setaf 3}
-BLUE		:= ${shell tput setaf 4}
-NO_COLOR	:= ${shell tput sgr0}
-BOLD		:= ${shell tput bold}
-
-header:
-	${info ${NO_COLOR}}	
-	${info ███    ███ ██ ███    ██ ██ ████████  █████  ██      ██   ██ }
-	${info ████  ████ ██ ████   ██ ██    ██    ██   ██ ██      ██  ██  }
-	${info ██ ████ ██ ██ ██ ██  ██ ██    ██    ███████ ██      █████   }
-	${info ██  ██  ██ ██ ██  ██ ██ ██    ██    ██   ██ ██      ██  ██  }
-	${info ██      ██ ██ ██   ████ ██    ██    ██   ██ ███████ ██   ██ }
-	${info ${NO_COLOR}}
-	
-# ------------------------------------------------------------------------------
