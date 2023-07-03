@@ -10,8 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Config ---------------------------------------------------------------------->
-
 NAME		:= minitalk
 NAME_SERVER	:= server
 NAME_CLIENT	:= client
@@ -40,7 +38,7 @@ DIR_DUP     = mkdir -p $(@D)
 .PHONY: all clean fclean re
 .SILENT:
 
-# Rules ----------------------------------------------------------------------->
+# Regole ----------------------------------------------------------------------->
 
 all: header $(NAME)
 
@@ -48,11 +46,11 @@ $(NAME): $(NAME_SERVER) $(NAME_CLIENT)
 
 $(NAME_SERVER): $(OBJS_SERVER) $(LIB_TARGET)
 	$(CC) $(LDFLAGS) $(OBJS_SERVER) $(LDLIBS) -o $(NAME_SERVER)
-	${info ${BOLD}Creating  -> ${BLUE}$(NAME_SERVER)${NO_COLOR}}
+	${info ${BOLD}Creazione -> $(NAME_SERVER)}
 
 $(NAME_CLIENT): $(OBJS_CLIENT) $(LIB_TARGET)
 	$(CC) $(LDFLAGS) $(OBJS_CLIENT) $(LDLIBS) -o $(NAME_CLIENT)
-	${info ${BOLD}Creating  -> ${BLUE}$(NAME_CLIENT)${NO_COLOR}}
+	${info ${BOLD}Creazione -> $(NAME_CLIENT)}
 
 $(LIB_TARGET):
 	$(MAKE) -C $(@D)
@@ -60,7 +58,7 @@ $(LIB_TARGET):
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	${info ${BOLD}Compiling -> ${BLUE}$@${NO_COLOR}}
+	${info ${BOLD}Compilazione -> $@}
 
 -include $(DEPS_SERVER)
 -include $(DEPS_CLIENT)
@@ -69,7 +67,7 @@ clean:
 	for f in $(dir $(LIB_TARGET)); do $(MAKE) -C $$f clean; done
 	$(RM) $(BUILD_DIR)
 	${info }
-	${info ${BOLD}${YELLOW}Cleaning in progress...${NO_COLOR}	🧹 🧹 🧹}
+	${info ${BOLD}Pulisci...${NO_COLOR}	🧹 🧹 🧹}
 
 fclean: clean
 	for f in $(dir $(LIB_TARGET)); do $(MAKE) -C $$f fclean; done
@@ -78,34 +76,6 @@ fclean: clean
 re:
 	$(MAKE) fclean
 	$(MAKE) all
-
-# Bonus ----------------------------------------------------------------------->
-
-SRCS_SERVER_BONUS 	:= server_bonus.c
-SRCS_CLIENT_BONUS 	:= client_bonus.c
-SRCS_SERVER_BONUS 	:= $(SRCS_SERVER_BONUS:%=$(SRC_DIR)/%)
-SRCS_CLIENT_BONUS 	:= $(SRCS_CLIENT_BONUS:%=$(SRC_DIR)/%)
-OBJS_SERVER_BONUS 	:= $(SRCS_SERVER_BONUS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-OBJS_CLIENT_BONUS 	:= $(SRCS_CLIENT_BONUS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-DEPS_SERVER_BONUS 	:= $(OBJS_SERVER_BONUS:.o=.d)
-DEPS_CLIENT_BONUS 	:= $(OBJS_CLIENT_BONUS:.o=.d)
-
--include $(DEPS_SERVER_BONUS)
--include $(DEPS_CLIENT_BONUS)
-
-bonus: header $(OBJS_SERVER_BONUS) $(OBJS_CLIENT_BONUS) $(LIB_TARGET)
-	$(CC) $(LDFLAGS) $(OBJS_SERVER_BONUS) $(LDLIBS) -o $(NAME_SERVER)
-	${info ${BOLD}Creating  -> ${BLUE}$(NAME_SERVER)${NO_COLOR}}
-	$(CC) $(LDFLAGS) $(OBJS_CLIENT_BONUS) $(LDLIBS) -o $(NAME_CLIENT)
-	${info ${BOLD}Creating  -> ${BLUE}$(NAME_CLIENT)${NO_COLOR}}
-
-# Style ----------------------------------------------------------------------->
-
-RED 		:= ${shell tput setaf 1}
-YELLOW		:= ${shell tput setaf 3}
-BLUE		:= ${shell tput setaf 4}
-NO_COLOR	:= ${shell tput sgr0}
-BOLD		:= ${shell tput bold}
 
 header:
 	${info ${NO_COLOR}}	
