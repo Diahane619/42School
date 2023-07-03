@@ -27,7 +27,7 @@ static void	encode_bits(char c)
 	}
 }
 
-static void send_message(pid_t server_pid, char *message)
+static void send_message(pid_t server_pid, char *message) //guarda la definzione di pid_t
 {
 	int sig;
 	size_t i, j;
@@ -40,11 +40,11 @@ static void send_message(pid_t server_pid, char *message)
 		while(j < 8)
 		{
 			if (g_bits_to_send[j] == '1')
-				sig = SIGUSR1;
+				sig = SIGUSR1; //guarda la definizione di SIG
 			else
 				sig = SIGUSR2;
-			kill(server_pid, sig);
-			usleep(50);
+			kill(server_pid, sig); //guarda la definizione di kill
+			usleep(50); //guarda la definizione di usleep
 			j++;
 		}
 		ft_free((void **)&g_bits_to_send);
@@ -55,7 +55,7 @@ static void send_message(pid_t server_pid, char *message)
 int main(int ac, char **av)
 {
 	if(ac != 3)
-		ft_exit("Numero di argomenti errato...\n", RED_B, 2, 1);
+		ft_exit("Argomenti sbagliati...\n", 2, 1);
 	send_message(ft_atoi(av[1]), av[2]);
 	return(0);
 }
