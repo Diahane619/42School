@@ -55,7 +55,7 @@ static void send_message(pid_t server_pid, char *message) //guarda la definzione
 int main(int ac, char **av)
 {
 	if(ac != 3)
-		ft_exit("Argomenti sbagliati...\n", 2, 1);
+		ft_exit("Argomenti sbagliati...\n", RED, 2, 1);
 	send_message(ft_atoi(av[1]), av[2]);
 	return(0);
 }

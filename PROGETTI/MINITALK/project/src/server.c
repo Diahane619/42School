@@ -52,8 +52,8 @@ int main(int ac, char **av)
 
 	(void)av;
 	if(ac != 1)
-		ft_exit("Troppi argomenti..\n", 2, 1);
-	ft_printf("%sServer PID ->%s %i%s\n", getpid(), RESET); //guardati getpid
+		ft_exit("Troppi argomenti...\n", RED, 2, 1);
+	ft_printf("%sServer PID ->%s%i%s\n", BLUE, GREEN, getpid(), RESET); //guardati getpid
 	while(true)
 	{
 		ft_bzero(&act, sizeof(act));
