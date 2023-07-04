@@ -1,3 +1,5 @@
+https://reactive.so/post/42-a-comprehensive-guide-to-so_long
+
 NAME		=	so_long
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
