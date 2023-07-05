@@ -26,35 +26,35 @@ SRC			=	src/die.c \
 
 all:		$(MLX) $(LFT) obj $(NAME)
 
+# Compila il file eseguibile
 $(NAME):	$(OBJ)
 			$(CC) $(FLAGS) -fsanitize=address -o $@ $^ $(LIB)
-
+# Compila la libreria minilibx
 $(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
+			@echo " [ .. ] | Compilazione minilibx.."
 			@make -s -C mlx
-			@echo " [ OK ] | Minilibx ready!"
-
+			@echo " [ OK ] | Minilibx pronta!"
+# Compila la libreria libft
 $(LFT):		
-			@echo " [ .. ] | Compiling libft.."
+			@echo " [ .. ] | Compilazione libft.."
 			@make -s -C libft
-			@echo " [ OK ] | Libft ready!"
-
+			@echo " [ OK ] | Libft pronta!"
+# Crea la cartella obj
 obj:
 			@mkdir -p obj
-
+# Compila i file di origine in file oggetto
 obj/%.o:	src/%.c
 			$(CC) $(FLAGS) $(INC) -o $@ -c $<
-
+# Pulisce i file oggetto
 clean:
 			@make -s $@ -C libft
 			@rm -rf $(OBJ) obj
-			@echo "object files removed."
-
+			@echo "File oggetto rimossi."
+# Rimuove il file eseguibile
 fclean:		clean
 			@make -s $@ -C libft
 			@rm -rf $(NAME)
-			@echo "binary file removed."
-
+			@echo "File binario rimosso."
+# Ricompila tutto
 re:			fclean all
-
-.PHONY:		all clean fclean re
+ .PHONY:		all clean fclean re
