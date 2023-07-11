@@ -6,50 +6,42 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 18:36:29 by gamarcha          #+#    #+#             */
-/*   Updated: 2023/07/09 16:51:41 by francevi         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:48:38 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Questo codice è un esempio di un programma che utilizza la libreria "so_long.h".
-Il programma verifica se il secondo argomento passato da linea di comando ha l'estensione ".ber" 
-e se il numero di argomenti è corretto. In caso contrario, viene chiamata la funzione "die" 
-per gestire l'errore. Successivamente, viene inizializzata una struttura "t_root" 
-chiamata "root" utilizzando il secondo argomento come parametro. Viene quindi chiamata la funzione "draw" 
-per disegnare qualcosa utilizzando la struttura "root". Infine, vengono impostati degli hook 
-per gestire gli eventi della finestra e viene avviato il loop di rendering con la funzione "mlx_loop". */
  #include "so_long.h"
- // Verifica se il file ha l'estensione ".ber"
-int isber(char *file)
+
+/* La funzione isber() controlla se il nome del file termina con l'estensione ".ber". Restituisce 1 se l'estensione è corretta, altrimenti restituisce 0. */
+ int isber(char *file)
 {
 	int len;
- 	len = ft_strlen(file);
-	if (file == 0)
+ 	len = ft_strlen(file); // Ottiene la lunghezza della stringa file
+	if (file == 0) // Se il puntatore a file è nullo, restituisce 0
 		return (0);
-	if (len < 5)
+	if (len < 5) // Se la lunghezza della stringa è inferiore a 5 (minimo per ".ber"), restituisce 0
 		return (0);
-	if (ft_strcmp(file + len - 4, ".ber") != 0)
+	if (ft_strcmp(file + len - 4, ".ber") != 0) // Confronta gli ultimi 4 caratteri della stringa con ".ber". Se non corrispondono, restituisce 0
 		return (0);
-	return (1);
+	return (1); // Se tutte le condizioni sono soddisfatte, restituisce 1
 }
- // Funzione principale del programma
-int main(int ac, char *av[])
+/* La funzione main() è la funzione principale del programma. 
+Controlla il numero di argomenti passati al programma e se l'argomento è un file valido con estensione ".ber".
+Inizializza la struttura root, disegna il contenuto del file e imposta i gestori degli eventi. Infine, avvia la loop di rendering. */
+ int main(int ac, char *av[])
 {
 	t_root *root;
- 	// Verifica se il numero di argomenti è diverso da 2 e gestisce l'errore in caso contrario
-	if (ac != 2)
+	
+ 	if (ac != 2) // Se il numero di argomenti non è 2, mostra un messaggio di errore e termina il programma
 		die("invalid number of arguments", 0);
- 	// Verifica se il secondo argomento non ha l'estensione ".ber" e gestisce l'errore in caso contrario
-	if (isber(av[1]) == 0)
+	if (isber(av[1]) == 0) // Se il file passato come argomento non ha estensione ".ber", mostra un messaggio di errore e termina il programma
 		die("invalid argument (<name>.ber)", 0);
- 	// Inizializza la struttura "root" utilizzando il secondo argomento come parametro
-	root = root_init(av[1]);
- 	// Chiama la funzione "draw" per disegnare qualcosa utilizzando la struttura "root"
-	draw(root);
- 	// Imposta hook per gestire gli eventi della finestra
-	mlx_hook(root->mlx_win, 2, 1L << 0, key_press, root);
-	mlx_hook(root->mlx_win, 3, 1L << 1, key_release, root);
-	mlx_hook(root->mlx_win, 17, 1L << 17, destroy_hook, root);
- 	// Avvia il loop di rendering
-	mlx_loop(root->mlx);
- 	return (0);
+	
+	root = root_init(av[1]); // Inizializza la struttura root con il file passato come argomento
+	draw(root); // Disegna il contenuto del file sulla finestra
+	mlx_hook(root->mlx_win, 2, 1L << 0, key_press, root); // Imposta il gestore dell'evento di pressione dei tasti
+	mlx_hook(root->mlx_win, 3, 1L << 1, key_release, root); // Imposta il gestore dell'evento di rilascio dei tasti
+	mlx_hook(root->mlx_win, 17, 1L << 17, destroy_hook, root); // Imposta il gestore dell'evento di chiusura della finestra
+	mlx_loop(root->mlx); // Avvia la loop di rendering
+ 	return (0); // Termina il programma
 }
