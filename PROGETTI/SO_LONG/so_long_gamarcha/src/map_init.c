@@ -107,4 +107,6 @@ void	map_init(t_root *root, char *filename)
 	// Chiude il file
 	close(fd);
 	// Legge la mappa dal contenuto del file
-	map_read
+	map_read(root, file);
+	free(file);
+}
