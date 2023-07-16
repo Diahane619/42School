@@ -6,7 +6,7 @@
 /*   By: francevi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 18:36:29 by gamarcha          #+#    #+#             */
-/*   Updated: 2023/07/10 15:48:38 by francevi         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:19:00 by francevi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ Inizializza la struttura root, disegna il contenuto del file e imposta i gestori
 	t_root *root;
 	
  	if (ac != 2) // Se il numero di argomenti non è 2, mostra un messaggio di errore e termina il programma
-		die("invalid number of arguments", 0);
+		die("Numero di argomenti non validi", 0);
 	if (isber(av[1]) == 0) // Se il file passato come argomento non ha estensione ".ber", mostra un messaggio di errore e termina il programma
-		die("invalid argument (<name>.ber)", 0);
+		die("Argomento non valido (<nome>.ber)", 0);
 	
 	root = root_init(av[1]); // Inizializza la struttura root con il file passato come argomento
 	draw(root); // Disegna il contenuto del file sulla finestra
