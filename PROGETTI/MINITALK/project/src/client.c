@@ -27,7 +27,7 @@ static void	encode_bits(char c)
 	}
 }
 
-static void send_message(pid_t server_pid, char *message) //guarda la definzione di pid_t
+static void send_message(pid_t server_pid, char *message)
 {
 	int sig;
 	size_t i, j;
