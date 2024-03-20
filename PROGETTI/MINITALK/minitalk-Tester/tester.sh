@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-PATH_TO_CLIENT="../project/client"
+PATH_TO_CLIENT="/workspaces/42School/PROGETTI/MINITALK/project/client"
 
 # Colors
 Black='\e[0;30m'
