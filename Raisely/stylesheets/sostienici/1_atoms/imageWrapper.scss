@@ -1,0 +1,25 @@
+.image-wrapper img {
+	border-radius: $borderRadius * 3;
+}
+
+@if global-variable-exists($name: hasOrganicShape) and $hasOrganicShape {
+	$radii: '40% 70% 30% 80% / 60% 80% 30% 50%',
+		'70% 40% 70% 40% / 70% 40% 70% 40%', '50% 70% 40% 80% / 40% 70% 40% 80%',
+		'80% 50% 50% 60% / 50% 70% 50% 80%', '40% 70% 30% 80% / 70% 40% 70% 40%',
+		'60% 50% 30% 50% / 60% 80% 30% 40%', '70% 40% 70% 40% / 60% 80% 30% 50%',
+		'80% 30% 50% 60% / 70% 40% 70% 40%', '60% 70% 70% 50% / 70% 60% 70% 50%',
+		'70% 70% 70% 50% / 80% 80% 60% 50%', '80% 30% 50% 60% / 60% 80% 30% 50%',
+		'70% 40% 70% 40% / 40% 70% 30% 80%';
+
+	@for $i from 1 through length($radii) {
+		.row:nth-of-type(#{length($radii)}n - #{$i}) {
+			.image-wrapper img {
+				border-radius: unquote(nth($radii, $i));
+			}
+		}
+	}
+}
+
+.image--no-shape .image-wrapper img {
+	border-radius: 0 !important;
+}

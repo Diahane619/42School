@@ -1,0 +1,51 @@
+.donation-tile {
+	padding: 0;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+
+	background: transparent;
+	color: accessible-color($donationTileBack, $donationTileBack, 7);
+
+	&__content {
+		padding: 0.66rem 1.1rem;
+		display: inline-block;
+		flex-basis: 60%;
+		flex-grow: 1;
+
+		&__activity {
+			font-family: $heading1FontFamily;
+		}
+
+		&__timestamp,
+		&__message {
+			font-style: italic;
+			font-weight: bold;
+		}
+
+		&__timestamp {
+			opacity: 0.66;
+		}
+
+		&__donor,
+		a {
+			font-weight: 800;
+		}
+	}
+
+	&__amount {
+		font-family: $heading1FontFamily;
+		font-size: 1.5em;
+		position: relative;
+		padding: 0.66rem 1.2rem 0.66rem 1.2rem;
+		width: auto;
+		display: inline-block;
+		top: unset;
+		height: unset;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		background: $primaryLight;
+		border-radius: $borderRadius * 10;
+	}
+}

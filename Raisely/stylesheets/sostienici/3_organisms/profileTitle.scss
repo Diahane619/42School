@@ -1,0 +1,146 @@
+.profile-tile {
+	border-radius: 5em 0 0 5em;
+	display: flex;
+
+	font-size: 0.9em;
+	font-family: $heading1FontFamily;
+
+	color: accessible-color($progressBarColor, white, 10);
+
+	.profile-image {
+		z-index: 1;
+		position: relative;
+	}
+
+	&__name {
+		margin-bottom: 0;
+		position: relative;
+		z-index: 1;
+		font-weight: 600;
+	}
+
+	&__content {
+		position: relative;
+		align-self: center;
+
+		margin-left: -2em;
+		padding: 1em 1em 1em 3.5em;
+		width: calc(100% - 75px + 2em);
+
+		box-shadow: 0 0 10px rgba(black, 0.1);
+		background: white;
+	}
+
+	&__total {
+		position: relative;
+		z-index: 1;
+		opacity: 0.66;
+		font-weight: 800;
+		top: unset;
+	}
+
+	&__edit a {
+		background: white;
+		border-radius: 1em;
+		padding: 0.25em 0.5em;
+		line-height: 1;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 12px;
+		box-shadow: 0 0 2px rgba(black, 0.2);
+
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.progress-bar {
+		&__progress {
+			font-size: 16px;
+			height: 1em;
+			line-height: 1em;
+			border-radius: 1em;
+
+			color: rgba(colorDarken($progressBarColor, 10), 0.1);
+			background: currentColor;
+			border-color: currentColor;
+		}
+	}
+
+	.page-controls button {
+		margin: 0 -0.5em;
+	}
+
+	.profile-image__photo {
+		@include fill(-0.5em);
+		width: auto;
+		height: auto;
+
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+
+		will-change: transform, box-shadow;
+		transition: 0.4s $easeOut;
+		box-shadow: $boxShadowClose;
+	}
+
+	&--detail-post {
+		background: transparent;
+	}
+
+	&--detail-post .profile-tile {
+		&__content {
+			padding-left: calc(2.5em + 1rem);
+			box-shadow: $boxShadowClose;
+		}
+
+		&__name,
+		&__total {
+			display: inline-block;
+
+			~ .button--primary {
+				position: relative;
+				margin-top: 0.25em;
+			}
+		}
+	}
+
+	&--detail-post &__total {
+		text-align: right;
+	}
+
+	&--detail-post .progress-bar__bar {
+		overflow: visible;
+	}
+
+	&--detail-post .profile-image {
+		min-width: 110px;
+		width: 110px;
+		min-height: 110px;
+		height: 110px;
+	}
+
+	&--detail-minimal {
+		color: inherit;
+
+		.profile-tile {
+			&__content {
+				background: none;
+				box-shadow: none;
+			}
+
+			&__name {
+				@include h3;
+				text-shadow: 0 2px 6px rgba(black, 0.25);
+			}
+		}
+	}
+
+	&__overlay:hover,
+	&__overlay:focus {
+		~ .profile-image .profile-image__photo {
+			box-shadow: $boxShadowFar;
+			transform: scale(1.033, 1.033);
+			transform: scale3d(1.033, 1.033, 1);
+		}
+	}
+}

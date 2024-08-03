@@ -1,0 +1,72 @@
+// ---------------------- //
+// DEFAULT VARIABLES
+// ---------------------- //
+
+$numberFontFamily: $heading1FontFamily !default;
+$borderWidth: 1px !default;
+$progressBarColor: $primaryColor !default;
+
+$fontSizes: (
+	'smallest': $paragraphFontSize * 0.85,
+	'small': $paragraphFontSize * 0.95,
+	'default': $paragraphFontSize,
+	'large': $paragraphFontSize * 1.15,
+) !default;
+
+$borderRadius: (
+	'small': '5px',
+	'default': '10px',
+	'large': '20px',
+) !default;
+
+$boxShadow: (
+	'closest': '0 1px 5px',
+	'close': '0 1px 10px',
+	'default': '0 2px 14px',
+	'far': '0 3px 20px',
+) !default;
+
+.page--home .header .logo img {
+	display: block;
+}
+
+// ensure backwards compatibility
+@if global-variable-exists(profileImageFormat) {
+	$profileImageShape: $profileImageFormat !default;
+}
+
+/* ADJUSTABLE VARIABLES */
+
+// General
+$borderRadius: 5px; // roundness of corners
+
+// Progress Bar
+$progressBarColor: if(
+	lightness($btnSecondaryBgColor) > 90,
+	$btnSecondaryTextColor,
+	$btnSecondaryBgColor
+); // progress bar color
+$donationTileBack: if(
+	lightness($btnSecondaryBgColor) > 90,
+	$btnSecondaryBgColor,
+	colorLighten($btnSecondaryBgColor, 15)
+); // progress background color
+
+// Colors
+$primaryGradientStop: if(
+	lightness($btnPrimaryBgColor) > 95,
+	darken($btnPrimaryBgColor, 2),
+	darken($btnPrimaryBgColor, 10)
+);
+$primaryGradient: linear-gradient(
+	to right,
+	$primaryGradientStop,
+	$btnPrimaryBgColor 80%
+); // gradient used for Primary Buttons and Donation Buttons
+
+$primaryGrey: colorLighten(accessible-color($btnPrimaryBgColor), 4);
+$primaryGrey: if(
+	saturation($primaryGrey) > 10,
+	desaturate($primaryGrey, (100% - saturation($primaryGrey) + 10%)),
+	$primaryGrey
+);

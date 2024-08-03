@@ -1,0 +1,16 @@
+.row__layout--footer {
+	.share {
+		text-align-last: center;
+
+		&:before {
+			color: white;
+			@include respond-to('tablet', true) {
+				line-height: 1rem;
+			}
+		}
+	}
+
+	@include respond-to('mobile', false) {
+		bottom: 50px;
+	}
+}

@@ -1,0 +1,34 @@
+.page-navigation {
+	&__link {
+		// Active link styles
+		.header__menu--desktop &--normal,
+		.header__menu--desktop &--dropdown {
+			position: relative;
+
+			&.page-navigation__link--is-active:before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0.75rem;
+				right: 0.75rem;
+				height: 3px;
+				border-radius: $borderRadius;
+				background: linear-gradient(
+					to right,
+					rgba(accessible-color($primaryGradientStop), 0.5),
+					accessibleColor($btnPrimaryBgColor) 80%
+				);
+			}
+		}
+
+		.header--theme-transparent
+			&--normal.page-navigation__link--is-active:before,
+		.header--theme-transparent &--dropdown .dropdown__tab__label:before {
+			background: linear-gradient(
+				to right,
+				rgba(accessible-color($primaryGradientStop, black), 0.5),
+				accessibleColor($btnPrimaryBgColor, black) 80%
+			);
+		}
+	}
+}

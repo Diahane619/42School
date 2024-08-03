@@ -1,0 +1,31 @@
+.share {
+	&--icon {
+		display: flex;
+		justify-content: flex-end;
+
+		&:before {
+			content: 'share campaign';
+			text-transform: uppercase;
+			color: black;
+			font-size: small;
+			align-self: center;
+			vertical-align: sub;
+		}
+	}
+
+	// &--large:before {
+	// 	content: none;
+	// }
+
+	.footer--social-share .share--icon &:before {
+		color: white;
+	}
+
+	&-button--icon:first-child {
+		margin-left: 15px;
+	}
+
+	&--social-icons {
+		text-align-last: right;
+	}
+}

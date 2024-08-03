@@ -1,0 +1,72 @@
+/* ROUNDED CORNERS */
+.progress-bar__progress,
+.progress-bar__bar,
+.donation-tile {
+	border-radius: $borderRadius;
+}
+
+.donation-form__amount-type {
+	border-radius: $borderRadius * 1.5;
+}
+
+.block--box,
+.raisely-blockwrapper--box,
+.block--separator:before,
+.raisely-blockwrapper--separator:before,
+.donation-form,
+.donation-form__amount-btn,
+.signup-form {
+	border-radius: $borderRadius * 2;
+}
+
+.col__container,
+.image-tile,
+.image-tile:before,
+.profile-tile__content,
+.profile-tile .progress-bar__progress,
+.profile-tile .progress-bar__bar:before,
+.image-wrapper img {
+	border-radius: $borderRadius * 3;
+}
+
+/* OTHER VARS */
+$boxShadowClose: 0 1px 15px rgba(black, 0.05);
+$boxShadowFar: 0 2px 20px rgba(black, 0.1);
+
+/* BLOCKS */
+.block {
+	&--box {
+		padding: 1.5em;
+		border-color: $primaryGrey;
+		border-width: 1px;
+
+		.profile-management-list {
+			padding: 0 1em;
+		}
+	}
+
+	&--separator {
+		padding: 1em 0;
+		background: transparent;
+
+		&:before {
+			content: '';
+			height: 2px;
+			display: block;
+			background: $primaryGrey;
+		}
+	}
+
+	&[class*='--border-']:before {
+		background: $primaryDarkest;
+	}
+}
+
+/* MISC */
+.links--inherit-color {
+	a:not([class]),
+	a:not([class]):hover,
+	a:not([class]):focus {
+		color: inherit;
+	}
+}

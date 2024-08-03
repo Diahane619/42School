@@ -1,0 +1,165 @@
+.donation-stream {
+	&--direction-horizontal {
+		width: calc(100% + 8px);
+		margin: 0 -4px;
+		border-bottom: 1px solid ($primaryGrey - 25);
+
+		.donation-stream__item {
+			padding: 0.5rem 2rem 1rem 2rem;
+			min-width: none;
+
+			&:last-of-type {
+				margin-right: 3vw;
+			}
+			.donation-tile__amount {
+				min-height: 4.5rem;
+				flex-basis: 4.5rem;
+				padding: 0.5rem;
+				justify-content: center;
+				flex-shrink: 0;
+			}
+		}
+
+		.donation-tile {
+			background: inherit;
+			color: inherit;
+
+			&__content,
+			&__content__activity {
+				color: inherit;
+			}
+
+			&__amount {
+				color: white;
+				font-size: large;
+				font-weight: 400;
+				margin: 0;
+			}
+
+			&__content {
+				align-self: center;
+				&__timestamp {
+					font-style: normal;
+					font-weight: 400;
+					color: $primaryDarkest;
+				}
+			}
+		}
+	}
+
+	&--direction-vertical {
+		.donation-stream__item {
+			padding: 1rem 0;
+			border-top: 1px solid ($primaryGrey - 25);
+
+			&:first-child {
+				border-top: 0;
+			}
+		}
+
+		.donation-tile {
+			text-align: left;
+			flex-direction: row-reverse;
+			color: $primaryLight;
+
+			&__content {
+				padding-left: 0;
+				&__activity {
+					font-size: 1.5rem;
+				}
+				&__timestamp {
+					display: none;
+				}
+				&__message {
+					font-style: normal;
+					color: $primaryDarkest;
+				}
+			}
+			&__amount {
+				font-size: 1.5rem;
+				background: transparent;
+				color: $primaryDarkest;
+			}
+		}
+	}
+
+	.page-controls {
+		margin-top: 1rem;
+		> button.button {
+			color: $secondaryColor;
+			border-color: ($primaryGrey - 25);
+		}
+	}
+}
+
+.donation-tile {
+	padding: 0;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+
+	background: $donationTileBack;
+	color: accessible-color($donationTileBack, $donationTileBack, 7);
+
+	&__content {
+		padding: 0.66rem 1.1rem;
+		display: inline-block;
+		flex-basis: 60%;
+		flex-grow: 1;
+
+		&__activity {
+			font-family: $heading1FontFamily;
+		}
+
+		&__timestamp,
+		&__message {
+			font-style: italic;
+			font-weight: bold;
+		}
+
+		&__timestamp {
+			opacity: 0.66;
+		}
+
+		&__donor,
+		a {
+			font-weight: 800;
+		}
+	}
+
+	&__amount {
+		font-family: $heading1FontFamily;
+		font-size: 1.5em;
+		position: relative;
+		padding: 0.66rem 1.2rem 0.66rem 1.2rem;
+		width: auto;
+		display: inline-block;
+		top: unset;
+		height: unset;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0.25em;
+			right: 0;
+			bottom: 0.25em;
+			width: 1px;
+			background: linear-gradient(
+				to bottom,
+				rgba(white, 0),
+				rgba(white, 0.75) 33%,
+				rgba(white, 0.75) 66%,
+				rgba(white, 0) 100%
+			);
+		}
+	}
+}
+
+.donation-stream--direction-horizontal
+	.donation-stream__track
+	.donation-stream__item {
+	min-width: 30ch;
+}

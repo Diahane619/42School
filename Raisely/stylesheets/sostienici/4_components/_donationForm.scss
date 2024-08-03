@@ -1,0 +1,224 @@
+.donation-form {
+	border: 1px solid lightgrey;
+
+	.form-field {
+		margin-bottom: 0.25rem;
+	}
+	&__message {
+		&--warning {
+			margin-bottom: 1.5rem;
+		}
+	}
+
+	&__body {
+		padding: 0 1.5rem;
+		background: white;
+		// If button background is super light
+		@if lightness($btnPrimaryBgColor) >
+			95 and
+			lightness($btnPrimaryBgColor) <
+			98
+		{
+			background: $btnPrimaryBgColor;
+		} @else if lightness($btnPrimaryBgColor) >= 98 {
+			background: white;
+			border: 1px
+				solid
+				accessibleColor($btnPrimaryBgColor, $threshold: 5);
+			border-top: none;
+		}
+
+		.field-wrapper {
+			padding: 0.25rem;
+		}
+	}
+
+	&--active {
+		color: $primaryLight;
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+
+		h4 {
+			order: 2;
+			width: 100%;
+			padding: 1.75rem 25px 0;
+			margin: 0;
+			margin-bottom: -0.75rem;
+			background: $primaryGrey;
+			color: accessible-color($primaryDark);
+			z-index: 1;
+		}
+	}
+
+	&:not(.donation-form--active-step-1) &__header h4 {
+		display: none;
+	}
+
+	&__stages {
+		padding-top: 2rem;
+		margin: 0;
+		background: white;
+		display: block;
+	}
+
+	&__stage {
+		width: auto;
+		height: auto;
+		background: transparent;
+		border: none;
+		color: black;
+		padding: 1rem;
+		margin: 0;
+
+		&--active {
+			color: $primaryLight;
+		}
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			top: 1rem;
+			bottom: 0;
+			width: 0;
+			transition: 0.3s $easeOut;
+			// opacity: 0;
+		}
+
+		&:before {
+			right: 0;
+		}
+
+		&:after {
+			// left: -1px;
+		}
+
+		&:last-of-type:before {
+			content: none;
+		}
+	}
+
+	&__amount-currency {
+		font-size: 0.7em;
+		font-size: Max(0.7em, 14px);
+		padding-bottom: 1em;
+
+		hr {
+			display: none;
+		}
+	}
+
+	&__amount {
+		font-family: $heading1FontFamily;
+
+		&-btn {
+			transition: 0.3s $easeOut;
+			position: relative;
+			font-size: 1.25em;
+
+			// If button background is super light
+			@if lightness($btnPrimaryBgColor) >
+				95 and
+				lightness($btnPrimaryBgColor) <
+				98
+			{
+				background: $btnPrimaryBgColor;
+				color: $btnPrimaryTextColor;
+			} @else {
+				background: white;
+				color: $primaryDarker;
+			}
+
+			border: 1px solid lightgrey;
+			border-radius: $borderRadius;
+
+			&--selected,
+			&:hover {
+				color: white;
+				background: $primaryLight;
+			}
+
+			&:hover,
+			&:focus {
+				background-position: right !important;
+			}
+		}
+	}
+
+	&__method > * {
+		padding-bottom: 0;
+
+		&-payment-button-wrapper {
+			padding-bottom: 0;
+		}
+	}
+
+	// Donation Navigation
+	&__stripe-buttons .button,
+	&__nav .button {
+		border-radius: 0;
+		border-bottom-left-radius: $borderRadius * 1.5;
+		border-bottom-right-radius: $borderRadius * 1.5;
+
+		&.donation-form__back {
+			border-bottom-right-radius: 0;
+		}
+
+		&.donation-form__next {
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	&__back:before {
+		opacity: 0.1;
+	}
+
+	// Amount Type & Payment Provider buttons
+	@mixin tabbed-buttons {
+		display: inline-block;
+
+		&-btn {
+			padding: 0.75em 1em;
+			margin: 0;
+
+			font-weight: bold;
+			line-height: 1;
+			letter-spacing: 0.05em;
+
+			background: transparent;
+			color: accessible-color($btnPrimaryBgColor, white, 7.5);
+			border-color: darken($btnPrimaryBgColor, 20);
+
+			&--inactive:hover,
+			&--inactive:focus {
+				color: accessible-color($btnPrimaryBgColor, white, 4.5);
+			}
+
+			&:first-of-type {
+				border-radius: $borderRadius 0 0 $borderRadius;
+			}
+
+			&:last-of-type {
+				border-radius: 0 $borderRadius $borderRadius 0;
+			}
+
+			&--active {
+				pointer-events: none;
+				background: white;
+				color: accessible-color(
+					$primaryLight,
+					darken($primaryDefault, 20)
+				);
+			}
+		}
+	}
+
+	&__amount-type,
+	&__payment-buttons {
+		@include tabbed-buttons;
+	}
+}
