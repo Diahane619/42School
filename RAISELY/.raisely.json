@@ -1,0 +1,6 @@
+{
+    "apiUrl": "https://api.raisely.com",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblV1aWQiOiI1ZmY0YzllMC01MzAzLTExZWYtODMyNi1lM2U2NThkNTExNmEiLCJleHAiOjE3MjQwNTU1NDMuMTc0LCJpYXQiOjE3MjI4NDU5NDN9.AhMbOJ2dq8FolPze40njFhhfpBpEirx3stxmOX1Vx4M",
+    "campaigns": [],
+    "organisationUuid": "d64a2620-52fa-11ef-8f2a-cb7e9cf16238"
+}
